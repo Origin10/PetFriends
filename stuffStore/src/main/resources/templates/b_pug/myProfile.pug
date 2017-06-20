@@ -1,0 +1,429 @@
+//output:../myProfile.html, doctype:strict
+doctype html
+html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
+  head(th:replace='common/header :: common-header')/
+  body
+    div(th:replace='common/header :: navbar')/
+    .container
+      .row(style='margin-bottom: -100px;')
+        .col-xs-8
+          h2.section-headline
+            h2.section-headline
+              span(th:text='${#strings.toUpperCase(user.username)}')
+        .col-xs-4
+          img.img-responsive(src='/image/logo.png')
+      hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
+      img.img-responsive(src='/image/wood.png', style='margin-top: -75px;')
+      .row(style='margin-top: 60px;')
+        .col-xs-9.col-xs-offset-3
+          // Nav tabs
+          ul.nav.nav-tabs
+            li(th:classappend="${classActiveEdit}? 'active'")
+              a(href='#tab-1', data-toggle='tab')
+                span(style='color: red;') Edit
+            li(th:classappend="${classActiveOrders}? 'active'")
+              a(href='#tab-2', data-toggle='tab')
+                span(style='color: red;') Orders
+            li(th:classappend="${classActiveBilling}? 'active'")
+              a(href='#tab-3', data-toggle='tab')
+                span(style='color: red;') Billing
+            li(th:classappend="${classActiveShipping}? 'active'")
+              a(href='#tab-4', data-toggle='tab')
+                span(style='color: red;') Shipping
+          // Tab panels
+          .tab-content
+            // Edit user information
+            #tab-1.tab-pane.fade(th:classappend="${classActiveEdit}? 'in active'")
+              .panel-group
+                .panel.panel-default(style='border: none;')
+                  .panel-body(style='background-color: #ededed; margin-top: 20px;')
+                    .alert.alert-danger(th:if='${incorrectPassword}')
+                      strong Incorrect Password!
+                      |  Pleae enter the correct
+                      | 										password for the current user.
+                    .alert.alert-succss(th:if='${updateSuccess}')
+                      strong Update Success!
+                    form(th:action='@{/updateUserInfo}', method='post')
+                      input(type='hidden', name='id', th:value='${user.id}')
+                      .bg-info(th:if='${updateUserInfo}')
+                        | User info
+                        | updated.
+                      .form-group
+                        .row
+                          .col-xs-6
+                            label(for='firstName') First Name
+                            input#firstName.form-control(type='text', name='firstName', th:value='${user.firstName}')
+                          .col-xs-6
+                            label(for='lastName') Last Name
+                            input#lastName.form-control(type='text', name='lastName', th:value='${user.lastName}')
+                      .form-group
+                        label(for='userName') Username
+                        |  ' 
+                        input#userName.form-control(type='text', name='username', th:value='${user.username}')
+                      .form-group
+                        label(for='currentPassword') Current Password
+                        |  ' 
+                        input#currentPassword.form-control(type='password', name='password', th:value='${currentPassword}')
+                      p(style='color: #828282')
+                        | Enter your current password to
+                        | change the email address or password.
+                      .form-group
+                        label(for='email') * Email Address
+                        |  ' 
+                        input#email.form-control(type='text', name='email', th:value='${user.email}')
+                      p(style='color: #828282')
+                        | A valid email address. All
+                        | emails from the system withll be sent to this address. The
+                        | email address is not made public and will only be used if you
+                        | wish to receive a new password or wish to receive certain
+                        | notification.
+                      .form-group
+                        label(for='txtNewPassword') Password
+                        span#checkPasswordMatch(style='color: red;')
+                        input#txtNewPassword.form-control(type='password', name='newPassword')
+                      .form-group
+                        label(for='txtConfirmPassword') Confirm Password
+                        |  ' 
+                        input#txtConfirmPassword.form-control(type='password')
+                      p(style='color: #828282')
+                        | To change the current user
+                        | password, enter the new password in both fields.
+                      button#updateUserInfoButton.btn.btn-primary(type='submit') Save All
+            // Order Information
+            #tab-2.tab-pane.fade(th:classappend="${classActiveOrders}? 'in active'")
+              .panel-group
+                .panel.panel-default(style='border: none;')
+                  .panel-body(style='background-color: #ededed; margin-top: 20px;')
+                    table.table.table-sm.table-inverse
+                      thead
+                        tr
+                          th Order Date
+                          th Order Number
+                          th Total
+                          th Status
+                      tbody
+                        tr(th:each='order : ${orderList}')
+                          td
+                            a(th:href='@{/orderDetail(id=${order.id})}')
+                              span(th:text='${order.orderDate}')
+                          td(data-th-text='${order.id}')
+                          td(data-th-text='${order.orderTotal}')
+                          td(data-th-text='${order.orderStatus}')
+                    div(th:if='${displayOrderDetail}')
+                      .row
+                        .col-xs-12
+                          .text-center
+                            h2
+                              | Order Detail for Purchase #
+                              span(th:text='${order.id}')
+                          hr
+                          .row
+                            .col-xs-4
+                              .panel.panel-default.height
+                                .panel-heading
+                                  strong Billing Details
+                                .panel-body
+                                  span(th:text='${order.billingAddress.billingAddressName}')
+                                  br
+                                  span(th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}")
+                                  br
+                                  span(th:text='${order.billingAddress.billingAddressCity}')
+                                  br
+                                  span(th:text='${order.billingAddress.billingAddressState}')
+                                  br
+                                  span(th:text='${order.billingAddress.billingAddressZipcode}')
+                                  br
+                            .col-xs-4
+                              .panel.panel-default.height
+                                .panel-heading
+                                  strong Payment Information
+                                .panel-body
+                                  span(th:text='${order.payment.holderName}')
+                                    | Card
+                                    | Name
+                                  br
+                                  span(th:text='${order.payment.cardNumber}')
+                                    | Card
+                                    | Number
+                                  br
+                                  span Exp Date:
+                                  span(th:text='${order.payment.expiryMonth}')
+                                  | /
+                                  span(th:text='${order.payment.expiryYear}')
+                                  br
+                            .col-xs-4
+                              .panel.panel-default.height
+                                .panel-heading
+                                  strong Billing Details
+                                .panel-body
+                                  span(th:text='${order.shippingAddress.shippingAddressName}')
+                                  br
+                                  span(th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}")
+                                  br
+                                  span(th:text='${order.shippingAddress.shippingAddressCity}')
+                                  br
+                                  span(th:text='${order.shippingAddress.shippingAddressState}')
+                                  br
+                                  span(th:text='${order.shippingAddress.shippingAddressZipcode}')
+                                  br
+                      .row
+                        .col-md-12
+                          .panel-heading
+                            h3.text-center
+                              strong Order Summary
+                          .panel-body
+                            .table-responsive
+                              table.table.table-condensed
+                                thead
+                                  tr
+                                    td
+                                      strong Item Name
+                                    td.text-center
+                                      strong
+                                        | Item
+                                        | Price
+                                    td.text-center
+                                      strong
+                                        | Item
+                                        | Quantity
+                                    td.text-right
+                                      strong Total
+                                tbody
+                                  tr(th:each='cartItem : ${cartItemList}')
+                                    td(data-th-text='${cartItem.book.title}')
+                                    td.text-center(data-th-text='${cartItem.book.ourPrice}')
+                                    td.text-center(data-th-text='${cartItem.qty}')
+                                    td.text-center(data-th-text='${cartItem.subtotal}')
+                                  tr
+                                    td.highrow
+                                    td.highrow
+                                    td.highrow.text-center
+                                      strong Subtotal
+                                    td.highrow.text-right(data-th-text='${order.orderTotal}')
+                                  tr
+                                    td.emptyrow
+                                    td.emptyrow
+                                    td.emptyrow.text-center
+                                      strong Tax
+                                    td.emptyrow.text-right(data-th-text='${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}')
+                                  tr
+                                    td.emptyrow
+                                      i.fa.fa-barcode.iconbig
+                                    td.emptyrow
+                                    td.emptyrow.text-center
+                                      strong Total
+                                    td.emptyrow.text-right(th:with='total=${order.orderTotal+order.orderTotal*0.06}', data-th-text='${#numbers.formatDecimal(total, 0, 2)}')
+            // Billing Information
+            #tab-3.tab-pane.fade(th:classappend="${classActiveBilling}? 'in active'")
+              .panel-group
+                .panel.panel-default(style='border: none;')
+                  .panel-body(style='background-color: #ededed; margin-top: 20px;')
+                    ol.breadcrumb
+                      li.breadcrumb-item.active
+                        a(th:href='@{/listOfCreditCards}', th:style="${listOfCreditCards}? 'color:red'")
+                          | List of
+                          | Credit Cards
+                      li.breadcrumb-item.active
+                        a(th:href='@{/addNewCreditCard}', th:style="${addNewCreditCard}? 'color:red'")
+                          | Add(Update)
+                          | Credit Card
+                    div(th:if='${listOfCreditCards}')
+                      form(th:action='@{/setDefaultPayment}', method='post')
+                        table.table
+                          thead
+                            tr
+                              th Default
+                              th Credit Card
+                              th Operations
+                          tbody
+                            tr(th:each='userPayment : ${userPaymentList}')
+                              td
+                                input(type='radio', name='defaultUserPaymentId', th:value='${userPayment.id}', th:checked='${userPayment.defaultPayment}')
+                              td(th:text='${userPayment.cardName}')
+                              td
+                                a(th:href='@{/updateCreditCard(id=${userPayment.id})}')
+                                  i.fa.fa-pencil
+                                a(th:href='@{/removeCreditCard(id=${userPayment.id})}')
+                                  i.fa.fa-times
+                        button.btn.btn-primary(type='submit') Save
+                    div(th:if='${addNewCreditCard}')
+                      form(th:action='@{addNewCreditCard}', method='post')
+                        .bg-info(th:if='${updateUserPaymentInfo}')
+                          | User
+                          | info updated.
+                        input(hidden='hidden', name='id', th:value='${userPayment.id}')
+                        .form-group
+                          h5 * Give a name for your card:
+                          input#cardName.form-control(type='text', placeholder='Card Name', th:name='cardName', required='required', th:value='${userPayment.cardName}')
+                        // Billing Address
+                        hr
+                        .form-group
+                          h4 Billing Address
+                        .form-group
+                          label(for='billingName') * Name
+                          input#billingName.form-control(type='text', placeholder='Receiver Name', th:name='userBillingName', required='required', th:value='${userBilling.userBillingName}')
+                        .form-group
+                          label(for='billingAddress') * Street Address
+                          input#billingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userBillingStreet1', required='required', th:value='${userBilling.userBillingStreet1}')
+                          input#billingAddress.form-control(type='text', placeholder='Street Address 2', th:name='userBillingStreet2', th:value='${userBilling.userBillingStreet2}')
+                        .row
+                          .col-xs-4
+                            .form-group
+                              label(for='billingCity') * City
+                              input#billingCity.form-control(type='text', placeholder='Billing city', th:name='userBillingCity', required='required', th:value='${userBilling.userBillingCity}')
+                          .col-xs-4
+                            .form-group
+                              label(for='billingState') * State
+                              select#billingState.form-control(th:name='userBillingState', th:value='${userBilling.userBillingState}', required='required')
+                                option(value='', disabled='disabled')
+                                  | Please
+                                  | select an option
+                                option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${userBilling.userBillingState}==${state})')
+                          .col-xs-4
+                            .form-group
+                              label(for='billingZipcode') * Zipcode
+                              input#billingZipcode.form-control(type='text', placeholder='Billing Zipcode', th:name='userBillingZipcode', required='required', th:value='${userBilling.userBillingZipcode}')
+                        // Credit Card Information
+                        hr
+                        .form-group
+                          h4 Credit Card Information
+                        .row
+                          .col-xs-12
+                            img.img-responsive(src='/image/creditcard.png')
+                            br
+                            .form-group
+                              label(for='cardType') * Select Card Type:
+                              select#cardType.form-control(th:name='type', th:value='${userPayment.type}')
+                                option(value='visa') Visa
+                                option(value='mastercard') Mastercard
+                                option(value='discover') Discover
+                                option(value='amex') American Express
+                            .form-group
+                              label(for='cardHolder') * Card Holder Name:
+                              input#cardHolder.form-control(type='text', required='required', placeholder='Card Holder Name', th:name='holderName', th:value='${userPayment.holderName}')
+                            .form-group
+                              label(for='cardNumber') * Card Number:
+                              .input-group
+                                input#cardNumber.form-control(type='tel', required='required', placeholder='Valid Card Number', th:name='cardNumber', th:value='${userPayment.cardNumber}')
+                                span.input-group-addon
+                                  i.fa.fa-credit-card(aria-hidden='true')
+                        .row
+                          .col-xs-7
+                            .form-group
+                              label * Expiration Date
+                              .row
+                                .col-xs-6
+                                  select.form-control(name='expiryMonth', required='required', th:value='${userPayment.expiryMonth}')
+                                    option(disabled='disabled') -- Month --
+                                    option(value='01') Jan (01)
+                                    option(value='02') Feb (02)
+                                    option(value='03') Mar (03)
+                                    option(value='04') Apr (04)
+                                    option(value='05') May (05)
+                                    option(value='06') June (06)
+                                    option(value='07') July (07)
+                                    option(value='08') Aug (08)
+                                    option(value='09') Sep (09)
+                                    option(value='10') Oct (10)
+                                    option(value='11') Nov (11)
+                                    option(value='12') Dec (12)
+                                .col-xs-6
+                                  select.form-control(name='expiryYear', th:value='${userPayment.expiryYear}')
+                                    option(disabled='disabled') -- Year --
+                                    option(value='2017') 2017
+                                    option(value='2018') 2018
+                                    option(value='19') 2019
+                                    option(value='20') 2020
+                                    option(value='21') 2021
+                                    option(value='22') 2022
+                                    option(value='23') 2023
+                                    option(value='23') 2024
+                                    option(value='23') 2025
+                                    option(value='23') 2026
+                                    option(value='23') 2027
+                                    option(value='23') 2028
+                                    option(value='23') 2029
+                          .col-xs-5
+                            .form-group
+                              label(for='cardCVC') CV Code
+                              input#cardCVC.form-control(type='tel', name='cvc', placeholder='CVC', th:name='cvc', th:value='${userPayment.cvc}')
+                        hr
+                        button.btn.btn-primary.btn-lg(type='submit')
+                          | Save
+                          | All
+            // Shipping Information
+            #tab-4.tab-pane.fade(th:classappend="${classActiveShipping}? 'in active'")
+              .panel-group
+                .panel.panel-default(style='border: none;')
+                  .panel-body(style='background-color: #ededed; margin-top: 20px;')
+                    ol.breadcrumb
+                      li.breadcrumb-item.active
+                        a(th:href='@{/listOfShippingAddresses}', th:style="${listOfShippingAddresses}? 'color:red'")
+                          | List
+                          | of Shipping Addresses
+                      li.breadcrumb-item.active
+                        a(th:href='@{/addNewShippingAddress}', th:style="${addNewShippingAddress}? 'color:red'")
+                          | Add(Update)
+                          | Shipping Address
+                    div(th:if='${listOfShippingAddresses}')
+                      form(th:action='@{/setDefaultShippingAddress}', method='post')
+                        table.table
+                          thead
+                            tr
+                              th Default
+                              th Shipping Address
+                              th Operations
+                          tbody
+                            tr(th:each='userShipping : ${userShippingList}')
+                              td
+                                input(type='radio', name='defaultShippingAddressId', th:value='${userShipping.id}', th:checked='${userShipping.userShippingDefault}')
+                                span default
+                              td(th:text="${userShipping.userShippingStreet1}+', '+\
+                              ${userShipping.userShippingCity}+', '+${userShipping.userShippingState}")
+                              td
+                                a(th:href='@{/updateUserShipping(id=${userShipping.id})}')
+                                  i.fa.fa-pencil
+                                a(th:href='@{/removeUserShipping(id=${userShipping.id})}')
+                                  i.fa.fa-times
+                        button.btn.btn-primary(type='submit') Save
+                    div(th:if='${addNewShippingAddress}')
+                      form(th:action='@{/addNewShippingAddress}', method='post')
+                        .bg-info(th:if='${updateUserShippingInfo}')
+                          | User
+                          | info updated.
+                        input(hidden='hidden', name='id', th:value='${userShipping.id}')
+                        // Shipping Address
+                        hr
+                        .form-group
+                          h4 Shipping Address
+                        .form-group
+                          label(for='shippingName') * Name
+                          input#shippingName.form-control(type='text', placeholder='Receiver Name', th:name='userShippingName', required='required', th:value='${userShipping.userShippingName}')
+                        .form-group
+                          label(for='shippingAddress') * Street Address
+                          input#shippingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userShippingStreet1', required='required', th:value='${userShipping.userShippingStreet1}')
+                          input.form-control(type='text', placeholder='Street Address 2', th:name='userShppingStreet2', th:value='${userShipping.userShippingStreet2}')
+                        .row
+                          .col-xs-4
+                            .form-group
+                              label(for='shippingCity') * City
+                              input#shippingCity.form-control(type='text', placeholder='Shipping City', th:name='userShippingCity', required='required', th:value='${userShipping.userShippingCity}')
+                          .col-xs-4
+                            .form-group
+                              label(for='shippingState') * State
+                              select#shippingState.form-control(th:name='userShippingState', th:value='${userShipping.userShippingState}', required='required')
+                                option(value='', disabled='disabled')
+                                  | Please
+                                  | select an option
+                                option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${userShipping.userShippingState}==${state})')
+                          .col-xs-4
+                            .form-group
+                              label(for='shippingZipcode') * Zipcode
+                              input#shippingZipcode.form-control(type='text', placeholder='Shipping Zipcode', th:name='userShippingZipcode', required='required', th:value='${userShipping.userShippingZipcode}')
+                        hr
+                        button.btn.btn-primary.btn-lg(type='submit')
+                          | Save
+                          | All
+    // end of container
+    div(th:replace='common/header :: footer')/
+    div(th:replace='common/header :: body-bottom-scripts')/

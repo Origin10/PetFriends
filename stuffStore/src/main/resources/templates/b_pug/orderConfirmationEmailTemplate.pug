@@ -1,0 +1,116 @@
+//output:../orderConfirmationEmailTemplate.html, doctype:strict
+doctype html
+html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
+  head
+    // Bootstrap core CSS
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/non-responsive.css', rel='stylesheet')
+    link(href='/css/font-awesome.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='/css/style.css', rel='stylesheet')
+    style.
+      table {
+      border-collapse: collapse;
+      }
+      table, th, td {
+      border:1px solid black;}
+  body
+    p
+      | Dear 
+      span(th:text='${user.firstName}')
+      | ,
+    br
+    p
+      | Thank you for shopping from our book store. We hope you had a good time with our service!
+    p
+      | Your order number is: 
+      strong
+        | #
+        span(th:text='${order.id}')
+      | . Here is your order detail:
+    h2
+      | Order Detail for purchase #
+      span(th:text='${order.id}')
+    hr
+    table
+      tr
+        th Billing Detail
+        th Payment Information
+        th Shipping Address
+      tr
+        td
+          span(th:text='${order.billingAddress.billingAddressName}')
+          br
+          span(th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}")
+          br
+          span(th:text='${order.billingAddress.billingAddressCity}')
+          br
+          span(th:text='${order.billingAddress.billingAddressState}')
+          br
+          span(th:text='${order.billingAddress.billingAddressZipcode}')
+          br
+        td
+          span(th:text='${order.payment.holderName}')
+          br
+          span(th:text='${order.payment.type}')
+          br
+          span(th:text='${order.payment.cardNumber}')
+          br
+          span(th:text='${order.payment.expiryMonth}')
+          br
+          span(th:text='${order.payment.expiryYear}')
+          br
+        td
+          span(th:text='${order.shippingAddress.shippingAddressName}')
+          br
+          span(th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}")
+          br
+          span(th:text='${order.shippingAddress.shippingAddressCity}')
+          br
+          span(th:text='${order.shippingAddress.shippingAddressState}')
+          br
+          span(th:text='${order.shippingAddress.shippingAddressZipcode}')
+          br
+    h3
+      strong Order Summary
+    table
+      thead
+        tr
+          td
+            strong Item Name
+          td.text-center
+            strong Item Price
+          td.text-center
+            strong Item Quantity
+          td.text-right
+            strong Total
+      tbody
+        tr(th:each='cartItem : ${cartItemList}')
+          td
+            span(data-th-text='${cartItem.book.title}')
+          td.text-center(data-th-text='${cartItem.book.ourPrice}')
+          td.text-center(data-th-text='${cartItem.qty}')
+          td.text-right(data-th-text='${cartItem.subtotal}')
+        tr
+          td.highrow
+          td.highrow
+          td.highrow.text-center
+            strong Subtotal
+          td.highrow.text-right(data-th-text='${order.orderTotal}')
+        tr
+          td.emptyrow
+          td.emptyrow
+          td.emptyrow.text-center
+            strong Tax
+          td.emptyrow.text-right(data-th-text='${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}')
+        tr
+          td.emptyrow
+            i.fa.fa-barcode.iconbig
+          td.emptyrow
+          td.emptyrow.text-center
+            strong Total
+          td.emptyrow.text-right(th:with='total=${order.orderTotal+order.orderTotal*0.06}', data-th-text='${#numbers.formatDecimal(total, 0, 2)}')
+    br
+    p Best,
+    p Le's Bookstore
+    p Since 1923

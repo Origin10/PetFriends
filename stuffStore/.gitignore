@@ -25,3 +25,4 @@ nbdist/
 
 /bin/
 /.mvn/
+/src/main/resources/templates/_Default.html

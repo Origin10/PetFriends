@@ -1,0 +1,31 @@
+//output:../login.html, doctype:strict
+doctype html
+html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
+  head(th:replace='common/header :: common-header')/
+  body
+    .container
+      h5.center-block
+        | Welcome to Admin Portal for Le's
+        | Bookstore.
+      hr
+      img.img-responsive(th:src='@{/image/logo.png}', style='width: 250px;')
+      .row
+        .col-xs-4.col-md-offset-4
+          .bg-danger(th:if='${param.error}')
+            | Invalid username
+            | and password.
+          .bg-danger(th:if='${param.logout}')
+            | You have been
+            | logged out.
+          form.form-signin(th:action='@{/login}', method='post')
+            h2.form-signin-heading Please sign in
+            .form-group
+              label.sr-only(for='username') Username
+              input#username.form-control(type='text', placeholder='Username', name='username', required='required', autofocus='autofocus')
+            .form-group
+              label.sr-only(for='password') Password
+              input#password.form-control(type='password', placeholder='Password', name='password', required='required')
+            button.btn.btn-lg.btn-primary.btn-block(type='submit')
+              | Sign
+              | In
+    div(th:replace='common/header :: body-bottom-scripts')/

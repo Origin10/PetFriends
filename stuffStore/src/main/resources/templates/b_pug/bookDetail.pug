@@ -1,0 +1,98 @@
+//output:../bookDetail.html, doctype:strict
+doctype html
+html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
+  head(th:replace='common/header :: common-header')/
+  body
+    div(th:replace='common/header :: navbar')/
+    .container
+      .row(style='margin-bottom: -100px;')
+        .col-xs-8
+          h2.section-headline
+            h2.section-headline
+              span(th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'")
+        .col-xs-4
+          img.img-responsive(src='/image/logo.png')
+      hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
+      img.img-responsive(src='/image/wood.png', style='margin-top: -75px;')
+      form(th:action='@{/shoppingCart/addItem}', method='post')
+        input(hidden='hidden', th:field='*{book.id}')
+        .row(style='margin-top: 120px;')
+          .col-xs-3
+            a(th:href='@{/bookshelf}') Back to book list
+            br
+            img.img-responsive.shelf-book(th:src="#{adminPath}+@{/image/book/}+${book.id}+'.png'")
+          .col-xs-9
+            h3
+              span(th:if='${addBookSuccess}', style='color: forestgreen')
+                i.fa.fa-check(aria-hidden='true', style='color: forestgreen')
+                | Added to cart.
+            h3
+              span(th:if='${notEnoughStock}', style='color: red')
+                | Oops, only 
+                span(th:text='${book.inStockNumber}')
+                |  In Stock.
+            h3(th:text='${book.title}') Book Title
+            .row
+              .col-xs-5
+                h5
+                  strong Author: 
+                  span(th:text='${book.author}')
+                p
+                  strong Publisher: 
+                  span(th:text='${book.publisher}')
+                p
+                  strong Publication Date: 
+                  span(th:text='${book.publicationDate}')
+                p
+                  strong Language: 
+                  span(th:text='${book.language}')
+                p
+                  strong Category: 
+                  span(th:text='${book.category}')
+                p
+                  strong
+                    span(th:text='${book.format}')
+                    | :
+                  span(th:text='${book.numberOfPages}')
+                  |  pages
+                p
+                  strong ISBN: 
+                  span(th:text='${book.isbn}')
+                p
+                  strong Shipping Weight: 
+                  span(th:text='${book.shippingWeight}')
+                  |  ounces
+              .col-xs-7
+                .panel.panel-default(style='border-width: 5px; margin-top: 20px;')
+                  .panel-body
+                    .row
+                      .col-xs-6
+                        h4
+                          | Our Price: 
+                          span(style='color:#db3208;')
+                            | $
+                            span(th:text='${book.ourPrice}')
+                        p
+                          | List Price: 
+                          span(style='text-decoration: line-through')
+                            | $
+                            span(th:text='${book.listPrice}')
+                        p
+                          | You save: $
+                          span(th:text="${#numbers.formatDecimal((book.listPrice - book.ourPrice), 0, 'COMMA', 2, 'POINT' )}")
+                        span Qty: 
+                        select(name='qty')
+                          option(th:each='qty : ${qtyList}', th:value='${qty}', th:text='${qty}')
+                      .col-xs-6
+                        h4(th:if='*{book.inStockNumber>10}', style='color: green') In Stock
+                        h4(th:if='*{book.inStockNumber<10 and book.inStockNumber>0}', style='color: green')
+                          | Only 
+                          span(th:text='${book.inStockNumber}')  
+                          |  In Stock
+                        h4(th:if='*{book.inStockNumber==0}', style='color:darkred;') Unavailable
+                        button.btn.btn-warning(type='submit', style='color:black;border:1px solid black; padding: 10px 40px 10px 40px;') Add to Cart
+            hr
+            p(th:utext='${book.description}')
+    // end of container
+    div(th:replace='common/header :: footer')/
+    div(th:replace='common/header :: body-bottom-scripts')/

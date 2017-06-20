@@ -15,13 +15,13 @@ import com.bookstore.service.UserService;
 import com.bookstore.utility.SecurityUtility;
 
 @SpringBootApplication
-public class BookstoreApplication implements CommandLineRunner {
+public class StuffstoreApplication implements CommandLineRunner {
 	
 	@Autowired
 	private UserService userService;
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookstoreApplication.class, args);
+		SpringApplication.run(StuffstoreApplication.class, args);
 	}
 	
 	@Override

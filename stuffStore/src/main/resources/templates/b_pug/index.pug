@@ -1,0 +1,142 @@
+//output:../index.html, doctype:strict
+doctype html
+html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
+  head(th:replace='common/header :: common-header')/
+  body
+    div(th:replace='common/header :: navbar')/
+    .container
+      .row.banner
+        // carousel
+        .col-xs-8
+          .panel.panel-default(style='margin-top: 20px;')
+            .panel-body
+              #carousel-example-generic.carousel.slide(data-ride='carousel')
+                // Indicators
+                ol.carousel-indicators
+                  li.active(data-target='#carousel-example-generic', data-slide-to='0')
+                  li(data-target='#carousel-example-generic', data-slide-to='1')
+                  li(data-target='#carousel-example-generic', data-slide-to='2')
+                // Wrapper for slides
+                .carousel-inner(role='listbox')
+                  .item.active
+                    img(src='http://lorempixel.com/output/sports-q-c-1600-500-1.jpg', alt='...')
+                    .carousel-caption
+                      h4 First Thumbnail Label
+                      p
+                        | Contrary to popular belief, Lorem Ipsum is not simply
+                        | random text. It has roots in a piece of classical Latin
+                        | literature from 45 BC, making it over 2000 years old.
+                  .item
+                    img(src='http://lorempixel.com/output/sports-q-c-1600-500-2.jpg', alt='...')
+                    .carousel-caption
+                      h4 First Thumbnail Label
+                      p
+                        | Contrary to popular belief, Lorem Ipsum is not simply
+                        | random text. It has roots in a piece of classical Latin
+                        | literature from 45 BC, making it over 2000 years old.
+                  .item
+                    img(src='http://lorempixel.com/output/sports-q-c-1600-500-3.jpg', alt='...')
+                    .carousel-caption
+                      h4 First Thumbnail Label
+                      p
+                        | Contrary to popular belief, Lorem Ipsum is not simply
+                        | random text. It has roots in a piece of classical Latin
+                        | literature from 45 BC, making it over 2000 years old.
+                  | 								...
+                // Controls
+                a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+                  span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                  span.sr-only Previous
+                a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+                  span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                  span.sr-only Next
+        .col-xs-4
+          img.img-responsive(src='/image/logo.png')
+      hr
+      .row
+        .col-xs-4
+          div(clas='panel panel-default')
+            .panel-body
+              a(th:href='@{/bookshelf}')
+                img.img-responsive(src='/image/bestseller.png')
+        .col-xs-4
+          div(clas='panel panel-default')
+            .panel-body
+              a(th:href='@{/hours}')
+                img.img-responsive(src='/image/hours.png')
+        .col-xs-4
+          div(clas='panel panel-default')
+            .panel-body
+              a(th:href='@{/faq}')
+                img.img-responsive(src='/image/faq.png')
+      div
+        .home-headline
+          span Featured Books
+        hr(style='margin-top: -15px;')
+      .row
+        #featured-books.carousel.slide(data-ride='carousel')
+          // Indicators
+          ol.carousel-indicators
+            li.active(data-target='#featured-books', data-slide-to='0')
+            li(data-target='#featured-books', data-slide-to='1')
+            li(data-target='#featured-books', data-slide-to='2')
+          // Wrapper for slides
+          .carousel-inner(role='listbox')
+            .item.active
+              img.img-responsive(src='/image/shelf.png')
+              .carousel-caption
+                .row
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+            .item
+              img.img-responsive(src='/image/shelf.png')
+              .carousel-caption
+                .row
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+            .item
+              img.img-responsive(src='/image/shelf.png')
+              .carousel-caption
+                .row
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+                  .col-xs-2
+                    img.img-responsive(src='/image/book1.png')
+          // Controls
+          a.left.carousel-control(href='##featured-books', role='button', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+            span.sr-only Previous
+          a.right.carousel-control(href='##featured-books', role='button', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+            span.sr-only Next
+    // end of container
+    div(th:replace='common/header :: footer')/
+    div(th:replace='common/header :: body-bottom-scripts')/
