@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+stuffStore/bin/src/main/resources/templates/
+bin/src/main/resources/templates/
+/stuffStore/mvnw
+/stuffStore/mvnw.cmd
+/.idea/
