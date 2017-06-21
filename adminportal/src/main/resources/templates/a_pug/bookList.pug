@@ -1,5 +1,4 @@
 //output:../bookList.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
@@ -11,13 +10,13 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             tr
               th
                 input(th:id='selectAllBooks', type='checkbox')
-              th Title
-              th Author
-              th Category
-              th List Price
-              th Our Price
-              th Active?
-              th Operation
+              th 名稱
+              th 製造商
+              th 分類
+              th 公司價
+              th 賣家價
+              th 公開或暫存
+              th 操作
           tbody
             tr(data-th-each='book : ${bookList}')
               td
@@ -35,8 +34,8 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 input(hidden='hidden', name='id', th:value='${book.id}')
                 button.btn.btn-danger.btn-xs.delete-book(th:id="'oneBook-'+${book.id}", type='submit', value='delete')
                   span.fa.fa-times
-                  | Delete
-      button.btn.btn-danger(th:id='deleteSelected') Delete Selected
+                  | 刪除
+      button.btn.btn-danger(th:id='deleteSelected') 刪除已選擇
     div(th:replace='common/header :: body-bottom-scripts')/
     script.
       $(document).ready(function() {

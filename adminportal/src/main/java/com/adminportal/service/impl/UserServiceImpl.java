@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		User localUser = userRepository.findByUsername(user.getUsername());
 
 		if (localUser != null) {
-			LOG.info("user {} already exists. Nothing will be done.", user.getUsername());
+			LOG.info("使用者 {} 已存在，沒有改動任何東西", user.getUsername());
 		} else {
 			for (UserRole ur : userRoles) {
 				roleRepository.save(ur.getRole());

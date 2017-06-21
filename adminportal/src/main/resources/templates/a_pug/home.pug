@@ -1,7 +1,12 @@
 //output:../home.html, doctype:strict
-doctype html
-html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
+html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
   head(th:replace='common/header :: common-header')/
   body
     div(th:replace='common/header :: navbar')/
+    .container
+      .row
+        .col-md-12
+          a.btn.btn-primary(type="button", th:href='@{/book/add}') 新增物資
+          &nbsp; &nbsp;
+          a.btn.btn-success(type="button", th:href='@{/book/bookList}') 檢視物資清單
     div(th:replace='common/header :: body-bottom-scripts')/

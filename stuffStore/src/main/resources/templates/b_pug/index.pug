@@ -1,10 +1,12 @@
 //output:../index.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
     div(th:replace='common/header :: navbar')/
     .container
+      div(th:replace='common/header :: searchStuff')/
+      div(th:replace='common/header :: icon-bar')/
+      hr
       .row.banner
         // carousel
         .col-xs-8
@@ -29,7 +31,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                   .item
                     img(src='http://lorempixel.com/output/sports-q-c-1600-500-2.jpg', alt='...')
                     .carousel-caption
-                      h4 First Thumbnail Label
+                      h4 Second Thumbnail Label
                       p
                         | Contrary to popular belief, Lorem Ipsum is not simply
                         | random text. It has roots in a piece of classical Latin
@@ -37,12 +39,12 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                   .item
                     img(src='http://lorempixel.com/output/sports-q-c-1600-500-3.jpg', alt='...')
                     .carousel-caption
-                      h4 First Thumbnail Label
+                      h4 Thired Thumbnail Label
                       p
                         | Contrary to popular belief, Lorem Ipsum is not simply
                         | random text. It has roots in a piece of classical Latin
                         | literature from 45 BC, making it over 2000 years old.
-                  | 								...
+                        | 								...
                 // Controls
                 a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
                   span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
@@ -51,24 +53,24 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                   span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
                   span.sr-only Next
         .col-xs-4
-          img.img-responsive(src='/image/logo.png')
+          img.img-responsive(src='/imgs/logo.png')
       hr
       .row
         .col-xs-4
-          div(clas='panel panel-default')
+          .panel.panel-default
             .panel-body
               a(th:href='@{/bookshelf}')
-                img.img-responsive(src='/image/bestseller.png')
+                img.img-responsive(src='/imgs/bestseller.png')
         .col-xs-4
           div(clas='panel panel-default')
             .panel-body
               a(th:href='@{/hours}')
-                img.img-responsive(src='/image/hours.png')
+                img.img-responsive(src='/imgs/hours.png')
         .col-xs-4
           div(clas='panel panel-default')
             .panel-body
               a(th:href='@{/faq}')
-                img.img-responsive(src='/image/faq.png')
+                img.img-responsive(src='/imgs/faq.png')
       div
         .home-headline
           span Featured Books
@@ -83,53 +85,53 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
           // Wrapper for slides
           .carousel-inner(role='listbox')
             .item.active
-              img.img-responsive(src='/image/shelf.png')
+              img.img-responsive(src='/imgs/shelf.png')
               .carousel-caption
                 .row
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
             .item
-              img.img-responsive(src='/image/shelf.png')
+              img.img-responsive(src='/imgs/shelf.png')
               .carousel-caption
                 .row
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
             .item
-              img.img-responsive(src='/image/shelf.png')
+              img.img-responsive(src='/imgs/shelf.png')
               .carousel-caption
                 .row
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
                   .col-xs-2
-                    img.img-responsive(src='/image/book1.png')
+                    img.img-responsive(src='/imgs/book1.png')
           // Controls
           a.left.carousel-control(href='##featured-books', role='button', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left(aria-hidden='true')

@@ -1,5 +1,4 @@
 //output:../bookshelf.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
@@ -11,25 +10,26 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             h2.section-headline
               span(th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'")
         .col-xs-4
-          img.img-responsive(src='/image/logo.png')
+          img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
-      img.img-responsive(src='/image/wood.png', style='margin-top: -75px;')
+      img.img-responsive(src='/imgs/wood.png', style='margin-top: -75px;')
       .row(style='margin-top: 60px;')
         .col-xs-3
           h3
-            label(for='category') Category
+            label(for='category') 分類
           #category.list-group
-            a.list-group-item(th:href="@{/bookshelf(category='all')}", th:classappend="${activeAll}? 'active'") All
-            a.list-group-item(th:href="@{/searchByCategory(category='Management')}", th:classappend="${activeManagement}? 'active'") Management
-            a.list-group-item(th:href="@{/searchByCategory(category='Fiction')}", th:classappend="${activeFiction}? 'active'") Fiction
-            a.list-group-item(th:href="@{/searchByCategory(category='Engineering')}", th:classappend="${activeEngineering}? 'active'") Engineering
-            a.list-group-item(th:href="@{/searchByCategory(category='Programming')}", th:classappend="${activeProgramming}? 'active'") Programming
-            a.list-group-item(th:href="@{/searchByCategory(category='Arts & Literature')}", th:classappend="${activeArtsLiterature}? 'active'") Arts & Literature
+            a.list-group-item(th:href="@{/bookshelf(category='all')}", th:classappend="${activeAll}? 'active'") 全部
+            a.list-group-item(th:href="@{/searchByCategory(category='Management')}", th:classappend="${activeManagement}? 'active'") 玩具
+            a.list-group-item(th:href="@{/searchByCategory(category='Fiction')}", th:classappend="${activeFiction}? 'active'") 食物
+            a.list-group-item(th:href="@{/searchByCategory(category='Engineering')}", th:classappend="${activeEngineering}? 'active'") 保養品
+            a.list-group-item(th:href="@{/searchByCategory(category='Programming')}", th:classappend="${activeProgramming}? 'active'") 日常消耗品
+            a.list-group-item(th:href="@{/searchByCategory(category='Arts & Literature')}", th:classappend="${activeArtsLiterature}? 'active'") 其他
         .col-xs-9
           div(th:if='${emptyList}')
-            h5(style='font-style: italic;')
-              | Oops, no result is found. Try
-              | something else or try again later.
+            .alert.alert-info
+              strong(style='font-style: italic;') 抱歉！
+              p 沒有你搜尋的結果，你可以稍後再繼續搜尋。
+            
           table#bookList(border='0')
             thead
               tr
@@ -41,7 +41,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                     .row(style='margin-bottom: 50px;')
                       .col-xs-3
                         a(th:href='@{/bookDetail?id=}+${book.id}')
-                          img.img-responsive.shelf-book(th:src="#{adminPath}+@{/image/book/}+${book.id}+'.png'")
+                          img.img-responsive.shelf-book(th:src="#{adminPath}+@{/imgs/book/}+${book.id}+'.png'")
                       .col-xs-9
                         a(th:href='@{/bookDetail?id=}+${book.id}')
                           h4(th:text='${book.title}')
@@ -50,7 +50,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                         a(th:href='@{/bookDetail?id=}+${book.id}')
                           span(th:text='${#strings.capitalize(book.format)}')
                         span(th:text='${book.numberOfPages}')
-                          span  pages
+                          span  頁數
                         br
                         a(th:href='@{/bookDetail?id=}+${book.id}')
                           span(style='font-size: x-large; color: #db3208;')

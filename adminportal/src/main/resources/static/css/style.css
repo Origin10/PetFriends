@@ -1,5 +1,9 @@
 body {
- 
+ margin: 32px 55px 0px;
+}
+
+.navbar-brand{
+	margin-left: 10px;
 }
 
 hr {

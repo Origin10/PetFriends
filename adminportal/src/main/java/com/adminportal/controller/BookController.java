@@ -45,7 +45,7 @@ public class BookController {
 			byte[] bytes = bookImage.getBytes();
 			String name = book.getId() + ".png";
 			BufferedOutputStream stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/book/" + name)));
+					new FileOutputStream(new File("src/main/resources/static/imgs/book/" + name)));
 			stream.write(bytes);
 			stream.close();
 		} catch (Exception e) {
@@ -82,10 +82,10 @@ public class BookController {
 				byte[] bytes = bookImage.getBytes();
 				String name = book.getId() + ".png";
 				
-				Files.delete(Paths.get("src/main/resources/static/image/book/"+name));
+				Files.delete(Paths.get("src/main/resources/static/imgs/book/"+name));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/book/" + name)));
+						new FileOutputStream(new File("src/main/resources/static/imgs/book/" + name)));
 				stream.write(bytes);
 				stream.close();
 			} catch (Exception e) {

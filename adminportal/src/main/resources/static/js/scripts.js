@@ -11,13 +11,13 @@ $(document).ready(function() {
 		var id=$(this).attr('id');
 		
 		bootbox.confirm({
-			message: "Are you sure to remove this book? It can't be undone.",
+			message: "您真的確定要刪除這一筆資料嗎？這項動作無法還原喔！",
 			buttons: {
 				cancel: {
-					label:'<i class="fa fa-times"></i> Cancel'
+					label:'<i class="fa fa-times"></i> 取消'
 				},
 				confirm: {
-					label:'<i class="fa fa-check"></i> Confirm'
+					label:'<i class="fa fa-check"></i> 確定'
 				}
 			},
 			callback: function(confirmed) {
@@ -58,13 +58,13 @@ $(document).ready(function() {
 	    /*]]>*/
 	    
 	    bootbox.confirm({
-			message: "Are you sure to remove all selected books? It can't be undone.",
+			message: "你確定要刪除已選的所有項目嗎？這項動作無法還原喔！",
 			buttons: {
 				cancel: {
-					label:'<i class="fa fa-times"></i> Cancel'
+					label:'<i class="fa fa-times"></i> 取消'
 				},
 				confirm: {
-					label:'<i class="fa fa-check"></i> Confirm'
+					label:'<i class="fa fa-check"></i> 確定'
 				}
 			},
 			callback: function(confirmed) {

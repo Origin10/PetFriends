@@ -1,31 +1,27 @@
 //output:../login.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
     .container
       h5.center-block
-        | Welcome to Admin Portal for Le's
-        | Bookstore.
+        | 歡迎光臨
+        | PetFriends.
       hr
-      img.img-responsive(th:src='@{/image/logo.png}', style='width: 250px;')
+      img.img-responsive(th:src='@{/imgs/logo.png}', style='width: 250px;')
       .row
         .col-xs-4.col-md-offset-4
           .bg-danger(th:if='${param.error}')
-            | Invalid username
-            | and password.
+            | 錯誤的使用者帳號以及密碼
           .bg-danger(th:if='${param.logout}')
-            | You have been
-            | logged out.
+            | 你已經登出了
           form.form-signin(th:action='@{/login}', method='post')
-            h2.form-signin-heading Please sign in
+            h2.form-signin-heading 麻煩請登入
             .form-group
-              label.sr-only(for='username') Username
+              label.sr-only(for='username') 使用者帳號
               input#username.form-control(type='text', placeholder='Username', name='username', required='required', autofocus='autofocus')
             .form-group
-              label.sr-only(for='password') Password
+              label.sr-only(for='password') 使用者密碼
               input#password.form-control(type='password', placeholder='Password', name='password', required='required')
             button.btn.btn-lg.btn-primary.btn-block(type='submit')
-              | Sign
-              | In
+              | 登入
     div(th:replace='common/header :: body-bottom-scripts')/

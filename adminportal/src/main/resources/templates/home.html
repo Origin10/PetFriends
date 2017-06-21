@@ -1,8 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
-  <head th:replace="common/header :: common-header">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head th:replace="common/header :: common-header"/>
   <body>
-    <div th:replace="common/header :: navbar">
-    <div th:replace="common/header :: body-bottom-scripts">
+    <div th:replace="common/header :: navbar"/>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><a type="button" th:href="@{/book/add}" class="btn btn-primary">新增物資</a>&nbsp; &nbsp;<a type="button" th:href="@{/book/bookList}" class="btn btn-success">檢視物資清單</a></div>
+      </div>
+    </div>
+    <div th:replace="common/header :: body-bottom-scripts"/>
   </body>
 </html>

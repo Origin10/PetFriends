@@ -1,5 +1,4 @@
 //output:../shoppingCart.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
@@ -11,55 +10,49 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             h2.section-headline
               span(th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'")
         .col-xs-4
-          img.img-responsive(src='/image/logo.png')
+          img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width:85%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
-      img.img-responsive(src='/image/wood.png', style='margin-top: -75px;')
+      img.img-responsive(src='/imgs/wood.png', style='margin-top: -75px;')
       .row(style='margin-top: 10px;')
         .col-xs-12
           .row
             .col-xs-6.text-left
               a.btn.btn-warning(th:href='@{/bookshelf}')
-                | Continue
-                | Shopping
+                | 繼續選購
             .col-xs-6.text-right
-              a.btn.btn-primary(th:href='@{/checkout(id=${shoppingCart.id})}') Check Out
+              a.btn.btn-primary(th:href='@{/checkout(id=${shoppingCart.id})}') 結帳
             br
             .alert.alert-warning(th:if='${notEnoughStock}')
-              | Oops, some of the products don't have enough stock. Please update
-              | product quantity.
+              | 抱歉，您選購的商品目前庫存不足
             .alert.alert-warning(th:if='${emptyCart}')
-              | Oops,
-              | your cart is empty. See if you can find what you like in the
-              | bookshelf and add them to cart.
+              | 您購物籃裡的項目為空，請選購您所喜歡的項目
             br
             br
             .row
               .col-xs-8
-                h4(style='margin-left:70px;') Products
+                h4(style='margin-left:70px;') 物資
               .col-xs-2
-                h4 Price
+                h4 價格
               .col-xs-2
-                h4 Qty
+                h4 數量
             // **************** display products in cart ****************
             .row(th:each='cartItem : ${cartItemList}')
               form(th:action='@{/shoppingCart/updateCartItem}', method='post')
                 hr
                 .col-xs-2
                   a(th:href='@{bookDetail(id=${cartItem.book.id})}')
-                    img.img-responsive.shelf-book.center-block(style='width:70px;', th:src="#{adminPath}+@{/image/book/}+\
+                    img.img-responsive.shelf-book.center-block(style='width:70px;', th:src="#{adminPath}+@{/imgs/book/}+\
                     ${cartItem.book.id}+'.png'")
                 .col-xs-6
                   div(style='margin-left:50px;')
                     a(th:href='@{/bookDetail?id=}+${cartItem.book.id}')
                       h4(th:text='${cartItem.book.title}')
-                    p(th:if='${cartItem.book.inStockNumber>10}', style='color: green;') In Stock
+                    p(th:if='${cartItem.book.inStockNumber>10}', style='color: green;') 庫存
                     p(th:if='${cartItem.book.inStockNumber<10 and cartItem.book.inStockNumber>0}', style='color: green;')
-                      | Only 
+                      | 庫存只剩下：
                       span(th:text='${cartItem.book.inStockNumber}')
-                      |  In
-                      | 									Stock
-                    p(th:if='${cartItem.book.inStockNumber==0}', style='color: darkred;') Product Unavailable
-                    a(th:href='@{/shoppingCart/removeItem?id=}+${cartItem.id}') delete
+                    p(th:if='${cartItem.book.inStockNumber==0}', style='color: darkred;') 物資不能選購
+                    a(th:href='@{/shoppingCart/removeItem?id=}+${cartItem.id}') 刪除
                 .col-xs-2
                   h5(style='color: #db3208; font-size: large;')
                     | $
@@ -67,14 +60,14 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 .col-xs-2
                   input(hidden='hidden', name='id', th:value='${cartItem.id}')
                   input.form-control.cartItemQty(th:id='${cartItem.id}', th:name='qty', th:disabled='${cartItem.book.inStockNumber==0}', th:value='${cartItem.qty}')
-                  button.btn.btn-warning.btn-xs(style='display: none;', th:id="'update-item-'+${cartItem.id}", type='submit') Update
+                  button.btn.btn-warning.btn-xs(style='display: none;', th:id="'update-item-'+${cartItem.id}", type='submit') 更新
             .row
               hr
               h4.col-xs-12.text-right
                 strong(style='font-size: large;')
-                  | Total Price (
+                  | 總價 (
                   span(th:text='${#lists.size(cartItemList)}')
-                  |  items):
+                  |  個項目):
                 span(style='color: #db3208; font-szie: large;')
                   | $
                   span(th:text='${shoppingCart.grandTotal}')

@@ -1,5 +1,4 @@
 //output:../orderConfirmationEmailTemplate.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
   head
     // Bootstrap core CSS
@@ -16,27 +15,27 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
       border:1px solid black;}
   body
     p
-      | Dear 
+      | 親愛的 
       span(th:text='${user.firstName}')
       | ,
     br
     p
-      | Thank you for shopping from our book store. We hope you had a good time with our service!
+      | 感謝您使用我們的物資交換平台，希望您在本平台上有份美好的使用經驗。
     p
-      | Your order number is: 
+      | 您的訂單號碼是： 
       strong
         | #
         span(th:text='${order.id}')
-      | . Here is your order detail:
+      | . 這是您的訂單明細：
     h2
-      | Order Detail for purchase #
+      | 訂單明細號碼 #
       span(th:text='${order.id}')
     hr
     table
       tr
-        th Billing Detail
-        th Payment Information
-        th Shipping Address
+        th 帳單明細
+        th 付款資訊
+        th 寄送地址
       tr
         td
           span(th:text='${order.billingAddress.billingAddressName}')
@@ -72,18 +71,18 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
           span(th:text='${order.shippingAddress.shippingAddressZipcode}')
           br
     h3
-      strong Order Summary
+      strong 訂單總計
     table
       thead
         tr
           td
-            strong Item Name
+            strong 項目名稱
           td.text-center
-            strong Item Price
+            strong 項目價格
           td.text-center
-            strong Item Quantity
+            strong 項目數量
           td.text-right
-            strong Total
+            strong 總合
       tbody
         tr(th:each='cartItem : ${cartItemList}')
           td
@@ -95,22 +94,22 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml')
           td.highrow
           td.highrow
           td.highrow.text-center
-            strong Subtotal
+            strong 小計
           td.highrow.text-right(data-th-text='${order.orderTotal}')
         tr
           td.emptyrow
           td.emptyrow
           td.emptyrow.text-center
-            strong Tax
+            strong 稅
           td.emptyrow.text-right(data-th-text='${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}')
         tr
           td.emptyrow
             i.fa.fa-barcode.iconbig
           td.emptyrow
           td.emptyrow.text-center
-            strong Total
+            strong 總計
           td.emptyrow.text-right(th:with='total=${order.orderTotal+order.orderTotal*0.06}', data-th-text='${#numbers.formatDecimal(total, 0, 2)}')
     br
     p Best,
-    p Le's Bookstore
+    p PetFriends
     p Since 1923

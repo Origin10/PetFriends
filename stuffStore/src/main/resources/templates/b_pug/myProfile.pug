@@ -1,5 +1,4 @@
 //output:../myProfile.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   head(th:replace='common/header :: common-header')/
   body
@@ -11,25 +10,25 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             h2.section-headline
               span(th:text='${#strings.toUpperCase(user.username)}')
         .col-xs-4
-          img.img-responsive(src='/image/logo.png')
+          img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
-      img.img-responsive(src='/image/wood.png', style='margin-top: -75px;')
+      img.img-responsive(src='/imgs/wood.png', style='margin-top: -75px;')
       .row(style='margin-top: 60px;')
         .col-xs-9.col-xs-offset-3
           // Nav tabs
           ul.nav.nav-tabs
             li(th:classappend="${classActiveEdit}? 'active'")
               a(href='#tab-1', data-toggle='tab')
-                span(style='color: red;') Edit
+                span(style='color: red;') 編輯
             li(th:classappend="${classActiveOrders}? 'active'")
               a(href='#tab-2', data-toggle='tab')
-                span(style='color: red;') Orders
+                span(style='color: red;') 訂單
             li(th:classappend="${classActiveBilling}? 'active'")
               a(href='#tab-3', data-toggle='tab')
-                span(style='color: red;') Billing
+                span(style='color: red;') 帳單
             li(th:classappend="${classActiveShipping}? 'active'")
               a(href='#tab-4', data-toggle='tab')
-                span(style='color: red;') Shipping
+                span(style='color: red;') 運輸
           // Tab panels
           .tab-content
             // Edit user information
@@ -38,57 +37,47 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 .panel.panel-default(style='border: none;')
                   .panel-body(style='background-color: #ededed; margin-top: 20px;')
                     .alert.alert-danger(th:if='${incorrectPassword}')
-                      strong Incorrect Password!
-                      |  Pleae enter the correct
-                      | 										password for the current user.
+                      strong 不正確的帳號或密碼！請輸入正確的帳號或密碼。
                     .alert.alert-succss(th:if='${updateSuccess}')
-                      strong Update Success!
+                      strong 新增成功!
                     form(th:action='@{/updateUserInfo}', method='post')
                       input(type='hidden', name='id', th:value='${user.id}')
                       .bg-info(th:if='${updateUserInfo}')
-                        | User info
-                        | updated.
+                        | 使用者資訊已更新。
                       .form-group
                         .row
                           .col-xs-6
-                            label(for='firstName') First Name
+                            label(for='firstName') 名
                             input#firstName.form-control(type='text', name='firstName', th:value='${user.firstName}')
                           .col-xs-6
-                            label(for='lastName') Last Name
+                            label(for='lastName') 姓氏
                             input#lastName.form-control(type='text', name='lastName', th:value='${user.lastName}')
                       .form-group
-                        label(for='userName') Username
+                        label(for='userName') 使用者帳號
                         |  ' 
                         input#userName.form-control(type='text', name='username', th:value='${user.username}')
                       .form-group
-                        label(for='currentPassword') Current Password
+                        label(for='currentPassword') 目前的密碼
                         |  ' 
                         input#currentPassword.form-control(type='password', name='password', th:value='${currentPassword}')
                       p(style='color: #828282')
-                        | Enter your current password to
-                        | change the email address or password.
+                        | 輸入你目前的密碼來更新你最新的密碼
                       .form-group
-                        label(for='email') * Email Address
+                        label(for='email') * 電子信箱
                         |  ' 
                         input#email.form-control(type='text', name='email', th:value='${user.email}')
                       p(style='color: #828282')
-                        | A valid email address. All
-                        | emails from the system withll be sent to this address. The
-                        | email address is not made public and will only be used if you
-                        | wish to receive a new password or wish to receive certain
-                        | notification.
+                        | 所有的訊息都會寄到目前這個地址，該電子信箱不會被公開，只會用於接收您的新密碼或其他相關網站資訊。
                       .form-group
-                        label(for='txtNewPassword') Password
+                        label(for='txtNewPassword') 密碼
                         span#checkPasswordMatch(style='color: red;')
                         input#txtNewPassword.form-control(type='password', name='newPassword')
                       .form-group
-                        label(for='txtConfirmPassword') Confirm Password
-                        |  ' 
+                        label(for='txtConfirmPassword') 重複密碼
                         input#txtConfirmPassword.form-control(type='password')
                       p(style='color: #828282')
-                        | To change the current user
-                        | password, enter the new password in both fields.
-                      button#updateUserInfoButton.btn.btn-primary(type='submit') Save All
+                        | 輸入重複的密碼，以確定密碼欄位輸入正確
+                      button#updateUserInfoButton.btn.btn-primary(type='submit') 保存
             // Order Information
             #tab-2.tab-pane.fade(th:classappend="${classActiveOrders}? 'in active'")
               .panel-group
@@ -97,10 +86,10 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                     table.table.table-sm.table-inverse
                       thead
                         tr
-                          th Order Date
-                          th Order Number
-                          th Total
-                          th Status
+                          th 訂單訊息
+                          th 訂單編號
+                          th 總價
+                          th 狀態
                       tbody
                         tr(th:each='order : ${orderList}')
                           td
@@ -114,14 +103,14 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                         .col-xs-12
                           .text-center
                             h2
-                              | Order Detail for Purchase #
+                              | 訂單詳細編號 #
                               span(th:text='${order.id}')
                           hr
                           .row
                             .col-xs-4
                               .panel.panel-default.height
                                 .panel-heading
-                                  strong Billing Details
+                                  strong 帳單編號
                                 .panel-body
                                   span(th:text='${order.billingAddress.billingAddressName}')
                                   br
@@ -136,17 +125,15 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                             .col-xs-4
                               .panel.panel-default.height
                                 .panel-heading
-                                  strong Payment Information
+                                  strong 付款資訊
                                 .panel-body
                                   span(th:text='${order.payment.holderName}')
-                                    | Card
-                                    | Name
+                                    | 持卡人姓名
                                   br
                                   span(th:text='${order.payment.cardNumber}')
-                                    | Card
-                                    | Number
+                                    | 卡片編號
                                   br
-                                  span Exp Date:
+                                  span 到期日：
                                   span(th:text='${order.payment.expiryMonth}')
                                   | /
                                   span(th:text='${order.payment.expiryYear}')
@@ -154,7 +141,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                             .col-xs-4
                               .panel.panel-default.height
                                 .panel-heading
-                                  strong Billing Details
+                                  strong 帳單寄送細目：
                                 .panel-body
                                   span(th:text='${order.shippingAddress.shippingAddressName}')
                                   br
@@ -170,24 +157,22 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                         .col-md-12
                           .panel-heading
                             h3.text-center
-                              strong Order Summary
+                              strong 訂單總和
                           .panel-body
                             .table-responsive
                               table.table.table-condensed
                                 thead
                                   tr
                                     td
-                                      strong Item Name
+                                      strong 項目名稱
                                     td.text-center
                                       strong
-                                        | Item
-                                        | Price
+                                        | 項目價錢
                                     td.text-center
                                       strong
-                                        | Item
-                                        | Quantity
+                                        | 項目數量
                                     td.text-right
-                                      strong Total
+                                      strong 總合
                                 tbody
                                   tr(th:each='cartItem : ${cartItemList}')
                                     td(data-th-text='${cartItem.book.title}')
@@ -198,20 +183,20 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                     td.highrow
                                     td.highrow
                                     td.highrow.text-center
-                                      strong Subtotal
+                                      strong 小計
                                     td.highrow.text-right(data-th-text='${order.orderTotal}')
                                   tr
                                     td.emptyrow
                                     td.emptyrow
                                     td.emptyrow.text-center
-                                      strong Tax
+                                      strong 稅
                                     td.emptyrow.text-right(data-th-text='${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}')
                                   tr
                                     td.emptyrow
                                       i.fa.fa-barcode.iconbig
                                     td.emptyrow
                                     td.emptyrow.text-center
-                                      strong Total
+                                      strong 總計
                                     td.emptyrow.text-right(th:with='total=${order.orderTotal+order.orderTotal*0.06}', data-th-text='${#numbers.formatDecimal(total, 0, 2)}')
             // Billing Information
             #tab-3.tab-pane.fade(th:classappend="${classActiveBilling}? 'in active'")
@@ -221,20 +206,18 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                     ol.breadcrumb
                       li.breadcrumb-item.active
                         a(th:href='@{/listOfCreditCards}', th:style="${listOfCreditCards}? 'color:red'")
-                          | List of
-                          | Credit Cards
+                          | 信用卡列表
                       li.breadcrumb-item.active
                         a(th:href='@{/addNewCreditCard}', th:style="${addNewCreditCard}? 'color:red'")
-                          | Add(Update)
-                          | Credit Card
+                          | 添加或修改信用卡
                     div(th:if='${listOfCreditCards}')
                       form(th:action='@{/setDefaultPayment}', method='post')
                         table.table
                           thead
                             tr
-                              th Default
-                              th Credit Card
-                              th Operations
+                              th 預設付款
+                              th 信用卡
+                              th 操作
                           tbody
                             tr(th:each='userPayment : ${userPaymentList}')
                               td
@@ -245,64 +228,62 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                   i.fa.fa-pencil
                                 a(th:href='@{/removeCreditCard(id=${userPayment.id})}')
                                   i.fa.fa-times
-                        button.btn.btn-primary(type='submit') Save
+                        button.btn.btn-primary(type='submit') 儲存
                     div(th:if='${addNewCreditCard}')
                       form(th:action='@{addNewCreditCard}', method='post')
                         .bg-info(th:if='${updateUserPaymentInfo}')
-                          | User
-                          | info updated.
+                          | 使用者資訊已更新。
                         input(hidden='hidden', name='id', th:value='${userPayment.id}')
                         .form-group
-                          h5 * Give a name for your card:
+                          h5 * 幫你的這張卡取名字：
                           input#cardName.form-control(type='text', placeholder='Card Name', th:name='cardName', required='required', th:value='${userPayment.cardName}')
                         // Billing Address
                         hr
                         .form-group
-                          h4 Billing Address
+                          h4 帳單地址
                         .form-group
-                          label(for='billingName') * Name
+                          label(for='billingName') * 收帳單者姓名
                           input#billingName.form-control(type='text', placeholder='Receiver Name', th:name='userBillingName', required='required', th:value='${userBilling.userBillingName}')
                         .form-group
-                          label(for='billingAddress') * Street Address
+                          label(for='billingAddress') * 帳單地址
                           input#billingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userBillingStreet1', required='required', th:value='${userBilling.userBillingStreet1}')
                           input#billingAddress.form-control(type='text', placeholder='Street Address 2', th:name='userBillingStreet2', th:value='${userBilling.userBillingStreet2}')
                         .row
                           .col-xs-4
                             .form-group
-                              label(for='billingCity') * City
+                              label(for='billingCity') * 城市
                               input#billingCity.form-control(type='text', placeholder='Billing city', th:name='userBillingCity', required='required', th:value='${userBilling.userBillingCity}')
                           .col-xs-4
                             .form-group
-                              label(for='billingState') * State
+                              label(for='billingState') * 國家
                               select#billingState.form-control(th:name='userBillingState', th:value='${userBilling.userBillingState}', required='required')
                                 option(value='', disabled='disabled')
-                                  | Please
-                                  | select an option
+                                  | 請選一個選項
                                 option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${userBilling.userBillingState}==${state})')
                           .col-xs-4
                             .form-group
-                              label(for='billingZipcode') * Zipcode
+                              label(for='billingZipcode') * 郵遞區號
                               input#billingZipcode.form-control(type='text', placeholder='Billing Zipcode', th:name='userBillingZipcode', required='required', th:value='${userBilling.userBillingZipcode}')
                         // Credit Card Information
                         hr
                         .form-group
-                          h4 Credit Card Information
+                          h4 信用卡訊息
                         .row
                           .col-xs-12
-                            img.img-responsive(src='/image/creditcard.png')
+                            img.img-responsive(src='/imgs/creditcard.png')
                             br
                             .form-group
-                              label(for='cardType') * Select Card Type:
+                              label(for='cardType') * 選擇卡片類型:
                               select#cardType.form-control(th:name='type', th:value='${userPayment.type}')
                                 option(value='visa') Visa
                                 option(value='mastercard') Mastercard
                                 option(value='discover') Discover
-                                option(value='amex') American Express
+                                option(value='amex') 美國運通
                             .form-group
-                              label(for='cardHolder') * Card Holder Name:
+                              label(for='cardHolder') * 持卡人姓名:
                               input#cardHolder.form-control(type='text', required='required', placeholder='Card Holder Name', th:name='holderName', th:value='${userPayment.holderName}')
                             .form-group
-                              label(for='cardNumber') * Card Number:
+                              label(for='cardNumber') * 信用卡卡號:
                               .input-group
                                 input#cardNumber.form-control(type='tel', required='required', placeholder='Valid Card Number', th:name='cardNumber', th:value='${userPayment.cardNumber}')
                                 span.input-group-addon
@@ -310,11 +291,11 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                         .row
                           .col-xs-7
                             .form-group
-                              label * Expiration Date
+                              label * 到期日期
                               .row
                                 .col-xs-6
                                   select.form-control(name='expiryMonth', required='required', th:value='${userPayment.expiryMonth}')
-                                    option(disabled='disabled') -- Month --
+                                    option(disabled='disabled') -- 月份 --
                                     option(value='01') Jan (01)
                                     option(value='02') Feb (02)
                                     option(value='03') Mar (03)
@@ -329,7 +310,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                     option(value='12') Dec (12)
                                 .col-xs-6
                                   select.form-control(name='expiryYear', th:value='${userPayment.expiryYear}')
-                                    option(disabled='disabled') -- Year --
+                                    option(disabled='disabled') -- 年 --
                                     option(value='2017') 2017
                                     option(value='2018') 2018
                                     option(value='19') 2019
@@ -349,8 +330,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                               input#cardCVC.form-control(type='tel', name='cvc', placeholder='CVC', th:name='cvc', th:value='${userPayment.cvc}')
                         hr
                         button.btn.btn-primary.btn-lg(type='submit')
-                          | Save
-                          | All
+                          | 儲存
             // Shipping Information
             #tab-4.tab-pane.fade(th:classappend="${classActiveShipping}? 'in active'")
               .panel-group
@@ -359,25 +339,23 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                     ol.breadcrumb
                       li.breadcrumb-item.active
                         a(th:href='@{/listOfShippingAddresses}', th:style="${listOfShippingAddresses}? 'color:red'")
-                          | List
-                          | of Shipping Addresses
+                          | 帳單地址列表
                       li.breadcrumb-item.active
                         a(th:href='@{/addNewShippingAddress}', th:style="${addNewShippingAddress}? 'color:red'")
-                          | Add(Update)
-                          | Shipping Address
+                          | 新增或更新帳單地址
                     div(th:if='${listOfShippingAddresses}')
                       form(th:action='@{/setDefaultShippingAddress}', method='post')
                         table.table
                           thead
                             tr
-                              th Default
-                              th Shipping Address
-                              th Operations
+                              th 預設帳單地址
+                              th 帳單地址
+                              th 操作
                           tbody
                             tr(th:each='userShipping : ${userShippingList}')
                               td
                                 input(type='radio', name='defaultShippingAddressId', th:value='${userShipping.id}', th:checked='${userShipping.userShippingDefault}')
-                                span default
+                                span 預設
                               td(th:text="${userShipping.userShippingStreet1}+', '+\
                               ${userShipping.userShippingCity}+', '+${userShipping.userShippingState}")
                               td
@@ -385,32 +363,31 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                   i.fa.fa-pencil
                                 a(th:href='@{/removeUserShipping(id=${userShipping.id})}')
                                   i.fa.fa-times
-                        button.btn.btn-primary(type='submit') Save
+                        button.btn.btn-primary(type='submit') 儲存
                     div(th:if='${addNewShippingAddress}')
                       form(th:action='@{/addNewShippingAddress}', method='post')
                         .bg-info(th:if='${updateUserShippingInfo}')
-                          | User
-                          | info updated.
+                          | 使用者資訊已更新。
                         input(hidden='hidden', name='id', th:value='${userShipping.id}')
                         // Shipping Address
                         hr
                         .form-group
-                          h4 Shipping Address
+                          h4 收貨地址
                         .form-group
-                          label(for='shippingName') * Name
+                          label(for='shippingName') * 收貨者姓名
                           input#shippingName.form-control(type='text', placeholder='Receiver Name', th:name='userShippingName', required='required', th:value='${userShipping.userShippingName}')
                         .form-group
-                          label(for='shippingAddress') * Street Address
+                          label(for='shippingAddress') * 收貨地址
                           input#shippingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userShippingStreet1', required='required', th:value='${userShipping.userShippingStreet1}')
                           input.form-control(type='text', placeholder='Street Address 2', th:name='userShppingStreet2', th:value='${userShipping.userShippingStreet2}')
                         .row
                           .col-xs-4
                             .form-group
-                              label(for='shippingCity') * City
+                              label(for='shippingCity') * 城市
                               input#shippingCity.form-control(type='text', placeholder='Shipping City', th:name='userShippingCity', required='required', th:value='${userShipping.userShippingCity}')
                           .col-xs-4
                             .form-group
-                              label(for='shippingState') * State
+                              label(for='shippingState') * 國家
                               select#shippingState.form-control(th:name='userShippingState', th:value='${userShipping.userShippingState}', required='required')
                                 option(value='', disabled='disabled')
                                   | Please
@@ -418,12 +395,11 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                 option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${userShipping.userShippingState}==${state})')
                           .col-xs-4
                             .form-group
-                              label(for='shippingZipcode') * Zipcode
+                              label(for='shippingZipcode') * 郵遞區號
                               input#shippingZipcode.form-control(type='text', placeholder='Shipping Zipcode', th:name='userShippingZipcode', required='required', th:value='${userShipping.userShippingZipcode}')
                         hr
                         button.btn.btn-primary.btn-lg(type='submit')
-                          | Save
-                          | All
+                          | 儲存
     // end of container
     div(th:replace='common/header :: footer')/
     div(th:replace='common/header :: body-bottom-scripts')/

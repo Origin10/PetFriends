@@ -1,5 +1,4 @@
 //output:../common/header.html, doctype:strict
-doctype html
 html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w3.org/1999/xhtml')
   head(th:fragment='common-header')
     meta(charset='utf-8')
@@ -13,13 +12,13 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
     link(th:href='@{/css/dataTables.bootstrap.min.css}', rel='stylesheet')
     link(th:href='@{/css/font-awesome.min.css}', rel='stylesheet')
     // Custom styles for this template
-    link(href='/css/style.css', rel='stylesheet')
-    link(rel='icon', href='/image/applie-touch-icon.png')
+    link(href='/css/style.min.css', rel='stylesheet')
+    link(rel='icon', href='/imgs/applie-touch-icon.png')
   body
-    div(th:fragment='navbar')
+    div(th:fragment='navbar2')
       .page-top(style='width: 100%; height: 20px; background-color: #f46b42;')
       // Static navbar
-      nav.navbar.navbar-default.navbar-inverse
+      nav.navbar.navbar-default
         .container-fluid
           .navbar-header
             a.navbar-brand(th:href='@{/}') LE'S BOOKSTORE
@@ -33,7 +32,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                   li
                     a(th:href='@{/bookshelf}') Browse the bookshelf
                   li
-                    a(th:href='@{/hours}') Store hours & Directions
+                    a(th:href='@{/hours}') Store hours &amp; Directions
                   li
                     a(th:href='@{/faq}') FAQ
               form.navbar-form(th:action='@{/searchBook}', method='post')
@@ -44,15 +43,104 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
               li
                 a(th:href='@{/shoppingCart/cart}') SHOPPING CART
               li
-                a(sec:authorize='isAnonymous()', th:href='@{/login}')
-                  | MY
-                  | ACCOUNT
+                a(sec:authorize='isAnonymous()', th:href='@{/login}') MY ACCOUNT
               li
                 a(sec:authorize='isAuthenticated()', th:href='@{/myProfile}') MY ACCOUNT
               li
                 a(sec:authorize='isAuthenticated()', th:href='@{/logout}') LOGOUT
           // /.nav-collapse
         // /.container-fluid
+    div(th:fragment='navbar')
+      nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+        .container
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
+            a.navbar-brand(href='index.html')
+            // title
+          // Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-center
+              li
+                a(href='about.html') 餐廳
+              li
+                a(href='services.html') 市集
+              li
+                a(href='contact.html') 協尋
+              li
+                a(href='contact.html') 血庫
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(sec:authorize='isAnonymous()', th:href='@{/login}') MY ACCOUNT
+              li
+                a(sec:authorize='isAuthenticated()', th:href='@{/myProfile}') MY ACCOUNT
+              li
+                a(sec:authorize='isAuthenticated()', th:href='@{/logout}') LOGOUT
+                
+              c:if(test='${not empty mem}')
+                li#profile-image
+                  a(href='${pageContext.servletContext.contextPath}/MemInfo.jsp')
+                    img(src='${pageContext.servletContext.contextPath}/memPhoto.do?id=${mem.mem_mail}&type=memPhoto', width='20', height='20')
+                    |                               ${mem.mem_name}
+                li#alert.dropdown(style='display:none')
+                  a.dropdown-toggle.glyphicon.glyphicon-bell(href='#', data-toggle='dropdown')
+                    span#alerttotal.badge 00
+                  ul.dropdown-menu
+                    c:foreach(var='alertlist', items='${alert}')
+                      li
+                        .panel.panel-default
+                          .panel-body
+                            img#alertimg(src='${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&type=memPhoto', width='60', height='60')
+                            //- | ${alertlist.mem_name} 寄出交友邀請給你
+                            //- br
+                            //- #mid.(class='${mem.mem_id}', style='display:none')
+                            //- #almid.(class='${alertlist.mem_id}', style='display:none')
+                            button#removefri.btn.btn-default(type='submit', style='float:right') 刪除邀請
+                            button#joinfri.btn.btn-default(type='submit', style='float:right') 接受
+                      li
+                        a(href='${pageContext.servletContext.contextPath}/logout.do?logout=登出') 登出     
+                                   
+    div(th:fragment="searchStuff")
+      .container.text-right
+        .row
+          .col-md-8 
+          .col-md-4
+            h2(style="padding-left:5px;") 物資收尋
+            #search-input
+              .input-group
+                form.navbar-form(th:action='@{/searchBook}', method='post')
+                  .form-group
+                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="35")
+                    span.input-group-btn
+                      button.btn.btn-info.btn-lg(type='submit')
+                        i.glyphicon.glyphicon-search  
+                        
+    div(th:fragment="icon-bar")
+      .text-center.bg-theme(style="margin:15px 0;")
+        .container
+          .row(style="padding-top: 10px;")
+            .col-md-2
+            .col-md-2
+              a(style="color:#fff", th:href='@{/bookshelf}') 
+                i.fa.fa-5x.fa-fw.fa-archive
+                .col-md-12
+                  p.lead 新進的物資
+            .col-md-2
+              a(style="color:#fff")
+                i.fa.fa-5x.fa-fw.fa-heart
+                .col-md-12
+                  p.lead 喜愛的物資
+            .col-md-2
+              a(style="color:#fff")
+                i.fa.fa-5x.fa-fw.fa-cart-plus
+                .col-md-12
+                  p.lead 物資交易明細
+            .col-md-2
+              a(style="color:#fff")
+                i.fa.fa-5x.fa-fw.fa-shopping-basket
+                .col-md-12
+                  p.lead 捐出的物資
+            .col-md-2                    
+                     
     div(th:fragment='footer')
       br
       br
@@ -60,15 +148,15 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
         .row
           .col-xs-3.footerleft
             .logofooter
-              a(th:href='@{/}')
-                img.img-responsive(src='/image/logo.png', style='width: 200px;')
+              a(th:href='@{/}') 
+                img.img-responsive(src='/imgs/logo.png', style='width: 200px;')
             p
-              | Le's Independent Book Store. 
+              | PetFriends. 
               br
-              | Serving our customers with the
+              | 動物們的好朋友
               | 						best.
           .col-xs-3.paddingtop-bottom
-            h6.heading7 CONTACT
+            h6.heading7 聯絡方式
             ul.post
               p
                 i.fa.fa-map-pin
@@ -78,43 +166,43 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                 | 							02112
               p
                 i.fa.fa-phone
-                |  Phone (USA) : +1 999 999 9999
+                |  電話 (TW) : +886 999 9999 999
               p
                 i.fa.fa-envelope
-                |  E-mail : info@lebookstore.com
+                |  E-mail : info@petfriends.com
           .col-xs-3.paddingtop-bottom
-            h6.heading7 LINKS
+            h6.heading7 相關連結
             ul.footer-ul
               li
-                a(href='#')  Privacy Policy
+                a(href='#')  使用者條約
               li
-                a(href='#')  Terms & Conditions
+                a(href='#')  政策 &amp; 公開條款
               li
-                a(href='#')  Frequently Ask Questions
+                a(href='#')  常見問與答
           .col-xs-3.paddingtop-bottom
-            h6.heading7 STORE HOURS
+            h6.heading7 網站營業時間
             .post
-              p Monday - Saturday: 9am - 11pm
-              p Sunday: 10am - 10pm
+              p 星期一 - 星期六: 9am - 11pm
+              p 星期天: 10am - 10pm
       .copyright
         .col-md-6
           p © 2017 - All Rights Reserved
         .col-md-6
           ul.bottom_ul
             li
-              a(href='#') About us
+              a(href='#') 關於我們
             li
-              a(href='#') Blog
+              a(href='#') 部落格
             li
-              a(href='#') Faq's
+              a(href='#') 問與答
             li
-              a(href='#') Contact us
+              a(href='#') 聯絡我們
             li
-              a(href='#') Site Map
+              a(href='#') 網站地圖
     div(th:fragment='body-bottom-scripts')
-      script(th:src='@{/js/jquery.min.js}').
-      script(th:src='@{/js/bootstrap.min.js}').
-      script(th:src='@{/js/scripts.js}').
+      script(th:src='@{/js/jquery.min.js}')
+      script(th:src='@{/js/bootstrap.min.js}')
+      script(th:src='@{/js/scripts.js}')
       // data table
-      script(th:src='@{/js/jquery.dataTables.min.js}').
-      script(th:src='@{/js/dataTables.bootstrap.min.js}').
+      script(th:src='@{/js/jquery.dataTables.min.js}')
+      script(th:src='@{/js/dataTables.bootstrap.min.js}')
