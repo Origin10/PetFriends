@@ -12,7 +12,7 @@ import com.bookstore.domain.CartItem;
 import com.bookstore.domain.Order;
 import com.bookstore.domain.ShoppingCart;
 import com.bookstore.domain.User;
-import com.bookstore.repository.BookToCartItemRepository;
+import com.bookstore.repository.StuffToCartItemRepository;
 import com.bookstore.repository.CartItemRepository;
 import com.bookstore.service.CartItemService;
 
@@ -23,7 +23,7 @@ public class CartItemServiceImpl implements CartItemService{
 	private CartItemRepository cartItemRepository;
 	
 	@Autowired
-	private BookToCartItemRepository bookToCartItemRepository;
+	private StuffToCartItemRepository stuffToCartItemRepository;
 	
 	public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
 		return cartItemRepository.findByShoppingCart(shoppingCart);
@@ -63,7 +63,7 @@ public class CartItemServiceImpl implements CartItemService{
 		BookToCartItem bookToCartItem = new BookToCartItem();
 		bookToCartItem.setBook(book);
 		bookToCartItem.setCartItem(cartItem);
-		bookToCartItemRepository.save(bookToCartItem);
+		stuffToCartItemRepository.save(bookToCartItem);
 		
 		return cartItem;
 	}
@@ -73,7 +73,7 @@ public class CartItemServiceImpl implements CartItemService{
 	}
 	
 	public void removeCartItem(CartItem cartItem) {
-		bookToCartItemRepository.deleteByCartItem(cartItem);
+		stuffToCartItemRepository.deleteByCartItem(cartItem);
 		cartItemRepository.delete(cartItem);
 	}
 	

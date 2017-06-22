@@ -7,6 +7,6 @@ import com.bookstore.domain.BookToCartItem;
 import com.bookstore.domain.CartItem;
 
 @Transactional
-public interface BookToCartItemRepository extends CrudRepository<BookToCartItem, Long> {
+public interface StuffToCartItemRepository extends CrudRepository<BookToCartItem, Long> {
 	void deleteByCartItem(CartItem cartItem);
 }

@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.domain.Book;
-import com.bookstore.repository.BookRepository;
+import com.bookstore.repository.StuffRepository;
 import com.bookstore.service.StuffService;
 
 @Service
 public class StuffServiceImpl implements StuffService {
 	@Autowired
-	private BookRepository bookRepository;
+	private StuffRepository stuffRepository;
 	
 	public List<Book> findAll() {
-		List<Book> bookList = (List<Book>) bookRepository.findAll();
+		List<Book> bookList = (List<Book>) stuffRepository.findAll();
 		List<Book> activeBookList = new ArrayList<>();
 		
 		for (Book book: bookList) {
@@ -29,11 +29,11 @@ public class StuffServiceImpl implements StuffService {
 	}
 	
 	public Book findOne(Long id) {
-		return bookRepository.findOne(id);
+		return stuffRepository.findOne(id);
 	}
 
 	public List<Book> findByCategory(String category){
-		List<Book> bookList = bookRepository.findByCategory(category);
+		List<Book> bookList = stuffRepository.findByCategory(category);
 		
 		List<Book> activeBookList = new ArrayList<>();
 		
@@ -47,7 +47,7 @@ public class StuffServiceImpl implements StuffService {
 	}
 	
 	public List<Book> blurrySearch(String title) {
-		List<Book> bookList = bookRepository.findByTitleContaining(title);
+		List<Book> bookList = stuffRepository.findByTitleContaining(title);
 List<Book> activeBookList = new ArrayList<>();
 		
 		for (Book book: bookList) {
