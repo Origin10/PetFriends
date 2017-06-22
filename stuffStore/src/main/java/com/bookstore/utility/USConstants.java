@@ -11,57 +11,25 @@ public class USConstants {
 	
 	public final static Map<String, String> mapOfUSStates = new HashMap<String, String>() {
 		{
-			put("AL", "Alabama");
-			put("AK", "Alaska");
-			put("AZ", "Arizona");
-            put("AR", "Arkansas");
-            put("CA", "California");
-            put("CO", "Colorado");
-            put("CT", "Connecticut");
-            put("DE", "Delaware");
-            put("DC", "Dist of Columbia");
-            put("FL", "Florida");
-            put("GA", "Georgia");
-            put("HI", "Hawaii");
-            put("ID", "Idaho");
-            put("IL", "Illinois");
-            put("IN", "Indiana");
-            put("IA", "Iowa");
-            put("KS", "Kansas");
-            put("KY", "Kentucky");
-            put("LA", "Louisiana");
-            put("ME", "Maine");
-            put("MD", "Maryland");
-            put("MA", "Massachusetts");
-            put("MI", "Michigan");
-            put("MN", "Minnesota");
-            put("MS", "Mississippi");
-            put("MO", "Missouri");
-            put("MT", "Montana");
-            put("NE", "Nebraska");
-            put("NV", "Nevada");
-            put("NH", "New Hampshire");
-            put("NJ", "New Jersey");
-            put("NM", "New Mexico");
-            put("NY", "New York");
-            put("NC", "North Carolina");
-            put("ND", "North Dakota");
-            put("OH", "Ohio");
-            put("OK", "Oklahoma");
-            put("OR", "Oregon");
-            put("PA", "Pennsylvania");
-            put("RI", "Rhode Island");
-            put("SC", "South Carolina");
-            put("SD", "South Dakota");
-            put("TN", "Tennessee");
-            put("TX", "Texas");
-            put("UT", "Utah");
-            put("VT", "Vermont");
-            put("VA", "Virginia");
-            put("WA", "Washington");
-            put("WV", "West Virginia");
-            put("WI", "Wisconsin");
-            put("WY", "Wyoming");
+            put("台北市", "台北市");
+            put("新北市", "新北市");
+            put("桃園市", "桃園市");
+            put("台中市", "台中市");
+            put("台南市", "台南市");
+            put("高雄市", "高雄市");
+            put("基隆市", "基隆市");
+            put("新竹縣", "新竹縣");
+            put("苗栗縣", "苗栗縣");
+            put("彰化縣", "彰化縣");
+            put("南投縣", "南投縣");
+            put("雲林縣", "雲林縣");
+            put("嘉義縣", "嘉義縣");
+            put("屏東縣", "屏東縣");
+            put("宜蘭縣", "宜蘭縣");
+            put("花蓮縣", "花蓮縣");
+            put("台東縣", "台東縣");
+            put("澎湖縣", "澎湖縣");
+
 		}
 	};
 	

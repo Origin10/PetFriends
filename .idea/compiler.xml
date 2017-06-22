@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="adminportal" />
         <module name="bookstore" />
+        <module name="stuffStore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="adminportal" target="1.8" />
       <module name="bookstore" target="1.8" />
+      <module name="stuffStore" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
