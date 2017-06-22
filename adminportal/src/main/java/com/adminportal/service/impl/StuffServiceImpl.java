@@ -6,28 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adminportal.domain.Book;
-import com.adminportal.repository.BookRepository;
+import com.adminportal.repository.StuffRepository;
 import com.adminportal.service.StuffService;
 
 @Service
 public class StuffServiceImpl implements StuffService {
 	
 	@Autowired
-	private BookRepository bookRepository;
+	private StuffRepository stuffRepository;
 	
 	public Book save(Book book) {
-		return bookRepository.save(book);
+		return stuffRepository.save(book);
 	}
 	
 	public List<Book> findAll() {
-		return (List<Book>) bookRepository.findAll();
+		return (List<Book>) stuffRepository.findAll();
 	}
 	
 	public Book findOne(Long id) {
-		return bookRepository.findOne(id);
+		return stuffRepository.findOne(id);
 	}
 	
 	public void removeOne(Long id) {
-		bookRepository.delete(id);
+		stuffRepository.delete(id);
 	}
 }
