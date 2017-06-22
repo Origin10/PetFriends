@@ -44,7 +44,7 @@ public class Book {
 	
 	@OneToMany(mappedBy = "book")
 	@JsonIgnore
-	private List<BookToCartItem> bookToCartItemList;
+	private List<StuffToCartItem> stuffToCartItemList;
 
 	public Long getId() {
 		return id;
@@ -182,12 +182,12 @@ public class Book {
 		this.bookImage = bookImage;
 	}
 
-	public List<BookToCartItem> getBookToCartItemList() {
-		return bookToCartItemList;
+	public List<StuffToCartItem> getStuffToCartItemList() {
+		return stuffToCartItemList;
 	}
 
-	public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
-		this.bookToCartItemList = bookToCartItemList;
+	public void setStuffToCartItemList(List<StuffToCartItem> stuffToCartItemList) {
+		this.stuffToCartItemList = stuffToCartItemList;
 	}
 	
 	
