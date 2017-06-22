@@ -5,3 +5,4 @@ bin/src/main/resources/templates/
 /stuffStore/mvnw
 /stuffStore/mvnw.cmd
 /.idea/
+lib/
