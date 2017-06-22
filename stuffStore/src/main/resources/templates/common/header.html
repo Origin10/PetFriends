@@ -53,10 +53,9 @@
       <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display-->
-          <div class="navbar-header"><a href="index.html" class="navbar-brand"></a>
-            <!-- title-->
+          <div class="navbar-header"><a th:href="@{/}" class="navbar-brand"> </a>
+            <!--(href='index.html')-->
           </div>
-          <!-- Collect the nav links, forms, and other content for toggling-->
           <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-center">
               <li><a href="about.html">餐廳</a></li>
@@ -116,11 +115,11 @@
         <div class="container">
           <div style="padding-top: 10px;" class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-2"><a style="color:#fff" th:href="@{/bookshelf}"> <i class="fa fa-5x fa-fw fa-archive"></i>
+            <div class="col-md-2"><a style="color:#fff" th:href="@{/bookshelf?category=all}"> <i class="fa fa-5x fa-fw fa-archive"></i>
                 <div class="col-md-12">
                   <p class="lead">新進的物資</p>
                 </div></a></div>
-            <div class="col-md-2"><a style="color:#fff"><i class="fa fa-5x fa-fw fa-heart"></i>
+            <div class="col-md-2"><a style="color:#fff" th:href="@{/bookshelf}"><i class="fa fa-5x fa-fw fa-heart"></i>
                 <div class="col-md-12">
                   <p class="lead">喜愛的物資</p>
                 </div></a></div>

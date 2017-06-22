@@ -55,9 +55,8 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
         .container
           // Brand and toggle get grouped for better mobile display
           .navbar-header
-            a.navbar-brand(href='index.html')
-            // title
-          // Collect the nav links, forms, and other content for toggling
+            a.navbar-brand(th:href='@{/}') 
+            //(href='index.html')
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-center
               li
@@ -120,12 +119,12 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
           .row(style="padding-top: 10px;")
             .col-md-2
             .col-md-2
-              a(style="color:#fff", th:href='@{/bookshelf}') 
+              a(style="color:#fff", th:href='@{/bookshelf?category=all}') 
                 i.fa.fa-5x.fa-fw.fa-archive
                 .col-md-12
                   p.lead 新進的物資
             .col-md-2
-              a(style="color:#fff")
+              a(style="color:#fff",th:href='@{/bookshelf}')
                 i.fa.fa-5x.fa-fw.fa-heart
                 .col-md-12
                   p.lead 喜愛的物資

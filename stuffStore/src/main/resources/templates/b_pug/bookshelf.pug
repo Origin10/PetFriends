@@ -8,7 +8,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
         .col-xs-8
           h2.section-headline
             h2.section-headline
-              span(th:text="${user}? '歡迎'+${#strings.toUpperCase(user.username)}+'使用者' : 'PetFriends 物資交換中心'")
+              span(th:text="${user}? '使用者 '+${#strings.toUpperCase(user.username)}+' 歡迎您的蒞臨' : 'PetFriends 物資交換中心'")
         .col-xs-4
           img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
@@ -29,7 +29,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             .alert.alert-info
               strong(style='font-style: italic;') 抱歉！沒有你搜尋的結果，可以留下您電子信箱，有相關物資上架時讓我們通知您。
             .text-center
-              input(type="email",placeholder="輸入信箱...",width="35px")
+              input(type="text",placeholder="輸入信箱...",width="35px")
               button.btn.btn-success(type="submit") 通知我
           table#bookList(border='0')
             thead
