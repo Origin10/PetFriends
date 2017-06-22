@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.domain.Book;
-import com.bookstore.domain.BookToCartItem;
+import com.bookstore.domain.StuffToCartItem;
 import com.bookstore.domain.CartItem;
 import com.bookstore.domain.Order;
 import com.bookstore.domain.ShoppingCart;
@@ -60,10 +60,10 @@ public class CartItemServiceImpl implements CartItemService{
 		cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(qty)));
 		cartItem = cartItemRepository.save(cartItem);
 		
-		BookToCartItem bookToCartItem = new BookToCartItem();
-		bookToCartItem.setBook(book);
-		bookToCartItem.setCartItem(cartItem);
-		stuffToCartItemRepository.save(bookToCartItem);
+		StuffToCartItem stuffToCartItem = new StuffToCartItem();
+		stuffToCartItem.setBook(book);
+		stuffToCartItem.setCartItem(cartItem);
+		stuffToCartItemRepository.save(stuffToCartItem);
 		
 		return cartItem;
 	}

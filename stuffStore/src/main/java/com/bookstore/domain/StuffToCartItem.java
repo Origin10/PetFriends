@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BookToCartItem {
+public class StuffToCartItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

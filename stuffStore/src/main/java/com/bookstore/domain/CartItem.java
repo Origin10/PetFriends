@@ -28,7 +28,7 @@ public class CartItem {
 	
 	@OneToMany(mappedBy = "cartItem")
 	@JsonIgnore
-	private List<BookToCartItem> bookToCartItemList;
+	private List<StuffToCartItem> stuffToCartItemList;
 	
 	@ManyToOne
 	@JoinColumn(name="shopping_cart_id")
@@ -70,12 +70,12 @@ public class CartItem {
 		this.book = book;
 	}
 
-	public List<BookToCartItem> getBookToCartItemList() {
-		return bookToCartItemList;
+	public List<StuffToCartItem> getStuffToCartItemList() {
+		return stuffToCartItemList;
 	}
 
-	public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
-		this.bookToCartItemList = bookToCartItemList;
+	public void setStuffToCartItemList(List<StuffToCartItem> stuffToCartItemList) {
+		this.stuffToCartItemList = stuffToCartItemList;
 	}
 
 	public ShoppingCart getShoppingCart() {

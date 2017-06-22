@@ -23,7 +23,7 @@ import com.adminportal.service.StuffService;
 
 @Controller
 @RequestMapping("/book")
-public class BookController {
+public class StuffController {
 
 	@Autowired
 	private StuffService stuffService;
