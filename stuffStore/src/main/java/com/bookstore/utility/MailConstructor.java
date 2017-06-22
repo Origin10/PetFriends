@@ -30,10 +30,10 @@ public class MailConstructor {
 			) {
 		
 		String url = contextPath + "/newUser?token="+token;
-		String message = "\nPlease click on this link to verify your email and edit your personal information. Your password is: \n"+password;
+		String message = "\n請點擊連結，至PetFriends更新您的暫時密碼，您的暫時密碼如下\n"+password;
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(user.getEmail());
-		email.setSubject("Le's Bookstore - New User");
+		email.setSubject("PetFriends - 新使用者您好");
 		email.setText(url+message);
 		email.setFrom(env.getProperty("support.email"));
 		return email;
@@ -52,9 +52,9 @@ public class MailConstructor {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
 				email.setTo(user.getEmail());
-				email.setSubject("Order Confirmation - "+order.getId());
+				email.setSubject("訂單確認 - "+order.getId());
 				email.setText(text, true);
-				email.setFrom(new InternetAddress("ray.deng83@gmail.com"));
+				email.setFrom(new InternetAddress("w.crows@gmail.com"));
 			}
 		};
 		

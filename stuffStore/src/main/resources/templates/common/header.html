@@ -95,12 +95,12 @@
         <div class="row">
           <div class="col-md-8"> </div>
           <div class="col-md-4">
-            <h2 style="padding-left:5px;">物資收尋</h2>
+            <h2 style="padding-left:8px;">物資搜尋</h2>
             <div id="search-input">
               <div class="input-group">
                 <form th:action="@{/searchBook}" method="post" class="navbar-form">
                   <div class="form-group">
-                    <input type="text" name="keyword" placeholder="尋找物資" size="35" class="form-control input-lg"/><span class="input-group-btn">
+                    <input type="text" name="keyword" placeholder="尋找物資" size="32" class="form-control input-lg"/><span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"> </i></button></span>
                   </div>
                 </form>
@@ -180,7 +180,7 @@
           <ul class="bottom_ul">
             <li><a href="#">關於我們</a></li>
             <li><a href="#">部落格</a></li>
-            <li><a href="#">問與答</a></li>
+            <li><a th:href="@{/faq}">問與答</a></li>
             <li><a href="#">聯絡我們</a></li>
             <li><a href="#">網站地圖</a></li>
           </ul>

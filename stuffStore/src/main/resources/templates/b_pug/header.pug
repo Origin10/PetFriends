@@ -103,12 +103,12 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
         .row
           .col-md-8 
           .col-md-4
-            h2(style="padding-left:5px;") 物資收尋
+            h2(style="padding-left:8px;") 物資搜尋
             #search-input
               .input-group
                 form.navbar-form(th:action='@{/searchBook}', method='post')
                   .form-group
-                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="35")
+                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="32")
                     span.input-group-btn
                       button.btn.btn-info.btn-lg(type='submit')
                         i.glyphicon.glyphicon-search  
@@ -193,7 +193,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
             li
               a(href='#') 部落格
             li
-              a(href='#') 問與答
+              a(th:href='@{/faq}') 問與答
             li
               a(href='#') 聯絡我們
             li
