@@ -14,7 +14,7 @@ import com.bookstore.domain.Book;
 import com.bookstore.domain.CartItem;
 import com.bookstore.domain.ShoppingCart;
 import com.bookstore.domain.User;
-import com.bookstore.service.BookService;
+import com.bookstore.service.StuffService;
 import com.bookstore.service.CartItemService;
 import com.bookstore.service.ShoppingCartService;
 import com.bookstore.service.UserService;
@@ -30,7 +30,7 @@ public class ShoppingCartController {
 	private CartItemService cartItemService;
 	
 	@Autowired
-	private BookService bookService;
+	private StuffService stuffService;
 	
 	@Autowired
 	private ShoppingCartService shoppingCartService;
@@ -57,7 +57,7 @@ public class ShoppingCartController {
 			Model model, Principal principal
 			) {
 		User user = userService.findByUsername(principal.getName());
-		book = bookService.findOne(book.getId());
+		book = stuffService.findOne(book.getId());
 		
 		if (Integer.parseInt(qty) > book.getInStockNumber()) {
 			model.addAttribute("notEnoughStock", true);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bookstore.domain.Book;
 
-public interface BookService {
+public interface StuffService {
 	List<Book> findAll ();
 	
 	Book findOne(Long id);

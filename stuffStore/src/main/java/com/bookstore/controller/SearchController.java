@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookstore.domain.Book;
 import com.bookstore.domain.User;
-import com.bookstore.service.BookService;
+import com.bookstore.service.StuffService;
 import com.bookstore.service.UserService;
 
 @Controller
@@ -21,7 +21,7 @@ public class SearchController {
 	private UserService userService;
 	
 	@Autowired
-	private BookService bookService;
+	private StuffService stuffService;
 
 	@RequestMapping("/searchByCategory")
 	public String searchByCategory(
@@ -39,7 +39,7 @@ public class SearchController {
 		classActiveCategory = classActiveCategory.replaceAll("&", "");
 		model.addAttribute(classActiveCategory, true);
 		
-		List<Book> bookList = bookService.findByCategory(category);
+		List<Book> bookList = stuffService.findByCategory(category);
 		
 		if (bookList.isEmpty()) {
 			model.addAttribute("emptyList", true);
@@ -62,7 +62,7 @@ public class SearchController {
 			model.addAttribute("user", user);
 		}
 		
-		List<Book> bookList = bookService.blurrySearch(keyword);
+		List<Book> bookList = stuffService.blurrySearch(keyword);
 		
 		if (bookList.isEmpty()) {
 			model.addAttribute("emptyList", true);

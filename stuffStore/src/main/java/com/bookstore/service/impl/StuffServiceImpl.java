@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.bookstore.domain.Book;
 import com.bookstore.repository.BookRepository;
-import com.bookstore.service.BookService;
+import com.bookstore.service.StuffService;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class StuffServiceImpl implements StuffService {
 	@Autowired
 	private BookRepository bookRepository;
 	

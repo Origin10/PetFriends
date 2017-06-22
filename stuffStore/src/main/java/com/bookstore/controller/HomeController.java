@@ -37,7 +37,7 @@ import com.bookstore.domain.UserShipping;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
-import com.bookstore.service.BookService;
+import com.bookstore.service.StuffService;
 import com.bookstore.service.CartItemService;
 import com.bookstore.service.OrderService;
 import com.bookstore.service.UserPaymentService;
@@ -64,7 +64,7 @@ public class HomeController {
 	private UserSecurityService userSecurityService;
 	
 	@Autowired
-	private BookService bookService;
+	private StuffService stuffService;
 	
 	@Autowired
 	private UserPaymentService userPaymentService;
@@ -107,7 +107,7 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		
-		List<Book> bookList = bookService.findAll();
+		List<Book> bookList = stuffService.findAll();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("activeAll",true);
 		
@@ -124,7 +124,7 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		
-		Book book = bookService.findOne(id);
+		Book book = stuffService.findOne(id);
 		
 		model.addAttribute("book", book);
 		
