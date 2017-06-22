@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.adminportal.domain.Book;
 import com.adminportal.repository.BookRepository;
-import com.adminportal.service.BookService;
+import com.adminportal.service.StuffService;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class StuffServiceImpl implements StuffService {
 	
 	@Autowired
 	private BookRepository bookRepository;

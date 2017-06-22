@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.adminportal.domain.Book;
-import com.adminportal.service.BookService;
+import com.adminportal.service.StuffService;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
 
 	@Autowired
-	private BookService bookService;
+	private StuffService stuffService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addBook(Model model) {
@@ -37,7 +37,7 @@ public class BookController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addBookPost(@ModelAttribute("book") Book book, HttpServletRequest request) {
-		bookService.save(book);
+		stuffService.save(book);
 
 		MultipartFile bookImage = book.getBookImage();
 
@@ -57,7 +57,7 @@ public class BookController {
 	
 	@RequestMapping("/bookInfo")
 	public String bookInfo(@RequestParam("id") Long id, Model model) {
-		Book book = bookService.findOne(id);
+		Book book = stuffService.findOne(id);
 		model.addAttribute("book", book);
 		
 		return "bookInfo";
@@ -65,7 +65,7 @@ public class BookController {
 	
 	@RequestMapping("/updateBook")
 	public String updateBook(@RequestParam("id") Long id, Model model) {
-		Book book = bookService.findOne(id);
+		Book book = stuffService.findOne(id);
 		model.addAttribute("book", book);
 		
 		return "updateBook";
@@ -73,7 +73,7 @@ public class BookController {
 	
 	@RequestMapping(value="/updateBook", method=RequestMethod.POST)
 	public String updateBookPost(@ModelAttribute("book") Book book, HttpServletRequest request) {
-		bookService.save(book);
+		stuffService.save(book);
 		
 		MultipartFile bookImage = book.getBookImage();
 		
@@ -98,7 +98,7 @@ public class BookController {
 	
 	@RequestMapping("/bookList")
 	public String bookList(Model model) {
-		List<Book> bookList = bookService.findAll();
+		List<Book> bookList = stuffService.findAll();
 		model.addAttribute("bookList", bookList);		
 		return "bookList";
 		
@@ -108,8 +108,8 @@ public class BookController {
 	public String remove(
 			@ModelAttribute("id") String id, Model model
 			) {
-		bookService.removeOne(Long.parseLong(id.substring(8)));
-		List<Book> bookList = bookService.findAll();
+		stuffService.removeOne(Long.parseLong(id.substring(8)));
+		List<Book> bookList = stuffService.findAll();
 		model.addAttribute("bookList", bookList);
 		
 		return "redirect:/book/bookList";

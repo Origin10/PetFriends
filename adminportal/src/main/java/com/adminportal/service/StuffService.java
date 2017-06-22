@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.adminportal.domain.Book;
 
-public interface BookService {
+public interface StuffService {
 	
 	Book save(Book book);
 
