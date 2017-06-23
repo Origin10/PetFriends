@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class UserShipping {
+public class MemShipping {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
