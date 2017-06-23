@@ -226,33 +226,33 @@
                         </div>
                         <div class="form-group">
                           <label for="billingName">* 收帳單者姓名</label>
-                          <input id="billingName" type="text" placeholder="Receiver Name" th:name="userBillingName" required="required" th:value="${userBilling.userBillingName}" class="form-control"/>
+                          <input id="billingName" type="text" placeholder="Receiver Name" th:name="userBillingName" required="required" th:value="${memBilling.userBillingName}" class="form-control"/>
                         </div>
                         <div class="form-group">
                           <label for="billingAddress">* 帳單地址</label>
-                          <input id="billingAddress" type="text" placeholder="Street Address 1" th:name="userBillingStreet1" required="required" th:value="${userBilling.userBillingStreet1}" class="form-control"/>
-                          <input id="billingAddress" type="text" placeholder="Street Address 2" th:name="userBillingStreet2" th:value="${userBilling.userBillingStreet2}" class="form-control"/>
+                          <input id="billingAddress" type="text" placeholder="Street Address 1" th:name="userBillingStreet1" required="required" th:value="${memBilling.userBillingStreet1}" class="form-control"/>
+                          <input id="billingAddress" type="text" placeholder="Street Address 2" th:name="userBillingStreet2" th:value="${memBilling.userBillingStreet2}" class="form-control"/>
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingCity">* 城市</label>
-                              <input id="billingCity" type="text" placeholder="Billing city" th:name="userBillingCity" required="required" th:value="${userBilling.userBillingCity}" class="form-control"/>
+                              <input id="billingCity" type="text" placeholder="Billing city" th:name="userBillingCity" required="required" th:value="${memBilling.userBillingCity}" class="form-control"/>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingState">* 國家</label>
-                              <select id="billingState" th:name="userBillingState" th:value="${userBilling.userBillingState}" required="required" class="form-control">
+                              <select id="billingState" th:name="userBillingState" th:value="${memBilling.userBillingState}" required="required" class="form-control">
                                 <option value="" disabled="disabled">請選一個選項</option>
-                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${userBilling.userBillingState}==${state})"></option>
+                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memBilling.userBillingState}==${state})"></option>
                               </select>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingZipcode">* 郵遞區號</label>
-                              <input id="billingZipcode" type="text" placeholder="Billing Zipcode" th:name="userBillingZipcode" required="required" th:value="${userBilling.userBillingZipcode}" class="form-control"/>
+                              <input id="billingZipcode" type="text" placeholder="Billing Zipcode" th:name="userBillingZipcode" required="required" th:value="${memBilling.userBillingZipcode}" class="form-control"/>
                             </div>
                           </div>
                         </div>

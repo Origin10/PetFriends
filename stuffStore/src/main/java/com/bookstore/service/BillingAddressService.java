@@ -1,8 +1,8 @@
 package com.bookstore.service;
 
 import com.bookstore.domain.BillingAddress;
-import com.bookstore.domain.UserBilling;
+import com.bookstore.domain.MemBilling;
 
 public interface BillingAddressService {
-	BillingAddress setByUserBilling(UserBilling userBilling, BillingAddress billingAddress);
+	BillingAddress setByUserBilling(MemBilling memBilling, BillingAddress billingAddress);
 }

@@ -29,7 +29,7 @@ public class UserPayment {
 	private User user;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "userPayment")
-	private UserBilling userBilling;
+	private MemBilling memBilling;
 
 	public Long getId() {
 		return id;
@@ -111,12 +111,12 @@ public class UserPayment {
 		this.user = user;
 	}
 
-	public UserBilling getUserBilling() {
-		return userBilling;
+	public MemBilling getMemBilling() {
+		return memBilling;
 	}
 
-	public void setUserBilling(UserBilling userBilling) {
-		this.userBilling = userBilling;
+	public void setMemBilling(MemBilling memBilling) {
+		this.memBilling = memBilling;
 	}
 	
 	

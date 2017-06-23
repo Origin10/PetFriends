@@ -243,27 +243,27 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           h4 帳單地址
                         .form-group
                           label(for='billingName') * 收帳單者姓名
-                          input#billingName.form-control(type='text', placeholder='Receiver Name', th:name='userBillingName', required='required', th:value='${userBilling.userBillingName}')
+                          input#billingName.form-control(type='text', placeholder='Receiver Name', th:name='userBillingName', required='required', th:value='${memBilling.userBillingName}')
                         .form-group
                           label(for='billingAddress') * 帳單地址
-                          input#billingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userBillingStreet1', required='required', th:value='${userBilling.userBillingStreet1}')
-                          input#billingAddress.form-control(type='text', placeholder='Street Address 2', th:name='userBillingStreet2', th:value='${userBilling.userBillingStreet2}')
+                          input#billingAddress.form-control(type='text', placeholder='Street Address 1', th:name='userBillingStreet1', required='required', th:value='${memBilling.userBillingStreet1}')
+                          input#billingAddress.form-control(type='text', placeholder='Street Address 2', th:name='userBillingStreet2', th:value='${memBilling.userBillingStreet2}')
                         .row
                           .col-xs-4
                             .form-group
                               label(for='billingCity') * 城市
-                              input#billingCity.form-control(type='text', placeholder='Billing city', th:name='userBillingCity', required='required', th:value='${userBilling.userBillingCity}')
+                              input#billingCity.form-control(type='text', placeholder='Billing city', th:name='userBillingCity', required='required', th:value='${memBilling.userBillingCity}')
                           .col-xs-4
                             .form-group
                               label(for='billingState') * 國家
-                              select#billingState.form-control(th:name='userBillingState', th:value='${userBilling.userBillingState}', required='required')
+                              select#billingState.form-control(th:name='userBillingState', th:value='${memBilling.userBillingState}', required='required')
                                 option(value='', disabled='disabled')
                                   | 請選一個選項
-                                option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${userBilling.userBillingState}==${state})')
+                                option(th:each='state : ${stateList}', th:text='${state}', th:selected='(${memBilling.userBillingState}==${state})')
                           .col-xs-4
                             .form-group
                               label(for='billingZipcode') * 郵遞區號
-                              input#billingZipcode.form-control(type='text', placeholder='Billing Zipcode', th:name='userBillingZipcode', required='required', th:value='${userBilling.userBillingZipcode}')
+                              input#billingZipcode.form-control(type='text', placeholder='Billing Zipcode', th:name='userBillingZipcode', required='required', th:value='${memBilling.userBillingZipcode}')
                         // Credit Card Information
                         hr
                         .form-group

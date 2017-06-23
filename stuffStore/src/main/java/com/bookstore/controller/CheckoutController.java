@@ -122,7 +122,7 @@ public class CheckoutController {
 		for (UserPayment userPayment : userPaymentList) {
 			if (userPayment.isDefaultPayment()) {
 				paymentService.setByUserPayment(userPayment, payment);
-				billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
+				billingAddressService.setByUserBilling(userPayment.getMemBilling(), billingAddress);
 			}
 		}
 
@@ -251,7 +251,7 @@ public class CheckoutController {
 			Model model) {
 		User user = memService.findByUsername(principal.getName());
 		UserPayment userPayment = memPaymentService.findById(userPaymentId);
-		UserBilling userBilling = userPayment.getUserBilling();
+		MemBilling memBilling = userPayment.getMemBilling();
 
 		if (userPayment.getUser().getId() != user.getId()) {
 			return "badRequestPage";
@@ -260,7 +260,7 @@ public class CheckoutController {
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
-			billingAddressService.setByUserBilling(userBilling, billingAddress);
+			billingAddressService.setByUserBilling(memBilling, billingAddress);
 
 			model.addAttribute("shippingAddress", shippingAddress);
 			model.addAttribute("payment", payment);

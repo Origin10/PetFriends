@@ -100,11 +100,11 @@ public class MemServiceImpl implements MemService {
 	}
 	
 	@Override
-	public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
+	public void updateUserBilling(MemBilling memBilling, UserPayment userPayment, User user) {
 		userPayment.setUser(user);
-		userPayment.setUserBilling(userBilling);
+		userPayment.setMemBilling(memBilling);
 		userPayment.setDefaultPayment(true);
-		userBilling.setUserPayment(userPayment);
+		memBilling.setUserPayment(userPayment);
 		user.getUserPaymentList().add(userPayment);
 		save(user);
 	}

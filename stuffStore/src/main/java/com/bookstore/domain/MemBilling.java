@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class UserBilling {
+public class MemBilling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

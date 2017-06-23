@@ -236,11 +236,11 @@ public class HomeController {
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
 		
-		UserBilling userBilling = new UserBilling();
+		MemBilling memBilling = new MemBilling();
 		UserPayment userPayment = new UserPayment();
 		
 		
-		model.addAttribute("userBilling", userBilling);
+		model.addAttribute("memBilling", memBilling);
 		model.addAttribute("userPayment", userPayment);
 		
 		List<String> stateList = USConstants.listOfUSStatesCode;
@@ -281,11 +281,11 @@ public class HomeController {
 	@RequestMapping(value="/addNewCreditCard", method=RequestMethod.POST)
 	public String addNewCreditCard(
 			@ModelAttribute("userPayment") UserPayment userPayment,
-			@ModelAttribute("userBilling") UserBilling userBilling,
+			@ModelAttribute("userBilling") MemBilling memBilling,
 			Principal principal, Model model
 			){
 		User user = memService.findByUsername(principal.getName());
-		memService.updateUserBilling(userBilling, userPayment, user);
+		memService.updateUserBilling(memBilling, userPayment, user);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
@@ -329,9 +329,9 @@ public class HomeController {
 			return "badRequestPage";
 		} else {
 			model.addAttribute("user", user);
-			UserBilling userBilling = userPayment.getUserBilling();
+			MemBilling memBilling = userPayment.getMemBilling();
 			model.addAttribute("userPayment", userPayment);
-			model.addAttribute("userBilling", userBilling);
+			model.addAttribute("memBilling", memBilling);
 			
 			List<String> stateList = USConstants.listOfUSStatesCode;
 			Collections.sort(stateList);
