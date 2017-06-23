@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -27,7 +25,7 @@ public class Payment {
 	private Order order;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "userPayment")
-	private UserBilling userBilling;
+	private MemBilling memBilling;
 
 	public Long getId() {
 		return id;
@@ -101,12 +99,12 @@ public class Payment {
 		this.order = order;
 	}
 
-	public UserBilling getUserBilling() {
-		return userBilling;
+	public MemBilling getMemBilling() {
+		return memBilling;
 	}
 
-	public void setUserBilling(UserBilling userBilling) {
-		this.userBilling = userBilling;
+	public void setMemBilling(MemBilling memBilling) {
+		this.memBilling = memBilling;
 	}
 	
 	
