@@ -1,9 +1,9 @@
 package com.bookstore.service.impl;
 
+import com.bookstore.domain.MemShipping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookstore.domain.UserShipping;
 import com.bookstore.repository.MemShippingRepository;
 import com.bookstore.service.MemShippingService;
 
@@ -14,7 +14,7 @@ public class MemShippingServiceImpl implements MemShippingService {
 	private MemShippingRepository memShippingRepository;
 	
 	
-	public UserShipping findById(Long id) {
+	public MemShipping findById(Long id) {
 		return memShippingRepository.findOne(id);
 	}
 	

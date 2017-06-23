@@ -69,11 +69,11 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           th 可收貨地址
                           th 操作
                       tbody
-                        tr(th:each='userShipping : ${userShippingList}')
-                          td(th:text="${userShipping.userShippingStreet1}+' '+${userShipping.userShippingStreet2}+', '+${userShipping.userShippingCity}\
-                          +', '+${userShipping.userShippingState}")
+                        tr(th:each='memShipping : ${memShippingList}')
+                          td(th:text="${memShipping.userShippingStreet1}+' '+${memShipping.userShippingStreet2}+', '+${memShipping.userShippingCity}\
+                          +', '+${memShipping.userShippingState}")
                           td
-                            a(th:href='@{/setShippingAddress(userShippingId=${userShipping.id})}')
+                            a(th:href='@{/setShippingAddress(userShippingId=${memShipping.id})}')
                               | 使用
                               | 這個地址
                     .form-group

@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.bookstore.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
-import com.bookstore.domain.UserBilling;
-import com.bookstore.domain.UserPayment;
-import com.bookstore.domain.UserShipping;
+import com.bookstore.domain.MemShipping;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.repository.PasswordResetTokenRepository;
@@ -88,7 +85,7 @@ public class MemServiceImpl implements MemService {
 			shoppingCart.setUser(user);
 			user.setShoppingCart(shoppingCart);
 			
-			user.setUserShippingList(new ArrayList<UserShipping>());
+			user.setMemShippingList(new ArrayList<MemShipping>());
 			user.setUserPaymentList(new ArrayList<UserPayment>());
 			
 			localUser = memRepository.save(user);
@@ -113,10 +110,10 @@ public class MemServiceImpl implements MemService {
 	}
 	
 	@Override
-	public void updateUserShipping(UserShipping userShipping, User user){
-		userShipping.setUser(user);
-		userShipping.setUserShippingDefault(true);
-		user.getUserShippingList().add(userShipping);
+	public void updateUserShipping(MemShipping memShipping, User user){
+		memShipping.setUser(user);
+		memShipping.setUserShippingDefault(true);
+		user.getMemShippingList().add(memShipping);
 		save(user);
 	}
 	
@@ -137,15 +134,15 @@ public class MemServiceImpl implements MemService {
 	
 	@Override
 	public void setUserDefaultShipping(Long userShippingId, User user) {
-		List<UserShipping> userShippingList = (List<UserShipping>) memShippingRepository.findAll();
+		List<MemShipping> memShippingList = (List<MemShipping>) memShippingRepository.findAll();
 		
-		for (UserShipping userShipping : userShippingList) {
-			if(userShipping.getId() == userShippingId) {
-				userShipping.setUserShippingDefault(true);
-				memShippingRepository.save(userShipping);
+		for (MemShipping memShipping : memShippingList) {
+			if(memShipping.getId() == userShippingId) {
+				memShipping.setUserShippingDefault(true);
+				memShippingRepository.save(memShipping);
 			} else {
-				userShipping.setUserShippingDefault(false);
-				memShippingRepository.save(userShipping);
+				memShipping.setUserShippingDefault(false);
+				memShippingRepository.save(memShipping);
 			}
 		}
 	}

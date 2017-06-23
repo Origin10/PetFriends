@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.bookstore.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bookstore.domain.BillingAddress;
-import com.bookstore.domain.CartItem;
-import com.bookstore.domain.Order;
-import com.bookstore.domain.Payment;
-import com.bookstore.domain.ShippingAddress;
-import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
-import com.bookstore.domain.UserBilling;
-import com.bookstore.domain.UserPayment;
-import com.bookstore.domain.UserShipping;
+import com.bookstore.domain.MemShipping;
 import com.bookstore.service.BillingAddressService;
 import com.bookstore.service.CartItemService;
 import com.bookstore.service.OrderService;
@@ -101,10 +93,10 @@ public class CheckoutController {
 			}
 		}
 
-		List<UserShipping> userShippingList = user.getUserShippingList();
+		List<MemShipping> memShippingList = user.getMemShippingList();
 		List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-		model.addAttribute("userShippingList", userShippingList);
+		model.addAttribute("memShippingList", memShippingList);
 		model.addAttribute("userPaymentList", userPaymentList);
 
 		if (userPaymentList.size() == 0) {
@@ -113,7 +105,7 @@ public class CheckoutController {
 			model.addAttribute("emptyPaymentList", false);
 		}
 
-		if (userShippingList.size() == 0) {
+		if (memShippingList.size() == 0) {
 			model.addAttribute("emptyShippingList", true);
 		} else {
 			model.addAttribute("emptyShippingList", false);
@@ -121,9 +113,9 @@ public class CheckoutController {
 
 		ShoppingCart shoppingCart = user.getShoppingCart();
 
-		for (UserShipping userShipping : userShippingList) {
-			if (userShipping.isUserShippingDefault()) {
-				shippingAddressService.setByUserShipping(userShipping, shippingAddress);
+		for (MemShipping memShipping : memShippingList) {
+			if (memShipping.isUserShippingDefault()) {
+				shippingAddressService.setByUserShipping(memShipping, shippingAddress);
 			}
 		}
 
@@ -213,12 +205,12 @@ public class CheckoutController {
 	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,
 			Model model) {
 		User user = memService.findByUsername(principal.getName());
-		UserShipping userShipping = memShippingService.findById(userShippingId);
+		MemShipping memShipping = memShippingService.findById(userShippingId);
 
-		if (userShipping.getUser().getId() != user.getId()) {
+		if (memShipping.getUser().getId() != user.getId()) {
 			return "badRequestPage";
 		} else {
-			shippingAddressService.setByUserShipping(userShipping, shippingAddress);
+			shippingAddressService.setByUserShipping(memShipping, shippingAddress);
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
@@ -232,10 +224,10 @@ public class CheckoutController {
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
-			List<UserShipping> userShippingList = user.getUserShippingList();
+			List<MemShipping> memShippingList = user.getMemShippingList();
 			List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-			model.addAttribute("userShippingList", userShippingList);
+			model.addAttribute("memShippingList", memShippingList);
 			model.addAttribute("userPaymentList", userPaymentList);
 
 			model.addAttribute("shippingAddress", shippingAddress);
@@ -280,10 +272,10 @@ public class CheckoutController {
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
-			List<UserShipping> userShippingList = user.getUserShippingList();
+			List<MemShipping> memShippingList = user.getMemShippingList();
 			List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-			model.addAttribute("userShippingList", userShippingList);
+			model.addAttribute("memShippingList", memShippingList);
 			model.addAttribute("userPaymentList", userPaymentList);
 
 			model.addAttribute("shippingAddress", shippingAddress);
@@ -292,7 +284,7 @@ public class CheckoutController {
 
 			model.addAttribute("emptyPaymentList", false);
 
-			if (userShippingList.size() == 0) {
+			if (memShippingList.size() == 0) {
 				model.addAttribute("emptyShippingList", true);
 			} else {
 				model.addAttribute("emptyShippingList", false);

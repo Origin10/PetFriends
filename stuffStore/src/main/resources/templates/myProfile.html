@@ -362,12 +362,12 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr th:each="userShipping : ${userShippingList}">
+                            <tr th:each="memShipping : ${memShippingList}">
                               <td>
-                                <input type="radio" name="defaultShippingAddressId" th:value="${userShipping.id}" th:checked="${userShipping.userShippingDefault}"/><span>預設</span>
+                                <input type="radio" name="defaultShippingAddressId" th:value="${memShipping.id}" th:checked="${memShipping.userShippingDefault}"/><span>預設</span>
                               </td>
-                              <td th:text="${userShipping.userShippingStreet1}+', '+                              ${userShipping.userShippingCity}+', '+${userShipping.userShippingState}"></td>
-                              <td><a th:href="@{/updateUserShipping(id=${userShipping.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeUserShipping(id=${userShipping.id})}"><i class="fa fa-times"></i></a></td>
+                              <td th:text="${memShipping.userShippingStreet1}+', '+                              ${memShipping.userShippingCity}+', '+${memShipping.userShippingState}"></td>
+                              <td><a th:href="@{/updateUserShipping(id=${memShipping.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeUserShipping(id=${memShipping.id})}"><i class="fa fa-times"></i></a></td>
                             </tr>
                           </tbody>
                         </table>
@@ -377,7 +377,7 @@
                     <div th:if="${addNewShippingAddress}">
                       <form th:action="@{/addNewShippingAddress}" method="post">
                         <div th:if="${updateUserShippingInfo}" class="bg-info">使用者資訊已更新。</div>
-                        <input hidden="hidden" name="id" th:value="${userShipping.id}"/>
+                        <input hidden="hidden" name="id" th:value="${memShipping.id}"/>
                         <!-- Shipping Address-->
                         <hr/>
                         <div class="form-group">
@@ -385,36 +385,36 @@
                         </div>
                         <div class="form-group">
                           <label for="shippingName">* 收貨者姓名</label>
-                          <input id="shippingName" type="text" placeholder="Receiver Name" th:name="userShippingName" required="required" th:value="${userShipping.userShippingName}" class="form-control"/>
+                          <input id="shippingName" type="text" placeholder="Receiver Name" th:name="userShippingName" required="required" th:value="${memShipping.userShippingName}" class="form-control"/>
                         </div>
                         <div class="form-group">
                           <label for="shippingAddress">* 收貨地址</label>
-                          <input id="shippingAddress" type="text" placeholder="Street Address 1" th:name="userShippingStreet1" required="required" th:value="${userShipping.userShippingStreet1}" class="form-control"/>
-                          <input type="text" placeholder="Street Address 2" th:name="userShppingStreet2" th:value="${userShipping.userShippingStreet2}" class="form-control"/>
+                          <input id="shippingAddress" type="text" placeholder="Street Address 1" th:name="userShippingStreet1" required="required" th:value="${memShipping.userShippingStreet1}" class="form-control"/>
+                          <input type="text" placeholder="Street Address 2" th:name="userShppingStreet2" th:value="${memShipping.userShippingStreet2}" class="form-control"/>
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingCity">* 城市</label>
-                              <input id="shippingCity" type="text" placeholder="Shipping City" th:name="userShippingCity" required="required" th:value="${userShipping.userShippingCity}" class="form-control"/>
+                              <input id="shippingCity" type="text" placeholder="Shipping City" th:name="userShippingCity" required="required" th:value="${memShipping.userShippingCity}" class="form-control"/>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingState">* 國家</label>
-                              <select id="shippingState" th:name="userShippingState" th:value="${userShipping.userShippingState}" required="required" class="form-control">
+                              <select id="shippingState" th:name="userShippingState" th:value="${memShipping.userShippingState}" required="required" class="form-control">
                                 <option value="" disabled="disabled">
                                   Please
                                   select an option
                                 </option>
-                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${userShipping.userShippingState}==${state})"></option>
+                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memShipping.userShippingState}==${state})"></option>
                               </select>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingZipcode">* 郵遞區號</label>
-                              <input id="shippingZipcode" type="text" placeholder="Shipping Zipcode" th:name="userShippingZipcode" required="required" th:value="${userShipping.userShippingZipcode}" class="form-control"/>
+                              <input id="shippingZipcode" type="text" placeholder="Shipping Zipcode" th:name="userShippingZipcode" required="required" th:value="${memShipping.userShippingZipcode}" class="form-control"/>
                             </div>
                           </div>
                         </div>

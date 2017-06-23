@@ -1,9 +1,9 @@
 package com.bookstore.service;
 
-import com.bookstore.domain.UserShipping;
+import com.bookstore.domain.MemShipping;
 
 public interface MemShippingService {
-	UserShipping findById(Long id);
+	MemShipping findById(Long id);
 	
 	void removeById(Long id);
 }
