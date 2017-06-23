@@ -9,7 +9,7 @@ import com.bookstore.domain.UserShipping;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
 
-public interface UserService {
+public interface MemService {
 	PasswordResetToken getPasswordResetToken(final String token);
 	
 	void createPasswordResetTokenForUser(final User user, final String token);

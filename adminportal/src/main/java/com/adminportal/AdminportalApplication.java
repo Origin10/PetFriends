@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
 import com.adminportal.domain.security.UserRole;
-import com.adminportal.service.UserService;
+import com.adminportal.service.MemService;
 import com.adminportal.utility.SecurityUtility;
 
 
@@ -20,7 +20,7 @@ import com.adminportal.utility.SecurityUtility;
 public class AdminportalApplication implements CommandLineRunner{
 	
 	@Autowired
-	private UserService userService;
+	private MemService memService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminportalApplication.class, args);
@@ -38,6 +38,6 @@ public class AdminportalApplication implements CommandLineRunner{
 		role1.setName("ROLE_ADMIN");
 		userRoles.add(new UserRole(user1, role1));
 		
-		userService.createUser(user1, userRoles);
+		memService.createUser(user1, userRoles);
 	}
 }

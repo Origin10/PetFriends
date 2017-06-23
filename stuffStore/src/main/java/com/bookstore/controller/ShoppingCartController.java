@@ -17,14 +17,14 @@ import com.bookstore.domain.User;
 import com.bookstore.service.StuffService;
 import com.bookstore.service.CartItemService;
 import com.bookstore.service.ShoppingCartService;
-import com.bookstore.service.UserService;
+import com.bookstore.service.MemService;
 
 @Controller
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {
 	
 	@Autowired
-	private UserService userService;
+	private MemService memService;
 	
 	@Autowired
 	private CartItemService cartItemService;
@@ -37,7 +37,7 @@ public class ShoppingCartController {
 	
 	@RequestMapping("/cart")
 	public String shoppingCart(Model model, Principal principal) {
-		User user = userService.findByUsername(principal.getName());
+		User user = memService.findByUsername(principal.getName());
 		ShoppingCart shoppingCart = user.getShoppingCart();
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
@@ -56,7 +56,7 @@ public class ShoppingCartController {
 			@ModelAttribute("qty") String qty,
 			Model model, Principal principal
 			) {
-		User user = userService.findByUsername(principal.getName());
+		User user = memService.findByUsername(principal.getName());
 		book = stuffService.findOne(book.getId());
 		
 		if (Integer.parseInt(qty) > book.getInStockNumber()) {

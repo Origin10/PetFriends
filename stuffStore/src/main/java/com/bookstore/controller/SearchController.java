@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bookstore.domain.Book;
 import com.bookstore.domain.User;
 import com.bookstore.service.StuffService;
-import com.bookstore.service.UserService;
+import com.bookstore.service.MemService;
 
 @Controller
 public class SearchController {
 	@Autowired
-	private UserService userService;
+	private MemService memService;
 	
 	@Autowired
 	private StuffService stuffService;
@@ -30,7 +30,7 @@ public class SearchController {
 			){
 		if(principal!=null) {
 			String username = principal.getName();
-			User user = userService.findByUsername(username);
+			User user = memService.findByUsername(username);
 			model.addAttribute("user", user);
 		}
 		
@@ -58,7 +58,7 @@ public class SearchController {
 			) {
 		if(principal!=null) {
 			String username = principal.getName();
-			User user = userService.findByUsername(username);
+			User user = memService.findByUsername(username);
 			model.addAttribute("user", user);
 		}
 		

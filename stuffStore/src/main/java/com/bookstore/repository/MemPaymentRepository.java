@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.bookstore.domain.UserPayment;
 
-public interface UserPaymentRepository extends CrudRepository<UserPayment, Long>{
+public interface MemPaymentRepository extends CrudRepository<UserPayment, Long>{
 
 }

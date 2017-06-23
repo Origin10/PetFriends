@@ -75,7 +75,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
               li
                 a(sec:authorize='isAuthenticated()', th:href='@{/logout}') LOGOUT
                 
-              c:if(test='${not empty mem}')
+              cif(test='${not empty mem}')
                 li#profile-image
                   a(href='${pageContext.servletContext.contextPath}/MemInfo.jsp')
                     img(src='${pageContext.servletContext.contextPath}/memPhoto.do?id=${mem.mem_mail}&type=memPhoto', width='20', height='20')
@@ -84,7 +84,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                   a.dropdown-toggle.glyphicon.glyphicon-bell(href='#', data-toggle='dropdown')
                     span#alerttotal.badge 00
                   ul.dropdown-menu
-                    c:foreach(var='alertlist', items='${alert}')
+                    cforeach(var='alertlist', items='${alert}')
                       li
                         .panel.panel-default
                           .panel-body
@@ -108,7 +108,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
               .input-group
                 form.navbar-form(th:action='@{/searchBook}', method='post')
                   .form-group
-                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="32")
+                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="30")
                     span.input-group-btn
                       button.btn.btn-info.btn-lg(type='submit')
                         i.glyphicon.glyphicon-search  

@@ -10,23 +10,23 @@ import org.springframework.stereotype.Service;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.UserRole;
 import com.adminportal.repository.RoleRepository;
-import com.adminportal.repository.UserRepository;
-import com.adminportal.service.UserService;
+import com.adminportal.repository.MemRepository;
+import com.adminportal.service.MemService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class MemServiceImpl implements MemService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MemService.class);
 	
 	@Autowired
-	private UserRepository userRepository;
+	private MemRepository memRepository;
 	
 	@Autowired
 	private RoleRepository roleRepository;
 
 	@Override
 	public User createUser(User user, Set<UserRole> userRoles) {
-		User localUser = userRepository.findByUsername(user.getUsername());
+		User localUser = memRepository.findByUsername(user.getUsername());
 
 		if (localUser != null) {
 			LOG.info("使用者 {} 已存在，沒有改動任何東西", user.getUsername());
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 			user.getUserRoles().addAll(userRoles);
 
-			localUser = userRepository.save(user);
+			localUser = memRepository.save(user);
 		}
 
 		return localUser;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User user) {
-		return userRepository.save(user);
+		return memRepository.save(user);
 	}
 
 }

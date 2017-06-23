@@ -67,11 +67,11 @@
               <li><a sec:authorize="isAnonymous()" th:href="@{/login}">MY ACCOUNT</a></li>
               <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">MY ACCOUNT</a></li>
               <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a></li>
-              <c:if test="${not empty mem}">
+              <cif test="${not empty mem}">
                 <li id="profile-image"><a href="${pageContext.servletContext.contextPath}/MemInfo.jsp"><img src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${mem.mem_mail}&amp;type=memPhoto" width="20" height="20"/>                              ${mem.mem_name}</a></li>
                 <li id="alert" style="display:none" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle glyphicon glyphicon-bell"><span id="alerttotal" class="badge">00</span></a>
                   <ul class="dropdown-menu">
-                    <c:foreach var="alertlist" items="${alert}">
+                    <cforeach var="alertlist" items="${alert}">
                       <li>
                         <div class="panel panel-default">
                           <div class="panel-body"><img id="alertimg" src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&amp;type=memPhoto" width="60" height="60"/>
@@ -81,10 +81,10 @@
                         </div>
                       </li>
                       <li><a href="${pageContext.servletContext.contextPath}/logout.do?logout=登出">登出     </a></li>
-                    </c:foreach>
+                    </cforeach>
                   </ul>
                 </li>
-              </c:if>
+              </cif>
             </ul>
           </div>
         </div>
@@ -100,7 +100,7 @@
               <div class="input-group">
                 <form th:action="@{/searchBook}" method="post" class="navbar-form">
                   <div class="form-group">
-                    <input type="text" name="keyword" placeholder="尋找物資" size="32" class="form-control input-lg"/><span class="input-group-btn">
+                    <input type="text" name="keyword" placeholder="尋找物資" size="30" class="form-control input-lg"/><span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"> </i></button></span>
                   </div>
                 </form>

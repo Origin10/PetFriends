@@ -31,9 +31,9 @@ import com.bookstore.service.OrderService;
 import com.bookstore.service.PaymentService;
 import com.bookstore.service.ShippingAddressService;
 import com.bookstore.service.ShoppingCartService;
-import com.bookstore.service.UserPaymentService;
-import com.bookstore.service.UserService;
-import com.bookstore.service.UserShippingService;
+import com.bookstore.service.MemPaymentService;
+import com.bookstore.service.MemService;
+import com.bookstore.service.MemShippingService;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.USConstants;
 
@@ -51,7 +51,7 @@ public class CheckoutController {
 	private MailConstructor mailConstructor;
 	
 	@Autowired
-	private UserService userService;
+	private MemService memService;
 
 	@Autowired
 	private CartItemService cartItemService;
@@ -69,10 +69,10 @@ public class CheckoutController {
 	private PaymentService paymentService;
 
 	@Autowired
-	private UserShippingService userShippingService;
+	private MemShippingService memShippingService;
 
 	@Autowired
-	private UserPaymentService userPaymentService;
+	private MemPaymentService memPaymentService;
 	
 	@Autowired
 	private OrderService orderService;
@@ -81,7 +81,7 @@ public class CheckoutController {
 	public String checkout(@RequestParam("id") Long cartId,
 			@RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,
 			Principal principal) {
-		User user = userService.findByUsername(principal.getName());
+		User user = memService.findByUsername(principal.getName());
 
 		if (cartId != user.getShoppingCart().getId()) {
 			return "badRequestPage";
@@ -159,7 +159,7 @@ public class CheckoutController {
 			@ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
 			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
 			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
-		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+		ShoppingCart shoppingCart = memService.findByUsername(principal.getName()).getShoppingCart();
 
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		model.addAttribute("cartItemList", cartItemList);
@@ -187,7 +187,7 @@ public class CheckoutController {
 				|| billingAddress.getBillingAddressZipcode().isEmpty())
 			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
 		
-		User user = userService.findByUsername(principal.getName());
+		User user = memService.findByUsername(principal.getName());
 		
 		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
 		
@@ -212,8 +212,8 @@ public class CheckoutController {
 	@RequestMapping("/setShippingAddress")
 	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,
 			Model model) {
-		User user = userService.findByUsername(principal.getName());
-		UserShipping userShipping = userShippingService.findById(userShippingId);
+		User user = memService.findByUsername(principal.getName());
+		UserShipping userShipping = memShippingService.findById(userShippingId);
 
 		if (userShipping.getUser().getId() != user.getId()) {
 			return "badRequestPage";
@@ -257,8 +257,8 @@ public class CheckoutController {
 	@RequestMapping("/setPaymentMethod")
 	public String setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
 			Model model) {
-		User user = userService.findByUsername(principal.getName());
-		UserPayment userPayment = userPaymentService.findById(userPaymentId);
+		User user = memService.findByUsername(principal.getName());
+		UserPayment userPayment = memPaymentService.findById(userPaymentId);
 		UserBilling userBilling = userPayment.getUserBilling();
 
 		if (userPayment.getUser().getId() != user.getId()) {

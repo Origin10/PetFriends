@@ -11,14 +11,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.bookstore.domain.User;
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
-import com.bookstore.service.UserService;
+import com.bookstore.service.MemService;
 import com.bookstore.utility.SecurityUtility;
 
 @SpringBootApplication
 public class StuffstoreApplication implements CommandLineRunner {
 	
 	@Autowired
-	private UserService userService;
+	private MemService memService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(StuffstoreApplication.class, args);
@@ -38,6 +38,6 @@ public class StuffstoreApplication implements CommandLineRunner {
 		role1.setName("ROLE_USER");
 		userRoles.add(new UserRole(user1, role1));
 		
-		userService.createUser(user1, userRoles);
+		memService.createUser(user1, userRoles);
 	}
 }
