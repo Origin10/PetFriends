@@ -99,16 +99,19 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                         a(href='${pageContext.servletContext.contextPath}/logout.do?logout=登出') 登出     
                                    
     div(th:fragment="searchStuff")
-      .container.text-right
+      .container
         .row
-          .col-md-8 
-          .col-md-4
-            h2(style="padding-left:8px;") 物資搜尋
+          .col-md-8.text-left
+            .btn-group(style="position:relative; top:75px")
+              a.btn.btn-primary.btn-lg(type="button", th:href='@{/book/add}') 新增物資
+              a.btn.btn-success.btn-lg(type="button", th:href='@{/book/bookList}') 檢視物資清單
+          .col-md-4.text-right
+            h2(style="padding-left:10px;") 物資搜尋
             #search-input
-              .input-group
+              .input-group(style="margin-left:80px;") 
                 form.navbar-form(th:action='@{/searchBook}', method='post')
                   .form-group
-                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="22")
+                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="22",style="position:relative; left:10px")
                     span.input-group-btn
                       button.btn.btn-info.btn-lg(type='submit')
                         i.glyphicon.glyphicon-search  
@@ -129,12 +132,12 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                 .col-md-12
                   p.lead 喜愛的物資
             .col-md-2
-              a(style="color:#fff")
+              a(style="color:#fff",th:href='@{/myProfile}') 
                 i.fa.fa-5x.fa-fw.fa-cart-plus
                 .col-md-12
                   p.lead 物資交易明細
             .col-md-2
-              a(style="color:#fff")
+              a(style="color:#fff",th:href='@{/book/bookList}')
                 i.fa.fa-5x.fa-fw.fa-shopping-basket
                 .col-md-12
                   p.lead 捐出的物資

@@ -91,16 +91,18 @@
       </nav>
     </div>
     <div th:fragment="searchStuff">
-      <div class="container text-right">
+      <div class="container">
         <div class="row">
-          <div class="col-md-8"> </div>
-          <div class="col-md-4">
-            <h2 style="padding-left:8px;">物資搜尋</h2>
+          <div class="col-md-8 text-left">
+            <div style="position:relative; top:75px" class="btn-group"><a type="button" th:href="@{/book/add}" class="btn btn-primary btn-lg">新增物資</a><a type="button" th:href="@{/book/bookList}" class="btn btn-success btn-lg">檢視物資清單</a></div>
+          </div>
+          <div class="col-md-4 text-right">
+            <h2 style="padding-left:10px;">物資搜尋</h2>
             <div id="search-input">
-              <div class="input-group">
+              <div style="margin-left:80px;" class="input-group"> 
                 <form th:action="@{/searchBook}" method="post" class="navbar-form">
                   <div class="form-group">
-                    <input type="text" name="keyword" placeholder="尋找物資" size="22" class="form-control input-lg"/><span class="input-group-btn">
+                    <input type="text" name="keyword" placeholder="尋找物資" size="22" style="position:relative; left:10px" class="form-control input-lg"/><span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"> </i></button></span>
                   </div>
                 </form>
@@ -123,11 +125,11 @@
                 <div class="col-md-12">
                   <p class="lead">喜愛的物資</p>
                 </div></a></div>
-            <div class="col-md-2"><a style="color:#fff"><i class="fa fa-5x fa-fw fa-cart-plus"></i>
+            <div class="col-md-2"><a style="color:#fff" th:href="@{/myProfile}"> <i class="fa fa-5x fa-fw fa-cart-plus"></i>
                 <div class="col-md-12">
                   <p class="lead">物資交易明細</p>
                 </div></a></div>
-            <div class="col-md-2"><a style="color:#fff"><i class="fa fa-5x fa-fw fa-shopping-basket"></i>
+            <div class="col-md-2"><a style="color:#fff" th:href="@{/book/bookList}"><i class="fa fa-5x fa-fw fa-shopping-basket"></i>
                 <div class="col-md-12">
                   <p class="lead">捐出的物資</p>
                 </div></a></div>
