@@ -96,5 +96,19 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             hr
             p(th:utext='${book.description}')
     // end of container
+    
+    .py-5.bg-theme.text-center
+      .container
+        .row
+          .col-4.col-md-4
+            a(herf='history.back()')
+              i.fa.fa-5x.fa-fw.fa-arrow-left.text-white
+          .col-4.col-md-4
+            a
+              i.fa.fa-5x.fa-fw.fa-archive.text-white
+          .col-4.col-md-4
+            a(href='#nav')
+              i.fa.fa-5x.fa-fw.fa-chevron-circle-up.text-white
+    
     div(th:replace='common/header :: footer')/
     div(th:replace='common/header :: body-bottom-scripts')/

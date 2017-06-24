@@ -68,13 +68,6 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
               li
                 a(href='contact.html') 血庫
             ul.nav.navbar-nav.navbar-right
-              li
-                a(sec:authorize='isAnonymous()', th:href='@{/login}') MY ACCOUNT
-              li
-                a(sec:authorize='isAuthenticated()', th:href='@{/myProfile}') MY ACCOUNT
-              li
-                a(sec:authorize='isAuthenticated()', th:href='@{/logout}') LOGOUT
-                
               cif(test='${not empty mem}')
                 li#profile-image
                   a(href='${pageContext.servletContext.contextPath}/MemInfo.jsp')
@@ -89,8 +82,8 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
                         .panel.panel-default
                           .panel-body
                             img#alertimg(src='${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&type=memPhoto', width='60', height='60')
-                            //- | ${alertlist.mem_name} 寄出交友邀請給你
-                            //- br
+                            | ${alertlist.mem_name} 寄出交友邀請給你
+                            br
                             //- #mid.(class='${mem.mem_id}', style='display:none')
                             //- #almid.(class='${alertlist.mem_id}', style='display:none')
                             button#removefri.btn.btn-default(type='submit', style='float:right') 刪除邀請
@@ -108,10 +101,10 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
           .col-md-4.text-right
             h2(style="padding-left:10px;") 物資搜尋
             #search-input
-              .input-group(style="margin-left:80px;") 
+              .input-group(style="margin-left:75px; position:relative; left:20px;") 
                 form.navbar-form(th:action='@{/searchBook}', method='post')
                   .form-group
-                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="22",style="position:relative; left:10px")
+                    input.form-control.input-lg(type='text', name='keyword', placeholder='尋找物資',size="15",style="position:relative; right:10px;")
                     span.input-group-btn
                       button.btn.btn-info.btn-lg(type='submit')
                         i.glyphicon.glyphicon-search  
@@ -151,7 +144,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
           .col-xs-3.footerleft
             .logofooter
               a(th:href='@{/}') 
-                img.img-responsive(src='/imgs/logo.png', style='width: 200px;')
+                img.img-responsive(src='/imgs/pf2update2.png', style='width: 200px;')
             p
               | PetFriends. 
               br
@@ -204,6 +197,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1999/xhtml', xmlns:sec='http://www.w
     div(th:fragment='body-bottom-scripts')
       script(th:src='@{/js/jquery.min.js}')
       script(th:src='@{/js/bootstrap.min.js}')
+      script(th:src='@{/js/bootbox.min.js}')
       script(th:src='@{/js/scripts.js}')
       // data table
       script(th:src='@{/js/jquery.dataTables.min.js}')

@@ -4,6 +4,12 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
   body
     div(th:replace='common/header :: navbar')/
     .container
+      .row
+        .col-md-8.text-left
+          .btn-group(style="position:relative; top:30px")
+            a.btn.btn-primary(type="button", th:href='@{/book/add}') 新增物資
+          .col-md-4.text-left
+    .container
       .table-responsive
         table#bookListTable.table.table-bordered.table-hover.table-striped
           thead
@@ -12,7 +18,6 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 input(th:id='selectAllBooks', type='checkbox')
               th 名稱
               th 製造商
-              th 分類
               th 公司價
               th 賣家價
               th 公開或暫存
@@ -26,7 +31,6 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 a(th:href='@{/book/bookInfo(id=${book.id})}')
                   span(th:text='${book.title}')
               td(th:text='${book.author}')
-              td(th:text='${book.category}')
               td(th:text='${book.listPrice}')
               td(th:text='${book.ourPrice}')
               td(th:text='${book.active}')

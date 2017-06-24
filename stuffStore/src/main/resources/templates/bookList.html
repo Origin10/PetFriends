@@ -4,6 +4,14 @@
   <body>
     <div th:replace="common/header :: navbar"/>
     <div class="container">
+      <div class="row">
+        <div class="col-md-8 text-left">
+          <div style="position:relative; top:30px" class="btn-group"><a type="button" th:href="@{/book/add}" class="btn btn-primary">新增物資</a></div>
+          <div class="col-md-4 text-left"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
       <div class="table-responsive">
         <table id="bookListTable" class="table table-bordered table-hover table-striped">
           <thead>
@@ -13,7 +21,6 @@
               </th>
               <th>名稱</th>
               <th>製造商</th>
-              <th>分類</th>
               <th>公司價</th>
               <th>賣家價</th>
               <th>公開或暫存</th>
@@ -28,7 +35,6 @@
               </td>
               <td><a th:href="@{/book/bookInfo(id=${book.id})}"><span th:text="${book.title}"></span></a></td>
               <td th:text="${book.author}"></td>
-              <td th:text="${book.category}"></td>
               <td th:text="${book.listPrice}"></td>
               <td th:text="${book.ourPrice}"></td>
               <td th:text="${book.active}"></td>

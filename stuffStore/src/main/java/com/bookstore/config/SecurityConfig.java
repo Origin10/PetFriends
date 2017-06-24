@@ -38,6 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/forgetPassword",
 			"/login",
 			"/fonts/**",
+			"/book",
+			"/book/bookInfo",
 			"/bookshelf",
 			"/bookDetail/**",
 			"/hours",
@@ -58,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable().cors().disable()
 			.formLogin().failureUrl("/login?error")
-			/*.defaultSuccessUrl("/")*/
+			.defaultSuccessUrl("/")
 			.loginPage("/login").permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

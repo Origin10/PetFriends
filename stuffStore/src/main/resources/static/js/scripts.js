@@ -1,43 +1,44 @@
 /**
- * 
+ *
  */
 
 function checkBillingAddress() {
-	if($("#theSameAsShippingAddress").is(":checked")) {
-		$(".billingAddress").prop("disabled", true);
-	} else {
-		$(".billingAddress").prop("disabled", false);
-	}
+    if($("#theSameAsShippingAddress").is(":checked")) {
+        $(".billingAddress").prop("disabled", true);
+    } else {
+        $(".billingAddress").prop("disabled", false);
+    }
 }
 
 function checkPasswordMatch() {
-	var password = $("#txtNewPassword").val();
-	var confirmPassword = $("#txtConfirmPassword").val();
-	
-	if(password == "" && confirmPassword =="") {
-		$("#checkPasswordMatch").html("");
-		$("#updateUserInfoButton").prop('disabled', false);
-	} else {
-		if(password != confirmPassword) {
-			$("#checkPasswordMatch").html("Passwords do not match!");
-			$("#updateUserInfoButton").prop('disabled', true);
-		} else {
-			$("#checkPasswordMatch").html("Passwords match");
-			$("#updateUserInfoButton").prop('disabled', false);
-		}
-	}
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+
+    if(password == "" && confirmPassword =="") {
+        $("#checkPasswordMatch").html("");
+        $("#updateUserInfoButton").prop('disabled', false);
+    } else {
+        if(password != confirmPassword) {
+            $("#checkPasswordMatch").html("Passwords do not match!");
+            $("#updateUserInfoButton").prop('disabled', true);
+        } else {
+            $("#checkPasswordMatch").html("Passwords match");
+            $("#updateUserInfoButton").prop('disabled', false);
+        }
+    }
 }
 
 $(document).ready(function(){
-	$(".cartItemQty").on('change', function(){
-		var id=this.id;
-		
-		$('#update-item-'+id).css('display', 'inline-block');
-	});
-	$("#theSameAsShippingAddress").on('click', checkBillingAddress);
-	$("#txtConfirmPassword").keyup(checkPasswordMatch);
-	$("#txtNewPassword").keyup(checkPasswordMatch);
+    $(".cartItemQty").on('change', function(){
+        var id=this.id;
+
+        $('#update-item-'+id).css('display', 'inline-block');
+    });
+    $("#theSameAsShippingAddress").on('click', checkBillingAddress);
+    $("#txtConfirmPassword").keyup(checkPasswordMatch);
+    $("#txtNewPassword").keyup(checkPasswordMatch);
 });
+
 
 /**
  *
@@ -45,14 +46,14 @@ $(document).ready(function(){
 
 $(document).ready(function() {
     $('.delete-book').on('click', function (){
-		/*<![CDATA[*/
+        /*<![CDATA[*/
         var path = /*[[@{/}]]*/'remove';
-		/*]]>*/
+        /*]]>*/
 
         var id=$(this).attr('id');
 
         bootbox.confirm({
-            message: "您真的確定要刪除這一筆資料嗎？這項動作無法還原喔！",
+            message: "你真的確定要刪除這個嗎？",
             buttons: {
                 cancel: {
                     label:'<i class="fa fa-times"></i> 取消'
@@ -94,12 +95,12 @@ $(document).ready(function() {
 
         console.log(bookIdList);
 
-		/*<![CDATA[*/
+        /*<![CDATA[*/
         var path = /*[[@{/}]]*/'removeList';
-		/*]]>*/
+        /*]]>*/
 
         bootbox.confirm({
-            message: "你確定要刪除已選的所有項目嗎？這項動作無法還原喔！",
+            message: "你確定要刪除所許的所有項目？",
             buttons: {
                 cancel: {
                     label:'<i class="fa fa-times"></i> 取消'
