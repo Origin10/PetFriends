@@ -64,9 +64,6 @@
               <li><a href="contact.html">血庫</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a sec:authorize="isAnonymous()" th:href="@{/login}">MY ACCOUNT</a></li>
-              <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">MY ACCOUNT</a></li>
-              <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a></li>
               <cif test="${not empty mem}">
                 <li id="profile-image"><a href="${pageContext.servletContext.contextPath}/MemInfo.jsp"><img src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${mem.mem_mail}&amp;type=memPhoto" width="20" height="20"/>                              ${mem.mem_name}</a></li>
                 <li id="alert" style="display:none" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle glyphicon glyphicon-bell"><span id="alerttotal" class="badge">00</span></a>
@@ -74,7 +71,7 @@
                     <cforeach var="alertlist" items="${alert}">
                       <li>
                         <div class="panel panel-default">
-                          <div class="panel-body"><img id="alertimg" src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&amp;type=memPhoto" width="60" height="60"/>
+                          <div class="panel-body"><img id="alertimg" src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&amp;type=memPhoto" width="60" height="60"/>${alertlist.mem_name} 寄出交友邀請給你<br/>
                             <button id="removefri" type="submit" style="float:right" class="btn btn-default">刪除邀請</button>
                             <button id="joinfri" type="submit" style="float:right" class="btn btn-default">接受</button>
                           </div>
@@ -99,10 +96,10 @@
           <div class="col-md-4 text-right">
             <h2 style="padding-left:10px;">物資搜尋</h2>
             <div id="search-input">
-              <div style="margin-left:80px;" class="input-group"> 
+              <div style="margin-left:75px; position:relative; left:20px;" class="input-group"> 
                 <form th:action="@{/searchBook}" method="post" class="navbar-form">
                   <div class="form-group">
-                    <input type="text" name="keyword" placeholder="尋找物資" size="22" style="position:relative; left:10px" class="form-control input-lg"/><span class="input-group-btn">
+                    <input type="text" name="keyword" placeholder="尋找物資" size="15" style="position:relative; right:10px;" class="form-control input-lg"/><span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-search"> </i></button></span>
                   </div>
                 </form>
@@ -142,7 +139,7 @@
       <footer>
         <div class="row">
           <div class="col-xs-3 footerleft">
-            <div class="logofooter"><a th:href="@{/}"> <img src="/imgs/logo.png" style="width: 200px;" class="img-responsive"/></a></div>
+            <div class="logofooter"><a th:href="@{/}"> <img src="/imgs/pf2update2.png" style="width: 200px;" class="img-responsive"/></a></div>
             <p>PetFriends. <br/>動物們的好朋友
               						best.
             </p>
@@ -192,6 +189,7 @@
     <div th:fragment="body-bottom-scripts">
       <script th:src="@{/js/jquery.min.js}"></script>
       <script th:src="@{/js/bootstrap.min.js}"></script>
+      <script th:src="@{/js/bootbox.min.js}"></script>
       <script th:src="@{/js/scripts.js}"></script>
       <!-- data table-->
       <script th:src="@{/js/jquery.dataTables.min.js}"></script>
