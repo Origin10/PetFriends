@@ -40,7 +40,7 @@ public class Order {
 	private Payment payment;
 	
 	@ManyToOne
-	private User user;
+	private Mem user;
 
 	public Long getId() {
 		return id;
@@ -124,11 +124,11 @@ public class Order {
 		this.billingAddress = billingAddress;
 	}
 
-	public User getUser() {
+	public Mem getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Mem user) {
 		this.user = user;
 	}
 	

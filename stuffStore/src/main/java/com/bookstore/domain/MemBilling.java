@@ -13,16 +13,16 @@ public class MemBilling {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String userBillingName;
-	private String userBillingStreet1;
-	private String userBillingStreet2;
-	private String userBillingCity;
-	private String userBillingState;
-	private String userBillingCountry;
-	private String userBillingZipcode;
+	private String memBillingName;
+	private String memBillingStreet1;
+	private String memBillingStreet2;
+	private String memBillingCity;
+	private String memBillingState;
+	private String memBillingCountry;
+	private String memBillingZipcode;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	private UserPayment userPayment;
+	private MemPayment memPayment;
 
 	public Long getId() {
 		return id;
@@ -32,68 +32,68 @@ public class MemBilling {
 		this.id = id;
 	}
 
-	public String getUserBillingName() {
-		return userBillingName;
+	public String getMemBillingName() {
+		return memBillingName;
 	}
 
-	public void setUserBillingName(String userBillingName) {
-		this.userBillingName = userBillingName;
+	public void setMemBillingName(String memBillingName) {
+		this.memBillingName = memBillingName;
 	}
 
-	public String getUserBillingStreet1() {
-		return userBillingStreet1;
+	public String getMemBillingStreet1() {
+		return memBillingStreet1;
 	}
 
-	public void setUserBillingStreet1(String userBillingStreet1) {
-		this.userBillingStreet1 = userBillingStreet1;
+	public void setMemBillingStreet1(String memBillingStreet1) {
+		this.memBillingStreet1 = memBillingStreet1;
 	}
 
-	public String getUserBillingStreet2() {
-		return userBillingStreet2;
+	public String getMemBillingStreet2() {
+		return memBillingStreet2;
 	}
 
-	public void setUserBillingStreet2(String userBillingStreet2) {
-		this.userBillingStreet2 = userBillingStreet2;
+	public void setMemBillingStreet2(String memBillingStreet2) {
+		this.memBillingStreet2 = memBillingStreet2;
 	}
 
-	public String getUserBillingCity() {
-		return userBillingCity;
+	public String getMemBillingCity() {
+		return memBillingCity;
 	}
 
-	public void setUserBillingCity(String userBillingCity) {
-		this.userBillingCity = userBillingCity;
+	public void setMemBillingCity(String memBillingCity) {
+		this.memBillingCity = memBillingCity;
 	}
 
-	public String getUserBillingState() {
-		return userBillingState;
+	public String getMemBillingState() {
+		return memBillingState;
 	}
 
-	public void setUserBillingState(String userBillingState) {
-		this.userBillingState = userBillingState;
+	public void setMemBillingState(String memBillingState) {
+		this.memBillingState = memBillingState;
 	}
 
-	public String getUserBillingCountry() {
-		return userBillingCountry;
+	public String getMemBillingCountry() {
+		return memBillingCountry;
 	}
 
-	public void setUserBillingCountry(String userBillingCountry) {
-		this.userBillingCountry = userBillingCountry;
+	public void setMemBillingCountry(String memBillingCountry) {
+		this.memBillingCountry = memBillingCountry;
 	}
 
-	public String getUserBillingZipcode() {
-		return userBillingZipcode;
+	public String getMemBillingZipcode() {
+		return memBillingZipcode;
 	}
 
-	public void setUserBillingZipcode(String userBillingZipcode) {
-		this.userBillingZipcode = userBillingZipcode;
+	public void setMemBillingZipcode(String memBillingZipcode) {
+		this.memBillingZipcode = memBillingZipcode;
 	}
 
-	public UserPayment getUserPayment() {
-		return userPayment;
+	public MemPayment getMemPayment() {
+		return memPayment;
 	}
 
-	public void setUserPayment(UserPayment userPayment) {
-		this.userPayment = userPayment;
+	public void setMemPayment(MemPayment memPayment) {
+		this.memPayment = memPayment;
 	}
 	
 	

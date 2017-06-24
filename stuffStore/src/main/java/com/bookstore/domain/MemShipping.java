@@ -9,122 +9,122 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class MemShipping {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String userShippingName;
-	private String userShippingStreet1;
-	private String userShippingStreet2;
-	private String userShippingCity;
-	private String userShippingState;
-	private String userShippingCountry;
-	private String userShippingZipcode;
-	private boolean userShippingDefault;
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String memShippingName;
+    private String memShippingStreet1;
+    private String memShippingStreet2;
+    private String memShippingCity;
+    private String memShippingState;
+    private String memShippingCountry;
+    private String memShippingZipcode;
+    private boolean memShippingDefault;
 
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "mem_id")
+    private Mem mem;
 
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
 
-	public String getUserShippingName() {
-		return userShippingName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
-	public void setUserShippingName(String userShippingName) {
-		this.userShippingName = userShippingName;
-	}
+    public String getMemShippingName() {
+        return memShippingName;
+    }
 
 
-	public String getUserShippingStreet1() {
-		return userShippingStreet1;
-	}
+    public void setMemShippingName(String memShippingName) {
+        this.memShippingName = memShippingName;
+    }
 
 
-	public void setUserShippingStreet1(String userShippingStreet1) {
-		this.userShippingStreet1 = userShippingStreet1;
-	}
+    public String getMemShippingStreet1() {
+        return memShippingStreet1;
+    }
 
 
-	public String getUserShippingStreet2() {
-		return userShippingStreet2;
-	}
+    public void setMemShippingStreet1(String memShippingStreet1) {
+        this.memShippingStreet1 = memShippingStreet1;
+    }
 
 
-	public void setUserShippingStreet2(String userShippingStreet2) {
-		this.userShippingStreet2 = userShippingStreet2;
-	}
+    public String getMemShippingStreet2() {
+        return memShippingStreet2;
+    }
 
 
-	public String getUserShippingCity() {
-		return userShippingCity;
-	}
+    public void setMemShippingStreet2(String memShippingStreet2) {
+        this.memShippingStreet2 = memShippingStreet2;
+    }
 
 
-	public void setUserShippingCity(String userShippingCity) {
-		this.userShippingCity = userShippingCity;
-	}
+    public String getMemShippingCity() {
+        return memShippingCity;
+    }
 
 
-	public String getUserShippingState() {
-		return userShippingState;
-	}
+    public void setMemShippingCity(String memShippingCity) {
+        this.memShippingCity = memShippingCity;
+    }
 
 
-	public void setUserShippingState(String userShippingState) {
-		this.userShippingState = userShippingState;
-	}
+    public String getMemShippingState() {
+        return memShippingState;
+    }
 
 
-	public String getUserShippingCountry() {
-		return userShippingCountry;
-	}
+    public void setMemShippingState(String memShippingState) {
+        this.memShippingState = memShippingState;
+    }
 
 
-	public void setUserShippingCountry(String userShippingCountry) {
-		this.userShippingCountry = userShippingCountry;
-	}
+    public String getMemShippingCountry() {
+        return memShippingCountry;
+    }
 
 
-	public String getUserShippingZipcode() {
-		return userShippingZipcode;
-	}
+    public void setMemShippingCountry(String memShippingCountry) {
+        this.memShippingCountry = memShippingCountry;
+    }
 
 
-	public void setUserShippingZipcode(String userShippingZipcode) {
-		this.userShippingZipcode = userShippingZipcode;
-	}
+    public String getMemShippingZipcode() {
+        return memShippingZipcode;
+    }
 
 
-	public User getUser() {
-		return user;
-	}
+    public void setMemShippingZipcode(String memShippingZipcode) {
+        this.memShippingZipcode = memShippingZipcode;
+    }
 
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Mem getMem() {
+        return mem;
+    }
 
 
-	public boolean isUserShippingDefault() {
-		return userShippingDefault;
-	}
+    public void setMem(Mem mem) {
+        this.mem = mem;
+    }
 
 
-	public void setUserShippingDefault(boolean userShippingDefault) {
-		this.userShippingDefault = userShippingDefault;
-	}
-	
-	
+    public boolean isMemShippingDefault() {
+        return memShippingDefault;
+    }
+
+
+    public void setMemShippingDefault(boolean memShippingDefault) {
+        this.memShippingDefault = memShippingDefault;
+    }
+
+
 }

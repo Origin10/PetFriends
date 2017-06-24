@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 
 @Entity
 @Table(name="user_role")
@@ -21,7 +21,7 @@ public class UserRole {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
-	private User user;
+	private Mem mem;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="role_id")
@@ -29,8 +29,8 @@ public class UserRole {
 	
 	public UserRole(){}
 	
-	public UserRole(User user, Role role) {
-		this.user = user;
+	public UserRole(Mem mem, Role role) {
+		this.mem = mem;
 		this.role = role;
 	}
 
@@ -45,13 +45,13 @@ public class UserRole {
 	}
 
 
-	public User getUser() {
-		return user;
+	public Mem getMem() {
+		return mem;
 	}
 
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMem(Mem mem) {
+		this.mem = mem;
 	}
 
 

@@ -11,7 +11,7 @@ import com.bookstore.domain.StuffToCartItem;
 import com.bookstore.domain.CartItem;
 import com.bookstore.domain.Order;
 import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 import com.bookstore.repository.StuffToCartItemRepository;
 import com.bookstore.repository.CartItemRepository;
 import com.bookstore.service.CartItemService;
@@ -40,7 +40,7 @@ public class CartItemServiceImpl implements CartItemService{
 		return cartItem;
 	}
 	
-	public CartItem addBookToCartItem(Book book, User user, int qty) {
+	public CartItem addBookToCartItem(Book book, Mem user, int qty) {
 		List<CartItem> cartItemList = findByShoppingCart(user.getShoppingCart());
 		
 		for (CartItem cartItem : cartItemList) {

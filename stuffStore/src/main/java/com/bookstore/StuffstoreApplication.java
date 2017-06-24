@@ -3,12 +3,12 @@ package com.bookstore;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.bookstore.domain.Mem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.bookstore.domain.User;
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.service.MemService;
@@ -26,7 +26,7 @@ public class StuffstoreApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		User user1 = new User();
+		Mem user1 = new Mem();
 		user1.setFirstName("John");
 		user1.setLastName("Adams");
 		user1.setUsername("j");
@@ -38,6 +38,6 @@ public class StuffstoreApplication implements CommandLineRunner {
 		role1.setName("ROLE_USER");
 		userRoles.add(new UserRole(user1, role1));
 		
-		memService.createUser(user1, userRoles);
+		memService.createMem(user1, userRoles);
 	}
 }

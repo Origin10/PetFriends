@@ -27,7 +27,7 @@ public class ShoppingCart {
 	private List<CartItem> cartItemList;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private Mem mem;
 
 	public Long getId() {
 		return id;
@@ -53,12 +53,12 @@ public class ShoppingCart {
 		this.cartItemList = cartItemList;
 	}
 
-	public User getUser() {
-		return user;
+	public Mem getMem() {
+		return mem;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMem(Mem mem) {
+		this.mem = mem;
 	}
 	
 	

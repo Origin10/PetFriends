@@ -73,13 +73,13 @@ public class CheckoutController {
 	public String checkout(@RequestParam("id") Long cartId,
 			@RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,
 			Principal principal) {
-		User user = memService.findByUsername(principal.getName());
+		Mem mem = memService.findByMemname(principal.getName());
 
-		if (cartId != user.getShoppingCart().getId()) {
+		if (cartId != mem.getShoppingCart().getId()) {
 			return "badRequestPage";
 		}
 
-		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(mem.getShoppingCart());
 
 		if (cartItemList.size() == 0) {
 			model.addAttribute("emptyCart", true);
@@ -93,13 +93,13 @@ public class CheckoutController {
 			}
 		}
 
-		List<MemShipping> memShippingList = user.getMemShippingList();
-		List<UserPayment> userPaymentList = user.getUserPaymentList();
+		List<MemShipping> memShippingList = mem.getMemShippingList();
+		List<MemPayment> memPaymentList = mem.getMemPaymentList();
 
 		model.addAttribute("memShippingList", memShippingList);
-		model.addAttribute("userPaymentList", userPaymentList);
+		model.addAttribute("memPaymentList", memPaymentList);
 
-		if (userPaymentList.size() == 0) {
+		if (memPaymentList.size() == 0) {
 			model.addAttribute("emptyPaymentList", true);
 		} else {
 			model.addAttribute("emptyPaymentList", false);
@@ -111,18 +111,18 @@ public class CheckoutController {
 			model.addAttribute("emptyShippingList", false);
 		}
 
-		ShoppingCart shoppingCart = user.getShoppingCart();
+		ShoppingCart shoppingCart = mem.getShoppingCart();
 
 		for (MemShipping memShipping : memShippingList) {
-			if (memShipping.isUserShippingDefault()) {
-				shippingAddressService.setByUserShipping(memShipping, shippingAddress);
+			if (memShipping.isMemShippingDefault()) {
+				shippingAddressService.setByMemShipping(memShipping, shippingAddress);
 			}
 		}
 
-		for (UserPayment userPayment : userPaymentList) {
-			if (userPayment.isDefaultPayment()) {
-				paymentService.setByUserPayment(userPayment, payment);
-				billingAddressService.setByUserBilling(userPayment.getMemBilling(), billingAddress);
+		for (MemPayment memPayment : memPaymentList) {
+			if (memPayment.isDefaultPayment()) {
+				paymentService.setByMemPayment(memPayment, payment);
+				billingAddressService.setByMemBilling(memPayment.getMemBilling(), billingAddress);
 			}
 		}
 
@@ -130,7 +130,7 @@ public class CheckoutController {
 		model.addAttribute("payment", payment);
 		model.addAttribute("billingAddress", billingAddress);
 		model.addAttribute("cartItemList", cartItemList);
-		model.addAttribute("shoppingCart", user.getShoppingCart());
+		model.addAttribute("shoppingCart", mem.getShoppingCart());
 
 		List<String> stateList = USConstants.listOfUSStatesCode;
 		Collections.sort(stateList);
@@ -151,7 +151,7 @@ public class CheckoutController {
 			@ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
 			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
 			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
-		ShoppingCart shoppingCart = memService.findByUsername(principal.getName()).getShoppingCart();
+		ShoppingCart shoppingCart = memService.findByMemname(principal.getName()).getShoppingCart();
 
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		model.addAttribute("cartItemList", cartItemList);
@@ -179,11 +179,11 @@ public class CheckoutController {
 				|| billingAddress.getBillingAddressZipcode().isEmpty())
 			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
 		
-		User user = memService.findByUsername(principal.getName());
+		Mem mem = memService.findByMemname(principal.getName());
 		
-		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
+		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, mem);
 		
-		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+		mailSender.send(mailConstructor.constructOrderConfirmationEmail(mem, order, Locale.ENGLISH));
 		
 		shoppingCartService.clearShoppingCart(shoppingCart);
 		
@@ -202,39 +202,39 @@ public class CheckoutController {
 	}
 
 	@RequestMapping("/setShippingAddress")
-	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,
+	public String setShippingAddress(@RequestParam("memShippingId") Long memShippingId, Principal principal,
 			Model model) {
-		User user = memService.findByUsername(principal.getName());
-		MemShipping memShipping = memShippingService.findById(userShippingId);
+		Mem mem = memService.findByMemname(principal.getName());
+		MemShipping memShipping = memShippingService.findById(memShippingId);
 
-		if (memShipping.getUser().getId() != user.getId()) {
+		if (memShipping.getMem().getId() != mem.getId()) {
 			return "badRequestPage";
 		} else {
-			shippingAddressService.setByUserShipping(memShipping, shippingAddress);
+			shippingAddressService.setByMemShipping(memShipping, shippingAddress);
 
-			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(mem.getShoppingCart());
 
 			model.addAttribute("shippingAddress", shippingAddress);
 			model.addAttribute("payment", payment);
 			model.addAttribute("billingAddress", billingAddress);
 			model.addAttribute("cartItemList", cartItemList);
-			model.addAttribute("shoppingCart", user.getShoppingCart());
+			model.addAttribute("shoppingCart", mem.getShoppingCart());
 
 			List<String> stateList = USConstants.listOfUSStatesCode;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
-			List<MemShipping> memShippingList = user.getMemShippingList();
-			List<UserPayment> userPaymentList = user.getUserPaymentList();
+			List<MemShipping> memShippingList = mem.getMemShippingList();
+			List<MemPayment> memPaymentList = mem.getMemPaymentList();
 
 			model.addAttribute("memShippingList", memShippingList);
-			model.addAttribute("userPaymentList", userPaymentList);
+			model.addAttribute("memPaymentList", memPaymentList);
 
 			model.addAttribute("shippingAddress", shippingAddress);
 
 			model.addAttribute("classActiveShipping", true);
 
-			if (userPaymentList.size() == 0) {
+			if (memPaymentList.size() == 0) {
 				model.addAttribute("emptyPaymentList", true);
 			} else {
 				model.addAttribute("emptyPaymentList", false);
@@ -247,36 +247,36 @@ public class CheckoutController {
 	}
 
 	@RequestMapping("/setPaymentMethod")
-	public String setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
+	public String setPaymentMethod(@RequestParam("memPaymentId") Long memPaymentId, Principal principal,
 			Model model) {
-		User user = memService.findByUsername(principal.getName());
-		UserPayment userPayment = memPaymentService.findById(userPaymentId);
-		MemBilling memBilling = userPayment.getMemBilling();
+		Mem mem = memService.findByMemname(principal.getName());
+		MemPayment memPayment = memPaymentService.findById(memPaymentId);
+		MemBilling memBilling = memPayment.getMemBilling();
 
-		if (userPayment.getUser().getId() != user.getId()) {
+		if (memPayment.getMem().getId() != mem.getId()) {
 			return "badRequestPage";
 		} else {
-			paymentService.setByUserPayment(userPayment, payment);
+			paymentService.setByMemPayment(memPayment, payment);
 
-			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(mem.getShoppingCart());
 
-			billingAddressService.setByUserBilling(memBilling, billingAddress);
+			billingAddressService.setByMemBilling(memBilling, billingAddress);
 
 			model.addAttribute("shippingAddress", shippingAddress);
 			model.addAttribute("payment", payment);
 			model.addAttribute("billingAddress", billingAddress);
 			model.addAttribute("cartItemList", cartItemList);
-			model.addAttribute("shoppingCart", user.getShoppingCart());
+			model.addAttribute("shoppingCart", mem.getShoppingCart());
 
 			List<String> stateList = USConstants.listOfUSStatesCode;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
-			List<MemShipping> memShippingList = user.getMemShippingList();
-			List<UserPayment> userPaymentList = user.getUserPaymentList();
+			List<MemShipping> memShippingList = mem.getMemShippingList();
+			List<MemPayment> memPaymentList = mem.getMemPaymentList();
 
 			model.addAttribute("memShippingList", memShippingList);
-			model.addAttribute("userPaymentList", userPaymentList);
+			model.addAttribute("memPaymentList", memPaymentList);
 
 			model.addAttribute("shippingAddress", shippingAddress);
 

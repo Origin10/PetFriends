@@ -1,9 +1,9 @@
 package com.bookstore.service;
 
-import com.bookstore.domain.UserPayment;
+import com.bookstore.domain.MemPayment;
 
 public interface MemPaymentService {
-	UserPayment findById(Long id);
+	MemPayment findById(Long id);
 	
 	void removeById(Long id);
 }

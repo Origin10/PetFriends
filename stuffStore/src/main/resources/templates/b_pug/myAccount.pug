@@ -30,17 +30,17 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                   | 忘記密碼
           // Tab panels
           .tab-content
-            // create new user pane
+            // create new mem pane
             #tab-1.tab-pane.fade(th:classappend="${classActiveNewAccount}? 'in active'")
               .panel-group
                 .panel.panel-default(style='border: none;')
                   .panel-body(style='background-color: #ededed; margin-top: 20px;')
                     .alert.alert-info(th:if='${emailSent}')
                       | 已經寄了一封驗證信，到您剛剛註冊email，麻煩您至信箱更改網站給您的預設密碼。
-                    form(th:action='@{/newUser}', method='post')
+                    form(th:action='@{/newMem}', method='post')
                       .form-group
-                        label(for='newUsername') * Username: 
-                        span(style='color: red;', th:if='${usernameExists}')
+                        label(for='newMemname') * Memname: 
+                        span(style='color: red;', th:if='${memNameExists}')
                           | 使用者帳號已存在，麻煩你換一個帳號試試。
                         input#newUsername.form-control(required='required', type='text', name='username')
                         p(style='color: #828282') 在這裡填入您的帳號

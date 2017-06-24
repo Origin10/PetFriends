@@ -7,7 +7,7 @@
       <div style="margin-bottom: -100px;" class="row">
         <div class="col-xs-8">
           <h2 class="section-headline">
-            <h2 class="section-headline"><span th:text="${#strings.toUpperCase(user.username)}"></span></h2>
+            <h2 class="section-headline"><span th:text="${#strings.toUpperCase(mem.memname)}"></span></h2>
           </h2>
         </div>
         <div class="col-xs-4"><img src="/imgs/logo.png" class="img-responsive"/></div>
@@ -24,31 +24,31 @@
           </ul>
           <!-- Tab panels-->
           <div class="tab-content">
-            <!-- Edit user information-->
+            <!-- Edit mem information-->
             <div id="tab-1" th:classappend="${classActiveEdit}? 'in active'" class="tab-pane fade">
               <div class="panel-group">
                 <div style="border: none;" class="panel panel-default">
                   <div style="background-color: #ededed; margin-top: 20px;" class="panel-body">
                     <div th:if="${incorrectPassword}" class="alert alert-danger"><strong>不正確的帳號或密碼！請輸入正確的帳號或密碼。</strong></div>
                     <div th:if="${updateSuccess}" class="alert alert-succss"><strong>新增成功!</strong></div>
-                    <form th:action="@{/updateUserInfo}" method="post">
-                      <input type="hidden" name="id" th:value="${user.id}"/>
-                      <div th:if="${updateUserInfo}" class="bg-info">使用者資訊已更新。</div>
+                    <form th:action="@{/updateMemInfo}" method="post">
+                      <input type="hidden" name="id" th:value="${mem.id}"/>
+                      <div th:if="${updateMemInfo}" class="bg-info">使用者資訊已更新。</div>
                       <div class="form-group">
                         <div class="row">
                           <div class="col-xs-6">
                             <label for="firstName">名</label>
-                            <input id="firstName" type="text" name="firstName" th:value="${user.firstName}" class="form-control"/>
+                            <input id="firstName" type="text" name="firstName" th:value="${mem.firstName}" class="form-control"/>
                           </div>
                           <div class="col-xs-6">
                             <label for="lastName">姓氏</label>
-                            <input id="lastName" type="text" name="lastName" th:value="${user.lastName}" class="form-control"/>
+                            <input id="lastName" type="text" name="lastName" th:value="${mem.lastName}" class="form-control"/>
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="userName">使用者帳號</label> ' 
-                        <input id="userName" type="text" name="username" th:value="${user.username}" class="form-control"/>
+                        <input id="userName" type="text" name="username" th:value="${mem.username}" class="form-control"/>
                       </div>
                       <div class="form-group">
                         <label for="currentPassword">目前的密碼</label> ' 
@@ -57,7 +57,7 @@
                       <p style="color: #828282">輸入你目前的密碼來更新你最新的密碼</p>
                       <div class="form-group">
                         <label for="email">* 電子信箱</label> ' 
-                        <input id="email" type="text" name="email" th:value="${user.email}" class="form-control"/>
+                        <input id="email" type="text" name="email" th:value="${mem.email}" class="form-control"/>
                       </div>
                       <p style="color: #828282">所有的訊息都會寄到目前這個地址，該電子信箱不會被公開，只會用於接收您的新密碼或其他相關網站資訊。</p>
                       <div class="form-group">
@@ -199,12 +199,12 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr th:each="userPayment : ${userPaymentList}">
+                            <tr th:each="memPayment : ${memPaymentList}">
                               <td>
-                                <input type="radio" name="defaultUserPaymentId" th:value="${userPayment.id}" th:checked="${userPayment.defaultPayment}"/>
+                                <input type="radio" name="defaultMemPaymentId" th:value="${memPayment.id}" th:checked="${memPayment.defaultPayment}"/>
                               </td>
-                              <td th:text="${userPayment.cardName}"></td>
-                              <td><a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a></td>
+                              <td th:text="${memPayment.cardName}"></td>
+                              <td><a th:href="@{/updateCreditCard(id=${memPayment.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeCreditCard(id=${memPayment.id})}"><i class="fa fa-times"></i></a></td>
                             </tr>
                           </tbody>
                         </table>
@@ -213,11 +213,11 @@
                     </div>
                     <div th:if="${addNewCreditCard}">
                       <form th:action="@{addNewCreditCard}" method="post">
-                        <div th:if="${updateUserPaymentInfo}" class="bg-info">使用者資訊已更新。</div>
-                        <input hidden="hidden" name="id" th:value="${userPayment.id}"/>
+                        <div th:if="${updateMemPaymentInfo}" class="bg-info">使用者資訊已更新。</div>
+                        <input hidden="hidden" name="id" th:value="${memPayment.id}"/>
                         <div class="form-group">
                           <h5>* 幫你的這張卡取名字：</h5>
-                          <input id="cardName" type="text" placeholder="Card Name" th:name="cardName" required="required" th:value="${userPayment.cardName}" class="form-control"/>
+                          <input id="cardName" type="text" placeholder="Card Name" th:name="cardName" required="required" th:value="${memPayment.cardName}" class="form-control"/>
                         </div>
                         <!-- Billing Address-->
                         <hr/>
@@ -226,33 +226,33 @@
                         </div>
                         <div class="form-group">
                           <label for="billingName">* 收帳單者姓名</label>
-                          <input id="billingName" type="text" placeholder="Receiver Name" th:name="userBillingName" required="required" th:value="${memBilling.userBillingName}" class="form-control"/>
+                          <input id="billingName" type="text" placeholder="Receiver Name" th:name="memBillingName" required="required" th:value="${memBilling.memBillingName}" class="form-control"/>
                         </div>
                         <div class="form-group">
                           <label for="billingAddress">* 帳單地址</label>
-                          <input id="billingAddress" type="text" placeholder="Street Address 1" th:name="userBillingStreet1" required="required" th:value="${memBilling.userBillingStreet1}" class="form-control"/>
-                          <input id="billingAddress" type="text" placeholder="Street Address 2" th:name="userBillingStreet2" th:value="${memBilling.userBillingStreet2}" class="form-control"/>
+                          <input id="billingAddress" type="text" placeholder="Street Address 1" th:name="memBillingStreet1" required="required" th:value="${memBilling.memBillingStreet1}" class="form-control"/>
+                          <input id="billingAddress" type="text" placeholder="Street Address 2" th:name="memBillingStreet2" th:value="${memBilling.memBillingStreet2}" class="form-control"/>
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingCity">* 城市</label>
-                              <input id="billingCity" type="text" placeholder="Billing city" th:name="userBillingCity" required="required" th:value="${memBilling.userBillingCity}" class="form-control"/>
+                              <input id="billingCity" type="text" placeholder="Billing city" th:name="memBillingCity" required="required" th:value="${memBilling.memBillingCity}" class="form-control"/>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingState">* 國家</label>
-                              <select id="billingState" th:name="userBillingState" th:value="${memBilling.userBillingState}" required="required" class="form-control">
+                              <select id="billingState" th:name="memBillingState" th:value="${memBilling.memBillingState}" required="required" class="form-control">
                                 <option value="" disabled="disabled">請選一個選項</option>
-                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memBilling.userBillingState}==${state})"></option>
+                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memBilling.memBillingState}==${state})"></option>
                               </select>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="billingZipcode">* 郵遞區號</label>
-                              <input id="billingZipcode" type="text" placeholder="Billing Zipcode" th:name="userBillingZipcode" required="required" th:value="${memBilling.userBillingZipcode}" class="form-control"/>
+                              <input id="billingZipcode" type="text" placeholder="Billing Zipcode" th:name="memBillingZipcode" required="required" th:value="${memBilling.memBillingZipcode}" class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -265,7 +265,7 @@
                           <div class="col-xs-12"><img src="/imgs/creditcard.png" class="img-responsive"/><br/>
                             <div class="form-group">
                               <label for="cardType">* 選擇卡片類型:</label>
-                              <select id="cardType" th:name="type" th:value="${userPayment.type}" class="form-control">
+                              <select id="cardType" th:name="type" th:value="${memPayment.type}" class="form-control">
                                 <option value="visa">Visa</option>
                                 <option value="mastercard">Mastercard</option>
                                 <option value="discover">Discover</option>
@@ -274,12 +274,12 @@
                             </div>
                             <div class="form-group">
                               <label for="cardHolder">* 持卡人姓名:</label>
-                              <input id="cardHolder" type="text" required="required" placeholder="Card Holder Name" th:name="holderName" th:value="${userPayment.holderName}" class="form-control"/>
+                              <input id="cardHolder" type="text" required="required" placeholder="Card Holder Name" th:name="holderName" th:value="${memPayment.holderName}" class="form-control"/>
                             </div>
                             <div class="form-group">
                               <label for="cardNumber">* 信用卡卡號:</label>
                               <div class="input-group">
-                                <input id="cardNumber" type="tel" required="required" placeholder="Valid Card Number" th:name="cardNumber" th:value="${userPayment.cardNumber}" class="form-control"/><span class="input-group-addon"><i aria-hidden="true" class="fa fa-credit-card"></i></span>
+                                <input id="cardNumber" type="tel" required="required" placeholder="Valid Card Number" th:name="cardNumber" th:value="${memPayment.cardNumber}" class="form-control"/><span class="input-group-addon"><i aria-hidden="true" class="fa fa-credit-card"></i></span>
                               </div>
                             </div>
                           </div>
@@ -290,7 +290,7 @@
                               <label>* 到期日期</label>
                               <div class="row">
                                 <div class="col-xs-6">
-                                  <select name="expiryMonth" required="required" th:value="${userPayment.expiryMonth}" class="form-control">
+                                  <select name="expiryMonth" required="required" th:value="${memPayment.expiryMonth}" class="form-control">
                                     <option disabled="disabled">-- 月份 --</option>
                                     <option value="01">Jan (01)</option>
                                     <option value="02">Feb (02)</option>
@@ -307,7 +307,7 @@
                                   </select>
                                 </div>
                                 <div class="col-xs-6">
-                                  <select name="expiryYear" th:value="${userPayment.expiryYear}" class="form-control">
+                                  <select name="expiryYear" th:value="${memPayment.expiryYear}" class="form-control">
                                     <option disabled="disabled">-- 年 --</option>
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
@@ -330,7 +330,7 @@
                           <div class="col-xs-5">
                             <div class="form-group">
                               <label for="cardCVC">CV Code</label>
-                              <input id="cardCVC" type="tel" name="cvc" placeholder="CVC" th:name="cvc" th:value="${userPayment.cvc}" class="form-control"/>
+                              <input id="cardCVC" type="tel" name="cvc" placeholder="CVC" th:name="cvc" th:value="${memPayment.cvc}" class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -364,10 +364,10 @@
                           <tbody>
                             <tr th:each="memShipping : ${memShippingList}">
                               <td>
-                                <input type="radio" name="defaultShippingAddressId" th:value="${memShipping.id}" th:checked="${memShipping.userShippingDefault}"/><span>預設</span>
+                                <input type="radio" name="defaultShippingAddressId" th:value="${memShipping.id}" th:checked="${memShipping.memShippingDefault}"/><span>預設</span>
                               </td>
-                              <td th:text="${memShipping.userShippingStreet1}+', '+                              ${memShipping.userShippingCity}+', '+${memShipping.userShippingState}"></td>
-                              <td><a th:href="@{/updateUserShipping(id=${memShipping.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeUserShipping(id=${memShipping.id})}"><i class="fa fa-times"></i></a></td>
+                              <td th:text="${memShipping.memShippingStreet1}+', '+                              ${memShipping.memShippingCity}+', '+${memShipping.memShippingState}"></td>
+                              <td><a th:href="@{/updateMemShipping(id=${memShipping.id})}"><i class="fa fa-pencil"></i></a><a th:href="@{/removeMemShipping(id=${memShipping.id})}"><i class="fa fa-times"></i></a></td>
                             </tr>
                           </tbody>
                         </table>
@@ -376,7 +376,7 @@
                     </div>
                     <div th:if="${addNewShippingAddress}">
                       <form th:action="@{/addNewShippingAddress}" method="post">
-                        <div th:if="${updateUserShippingInfo}" class="bg-info">使用者資訊已更新。</div>
+                        <div th:if="${updateMemShippingInfo}" class="bg-info">使用者資訊已更新。</div>
                         <input hidden="hidden" name="id" th:value="${memShipping.id}"/>
                         <!-- Shipping Address-->
                         <hr/>
@@ -385,36 +385,36 @@
                         </div>
                         <div class="form-group">
                           <label for="shippingName">* 收貨者姓名</label>
-                          <input id="shippingName" type="text" placeholder="Receiver Name" th:name="userShippingName" required="required" th:value="${memShipping.userShippingName}" class="form-control"/>
+                          <input id="shippingName" type="text" placeholder="Receiver Name" th:name="memShippingName" required="required" th:value="${memShipping.memShippingName}" class="form-control"/>
                         </div>
                         <div class="form-group">
                           <label for="shippingAddress">* 收貨地址</label>
-                          <input id="shippingAddress" type="text" placeholder="Street Address 1" th:name="userShippingStreet1" required="required" th:value="${memShipping.userShippingStreet1}" class="form-control"/>
-                          <input type="text" placeholder="Street Address 2" th:name="userShppingStreet2" th:value="${memShipping.userShippingStreet2}" class="form-control"/>
+                          <input id="shippingAddress" type="text" placeholder="Street Address 1" th:name="memShippingStreet1" required="required" th:value="${memShipping.memShippingStreet1}" class="form-control"/>
+                          <input type="text" placeholder="Street Address 2" th:name="memShppingStreet2" th:value="${memShipping.memShippingStreet2}" class="form-control"/>
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingCity">* 城市</label>
-                              <input id="shippingCity" type="text" placeholder="Shipping City" th:name="userShippingCity" required="required" th:value="${memShipping.userShippingCity}" class="form-control"/>
+                              <input id="shippingCity" type="text" placeholder="Shipping City" th:name="memShippingCity" required="required" th:value="${memShipping.memShippingCity}" class="form-control"/>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingState">* 國家</label>
-                              <select id="shippingState" th:name="userShippingState" th:value="${memShipping.userShippingState}" required="required" class="form-control">
+                              <select id="shippingState" th:name="memShippingState" th:value="${memShipping.memShippingState}" required="required" class="form-control">
                                 <option value="" disabled="disabled">
                                   Please
                                   select an option
                                 </option>
-                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memShipping.userShippingState}==${state})"></option>
+                                <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${memShipping.memShippingState}==${state})"></option>
                               </select>
                             </div>
                           </div>
                           <div class="col-xs-4">
                             <div class="form-group">
                               <label for="shippingZipcode">* 郵遞區號</label>
-                              <input id="shippingZipcode" type="text" placeholder="Shipping Zipcode" th:name="userShippingZipcode" required="required" th:value="${memShipping.userShippingZipcode}" class="form-control"/>
+                              <input id="shippingZipcode" type="text" placeholder="Shipping Zipcode" th:name="memShippingZipcode" required="required" th:value="${memShipping.memShippingZipcode}" class="form-control"/>
                             </div>
                           </div>
                         </div>

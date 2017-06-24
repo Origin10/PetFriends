@@ -3,6 +3,7 @@ package com.bookstore.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.bookstore.domain.Mem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bookstore.domain.Book;
 import com.bookstore.domain.CartItem;
 import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
 import com.bookstore.service.StuffService;
 import com.bookstore.service.CartItemService;
 import com.bookstore.service.ShoppingCartService;
@@ -37,7 +37,7 @@ public class ShoppingCartController {
 	
 	@RequestMapping("/cart")
 	public String shoppingCart(Model model, Principal principal) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		ShoppingCart shoppingCart = user.getShoppingCart();
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
@@ -56,7 +56,7 @@ public class ShoppingCartController {
 			@ModelAttribute("qty") String qty,
 			Model model, Principal principal
 			) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		book = stuffService.findOne(book.getId());
 		
 		if (Integer.parseInt(qty) > book.getInStockNumber()) {

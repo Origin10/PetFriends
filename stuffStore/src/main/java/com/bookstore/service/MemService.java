@@ -2,33 +2,33 @@ package com.bookstore.service;
 
 import java.util.Set;
 
-import com.bookstore.domain.MemShipping;
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 import com.bookstore.domain.MemBilling;
-import com.bookstore.domain.UserPayment;
+import com.bookstore.domain.MemShipping;
+import com.bookstore.domain.MemPayment;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
 
 public interface MemService {
 	PasswordResetToken getPasswordResetToken(final String token);
 	
-	void createPasswordResetTokenForUser(final User user, final String token);
+	void createPasswordResetTokenForMem(final Mem mem, final String token);
 	
-	User findByUsername(String username);
+	Mem findByMemname(String memname);
 	
-	User findByEmail (String email);
+	Mem findByEmail (String email);
 	
-	User findById(Long id);
+	Mem findById(Long id);
 	
-	User createUser(User user, Set<UserRole> userRoles) throws Exception;
+	Mem createMem(Mem mem, Set<UserRole> userRoles) throws Exception;
 	
-	User save(User user);
+	Mem save(Mem mem);
 	
-	void updateUserBilling(MemBilling memBilling, UserPayment userPayment, User user);
+	void updateMemBilling(MemBilling memBilling, MemPayment memPayment, Mem mem);
 	
-	void updateUserShipping(MemShipping memShipping, User user);
+	void updateMemShipping(MemShipping memShipping, Mem mem);
 	
-	void setUserDefaultPayment(Long userPaymentId, User user);
+	void setMemDefaultPayment(Long memPaymentId, Mem mem);
 	
-	void setUserDefaultShipping(Long userShippingId, User user);
+	void setMemDefaultShipping(Long memShippingId, Mem mem);
 }

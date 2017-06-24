@@ -2,10 +2,10 @@ package com.bookstore.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 
-public interface MemRepository extends CrudRepository<User, Long> {
-	User findByUsername(String username);
+public interface MemRepository extends CrudRepository<Mem, Long> {
+	Mem findByUsername(String username);
 	
-	User findByEmail(String email);
+	Mem findByEmail(String email);
 }

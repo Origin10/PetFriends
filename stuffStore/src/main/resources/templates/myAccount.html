@@ -21,15 +21,15 @@
           </ul>
           <!-- Tab panels-->
           <div class="tab-content">
-            <!-- create new user pane-->
+            <!-- create new mem pane-->
             <div id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'" class="tab-pane fade">
               <div class="panel-group">
                 <div style="border: none;" class="panel panel-default">
                   <div style="background-color: #ededed; margin-top: 20px;" class="panel-body">
                     <div th:if="${emailSent}" class="alert alert-info">已經寄了一封驗證信，到您剛剛註冊email，麻煩您至信箱更改網站給您的預設密碼。</div>
-                    <form th:action="@{/newUser}" method="post">
+                    <form th:action="@{/newMem}" method="post">
                       <div class="form-group">
-                        <label for="newUsername">* Username: </label><span style="color: red;" th:if="${usernameExists}">使用者帳號已存在，麻煩你換一個帳號試試。</span>
+                        <label for="newMemname">* Memname: </label><span style="color: red;" th:if="${memNameExists}">使用者帳號已存在，麻煩你換一個帳號試試。</span>
                         <input id="newUsername" required="required" type="text" name="username" class="form-control"/>
                         <p style="color: #828282">在這裡填入您的帳號</p>
                       </div>

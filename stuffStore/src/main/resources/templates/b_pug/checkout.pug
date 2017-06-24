@@ -7,7 +7,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
       .row(style='margin-bottom: -100px;')
         .col-xs-8
           h2.section-headline
-            span User Account
+            span 使用者帳號
         .col-xs-4
           img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
@@ -70,10 +70,10 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           th 操作
                       tbody
                         tr(th:each='memShipping : ${memShippingList}')
-                          td(th:text="${memShipping.userShippingStreet1}+' '+${memShipping.userShippingStreet2}+', '+${memShipping.userShippingCity}\
-                          +', '+${memShipping.userShippingState}")
+                          td(th:text="${memShipping.memShippingStreet1}+' '+${memShipping.memShippingStreet2}+', '+${memShipping.memShippingCity}\
+                          +', '+${memShipping.memShippingState}")
                           td
-                            a(th:href='@{/setShippingAddress(userShippingId=${memShipping.id})}')
+                            a(th:href='@{/setShippingAddress(memShippingId=${memShipping.id})}')
                               | 使用
                               | 這個地址
                     .form-group
@@ -114,10 +114,10 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           th 可使用的信用卡
                           th 操作
                       tbody
-                        tr(th:each='userPayment : ${userPaymentList}')
-                          td(th:text='${userPayment.cardName}')
+                        tr(th:each='memPayment : ${memPaymentList}')
+                          td(th:text='${memPayment.cardName}')
                           td
-                            a(th:href='@{/setPaymentMethod(userPaymentId=${userPayment.id})}')
+                            a(th:href='@{/setPaymentMethod(memPaymentId=${memPayment.id})}')
                               | 使用
                               | 這個付款方式
                     // Credit Card Information

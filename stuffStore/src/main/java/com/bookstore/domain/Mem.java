@@ -15,7 +15,7 @@ import com.bookstore.domain.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class User implements UserDetails{
+public class Mem implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -39,7 +39,7 @@ public class User implements UserDetails{
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<UserPayment> userPaymentList;
+	private List<MemPayment> memPaymentList;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Order> orderList;
@@ -109,11 +109,11 @@ public class User implements UserDetails{
 	public void setMemShippingList(List<MemShipping> memShippingList) {
 		this.memShippingList = memShippingList;
 	}
-	public List<UserPayment> getUserPaymentList() {
-		return userPaymentList;
+	public List<MemPayment> getMemPaymentList() {
+		return memPaymentList;
 	}
-	public void setUserPaymentList(List<UserPayment> userPaymentList) {
-		this.userPaymentList = userPaymentList;
+	public void setMemPaymentList(List<MemPayment> memPaymentList) {
+		this.memPaymentList = memPaymentList;
 	}
 	
 	public ShoppingCart getShoppingCart() {

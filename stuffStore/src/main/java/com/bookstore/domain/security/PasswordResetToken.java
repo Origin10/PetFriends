@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 
 @Entity
 public class PasswordResetToken {
@@ -24,19 +24,19 @@ public class PasswordResetToken {
 	
 	private String token;
 	
-	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	@OneToOne(targetEntity = Mem.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable=false, name="user_id")
-	private User user;
+	private Mem mem;
 	
 	private Date expiryDate;
 	
 	public PasswordResetToken(){}
 	
-	public PasswordResetToken(final String token, final User user) {
+	public PasswordResetToken(final String token, final Mem mem) {
 		super ();
 		
 		this.token = token;
-		this.user = user;
+		this.mem = mem;
 		this.expiryDate = calculateExpiryDate(EXPIRATION);
 	}
 	
@@ -68,12 +68,12 @@ public class PasswordResetToken {
 		this.token = token;
 	}
 
-	public User getUser() {
-		return user;
+	public Mem getMem() {
+		return mem;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMem(Mem mem) {
+		this.mem = mem;
 	}
 
 	public Date getExpiryDate() {
@@ -90,7 +90,7 @@ public class PasswordResetToken {
 
 	@Override
 	public String toString() {
-		return "PasswordResetToken [id=" + id + ", token=" + token + ", user=" + user + ", expiryDate=" + expiryDate
+		return "PasswordResetToken [id=" + id + ", token=" + token + ", mem=" + mem + ", expiryDate=" + expiryDate
 				+ "]";
 	}
 	

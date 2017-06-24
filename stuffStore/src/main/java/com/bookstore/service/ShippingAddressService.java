@@ -4,5 +4,5 @@ import com.bookstore.domain.MemShipping;
 import com.bookstore.domain.ShippingAddress;
 
 public interface ShippingAddressService {
-	ShippingAddress setByUserShipping(MemShipping memShipping, ShippingAddress shippingAddress);
+	ShippingAddress setByMemShipping(MemShipping memShipping, ShippingAddress shippingAddress);
 }

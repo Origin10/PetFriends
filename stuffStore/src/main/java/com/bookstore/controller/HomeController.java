@@ -98,7 +98,7 @@ public class HomeController {
 	public String bookshelf(Model model, Principal principal) {
 		if(principal != null) {
 			String username = principal.getName();
-			User user = memService.findByUsername(username);
+			Mem user = memService.findByMemname(username);
 			model.addAttribute("user", user);
 		}
 		
@@ -115,7 +115,7 @@ public class HomeController {
 			) {
 		if(principal != null) {
 			String username = principal.getName();
-			User user = memService.findByUsername(username);
+			Mem user = memService.findByMemname(username);
 			model.addAttribute("user", user);
 		}
 		
@@ -140,7 +140,7 @@ public class HomeController {
 
 		model.addAttribute("classActiveForgetPassword", true);
 		
-		User user = memService.findByEmail(email);
+		Mem user = memService.findByEmail(email);
 		
 		if (user == null) {
 			model.addAttribute("emailNotExist", true);
@@ -155,7 +155,7 @@ public class HomeController {
 		memService.save(user);
 		
 		String token = UUID.randomUUID().toString();
-		memService.createPasswordResetTokenForUser(user, token);
+		memService.createPasswordResetTokenForMem(user, token);
 		
 		String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		
@@ -171,9 +171,9 @@ public class HomeController {
 	
 	@RequestMapping("/myProfile")
 	public String myProfile(Model model, Principal principal) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -195,9 +195,9 @@ public class HomeController {
 	public String listOfCreditCards(
 			Model model, Principal principal, HttpServletRequest request
 			) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -212,9 +212,9 @@ public class HomeController {
 	public String listOfShippingAddresses(
 			Model model, Principal principal, HttpServletRequest request
 			) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -229,7 +229,7 @@ public class HomeController {
 	public String addNewCreditCard(
 			Model model, Principal principal
 			){
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		model.addAttribute("user", user);
 		
 		model.addAttribute("addNewCreditCard", true);
@@ -237,16 +237,16 @@ public class HomeController {
 		model.addAttribute("listOfShippingAddresses", true);
 		
 		MemBilling memBilling = new MemBilling();
-		UserPayment userPayment = new UserPayment();
+		MemPayment memPayment = new MemPayment();
 		
 		
 		model.addAttribute("memBilling", memBilling);
-		model.addAttribute("userPayment", userPayment);
+		model.addAttribute("memPayment", memPayment);
 		
 		List<String> stateList = USConstants.listOfUSStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -257,7 +257,7 @@ public class HomeController {
 	public String addNewShippingAddress(
 			Model model, Principal principal
 			){
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		model.addAttribute("user", user);
 		
 		model.addAttribute("addNewShippingAddress", true);
@@ -271,7 +271,7 @@ public class HomeController {
 		List<String> stateList = USConstants.listOfUSStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -280,15 +280,15 @@ public class HomeController {
 	
 	@RequestMapping(value="/addNewCreditCard", method=RequestMethod.POST)
 	public String addNewCreditCard(
-			@ModelAttribute("userPayment") UserPayment userPayment,
+			@ModelAttribute("userPayment") MemPayment memPayment,
 			@ModelAttribute("userBilling") MemBilling memBilling,
 			Principal principal, Model model
 			){
-		User user = memService.findByUsername(principal.getName());
-		memService.updateUserBilling(memBilling, userPayment, user);
+		Mem user = memService.findByMemname(principal.getName());
+		memService.updateMemBilling(memBilling, memPayment, user);
 		
 		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("classActiveBilling", true);
@@ -303,11 +303,11 @@ public class HomeController {
 			@ModelAttribute("userShipping") MemShipping memShipping,
 			Principal principal, Model model
 			){
-		User user = memService.findByUsername(principal.getName());
-		memService.updateUserShipping(memShipping, user);
+		Mem user = memService.findByMemname(principal.getName());
+		memService.updateMemShipping(memShipping, user);
 		
 		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("listOfShippingAddresses", true);
 		model.addAttribute("classActiveShipping", true);
@@ -322,15 +322,15 @@ public class HomeController {
 	public String updateCreditCard(
 			@ModelAttribute("id") Long creditCardId, Principal principal, Model model
 			) {
-		User user = memService.findByUsername(principal.getName());
-		UserPayment userPayment = memPaymentService.findById(creditCardId);
+		Mem user = memService.findByMemname(principal.getName());
+		MemPayment memPayment = memPaymentService.findById(creditCardId);
 		
-		if(user.getId() != userPayment.getUser().getId()) {
+		if(user.getId() != memPayment.getMem().getId()) {
 			return "badRequestPage";
 		} else {
 			model.addAttribute("user", user);
-			MemBilling memBilling = userPayment.getMemBilling();
-			model.addAttribute("userPayment", userPayment);
+			MemBilling memBilling = memPayment.getMemBilling();
+			model.addAttribute("memPayment", memPayment);
 			model.addAttribute("memBilling", memBilling);
 			
 			List<String> stateList = USConstants.listOfUSStatesCode;
@@ -341,7 +341,7 @@ public class HomeController {
 			model.addAttribute("classActiveBilling", true);
 			model.addAttribute("listOfShippingAddresses", true);
 			
-			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userPaymentList", user.getMemPaymentList());
 			model.addAttribute("userShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
@@ -349,14 +349,14 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping("/updateUserShipping")
-	public String updateUserShipping(
+	@RequestMapping("/updateMemShipping")
+	public String updateMemShipping(
 			@ModelAttribute("id") Long shippingAddressId, Principal principal, Model model
 			) {
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		MemShipping memShipping = memShippingService.findById(shippingAddressId);
 		
-		if(user.getId() != memShipping.getUser().getId()) {
+		if(user.getId() != memShipping.getMem().getId()) {
 			return "badRequestPage";
 		} else {
 			model.addAttribute("user", user);
@@ -371,7 +371,7 @@ public class HomeController {
 			model.addAttribute("classActiveShipping", true);
 			model.addAttribute("listOfCreditCards", true);
 			
-			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userPaymentList", user.getMemPaymentList());
 			model.addAttribute("userShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
@@ -383,15 +383,15 @@ public class HomeController {
 	public String setDefaultPayment(
 			@ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
 			) {
-		User user = memService.findByUsername(principal.getName());
-		memService.setUserDefaultPayment(defaultPaymentId, user);
+		Mem user = memService.findByMemname(principal.getName());
+		memService.setMemDefaultPayment(defaultPaymentId, user);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
 		
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -402,15 +402,15 @@ public class HomeController {
 	public String setDefaultShippingAddress(
 			@ModelAttribute("defaultShippingAddressId") Long defaultShippingId, Principal principal, Model model
 			) {
-		User user = memService.findByUsername(principal.getName());
-		memService.setUserDefaultShipping(defaultShippingId, user);
+		Mem user = memService.findByMemname(principal.getName());
+		memService.setMemDefaultShipping(defaultShippingId, user);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("classActiveShipping", true);
 		model.addAttribute("listOfShippingAddresses", true);
 		
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userPaymentList", user.getMemPaymentList());
 		model.addAttribute("userShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
@@ -421,10 +421,10 @@ public class HomeController {
 	public String removeCreditCard(
 			@ModelAttribute("id") Long creditCardId, Principal principal, Model model
 			){
-		User user = memService.findByUsername(principal.getName());
-		UserPayment userPayment = memPaymentService.findById(creditCardId);
+		Mem user = memService.findByMemname(principal.getName());
+		MemPayment memPayment = memPaymentService.findById(creditCardId);
 		
-		if(user.getId() != userPayment.getUser().getId()) {
+		if(user.getId() != memPayment.getMem().getId()) {
 			return "badRequestPage";
 		} else {
 			model.addAttribute("user", user);
@@ -434,7 +434,7 @@ public class HomeController {
 			model.addAttribute("classActiveBilling", true);
 			model.addAttribute("listOfShippingAddresses", true);
 			
-			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userPaymentList", user.getMemPaymentList());
 			model.addAttribute("userShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
@@ -442,14 +442,14 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping("/removeUserShipping")
-	public String removeUserShipping(
+	@RequestMapping("/removeMemShipping")
+	public String removeMemShipping(
 			@ModelAttribute("id") Long userShippingId, Principal principal, Model model
 			){
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		MemShipping memShipping = memShippingService.findById(userShippingId);
 		
-		if(user.getId() != memShipping.getUser().getId()) {
+		if(user.getId() != memShipping.getMem().getId()) {
 			return "badRequestPage";
 		} else {
 			model.addAttribute("user", user);
@@ -459,7 +459,7 @@ public class HomeController {
 			model.addAttribute("listOfShippingAddresses", true);
 			model.addAttribute("classActiveShipping", true);
 			
-			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userPaymentList", user.getMemPaymentList());
 			model.addAttribute("userShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
@@ -467,7 +467,7 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping(value="/newUser", method = RequestMethod.POST)
+	@RequestMapping(value="/newMem", method = RequestMethod.POST)
 	public String newUserPost(
 			HttpServletRequest request,
 			@ModelAttribute("email") String userEmail,
@@ -478,8 +478,8 @@ public class HomeController {
 		model.addAttribute("email", userEmail);
 		model.addAttribute("username", username);
 		
-		if (memService.findByUsername(username) != null) {
-			model.addAttribute("usernameExists", true);
+		if (memService.findByMemname(username) != null) {
+			model.addAttribute("memNameExists", true);
 			
 			return "myAccount";
 		}
@@ -490,40 +490,40 @@ public class HomeController {
 			return "myAccount";
 		}
 		
-		User user = new User();
-		user.setUsername(username);
-		user.setEmail(userEmail);
+		Mem mem = new Mem();
+		mem.setUsername(username);
+		mem.setEmail(userEmail);
 		
 		String password = SecurityUtility.randomPassword();
 		
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
-		user.setPassword(encryptedPassword);
+		mem.setPassword(encryptedPassword);
 		
 		Role role = new Role();
 		role.setRoleId(1);
 		role.setName("ROLE_USER");
 		Set<UserRole> userRoles = new HashSet<>();
-		userRoles.add(new UserRole(user, role));
-		memService.createUser(user, userRoles);
+		userRoles.add(new UserRole(mem, role));
+		memService.createMem(mem, userRoles);
 		
 		String token = UUID.randomUUID().toString();
-		memService.createPasswordResetTokenForUser(user, token);
+		memService.createPasswordResetTokenForMem(mem, token);
 		
 		String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		
-		SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+		SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, mem, password);
 		
 		mailSender.send(email);
 		
 		model.addAttribute("emailSent", "true");
-		model.addAttribute("orderList", user.getOrderList());
+		model.addAttribute("orderList", mem.getOrderList());
 		
 		return "myAccount";
 	}
 	
 
-	@RequestMapping("/newUser")
-	public String newUser(Locale locale, @RequestParam("token") String token, Model model) {
+	@RequestMapping("/newMem")
+	public String newMem(Locale locale, @RequestParam("token") String token, Model model) {
 		PasswordResetToken passToken = memService.getPasswordResetToken(token);
 
 		if (passToken == null) {
@@ -532,8 +532,8 @@ public class HomeController {
 			return "redirect:/badRequest";
 		}
 
-		User user = passToken.getUser();
-		String username = user.getUsername();
+		Mem mem = passToken.getMem();
+		String username = mem.getUsername();
 
 		UserDetails userDetails = userSecurityService.loadUserByUsername(username);
 
@@ -542,36 +542,36 @@ public class HomeController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		model.addAttribute("user", user);
+		model.addAttribute("mem", mem);
 
 		model.addAttribute("classActiveEdit", true);
 		
 		return "myProfile";
 	}
 	
-	@RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
-	public String updateUserInfo(
-			@ModelAttribute("user") User user,
+	@RequestMapping(value="/updateMemInfo", method=RequestMethod.POST)
+	public String updateMemInfo(
+			@ModelAttribute("mem") Mem mem,
 			@ModelAttribute("newPassword") String newPassword,
 			Model model
 			) throws Exception {
-		User currentUser = memService.findById(user.getId());
+		Mem currentMem = memService.findById(mem.getId());
 		
-		if(currentUser == null) {
-			throw new Exception ("User not found");
+		if(currentMem == null) {
+			throw new Exception ("Mem not found");
 		}
 		
 		/*check email already exists*/
-		if (memService.findByEmail(user.getEmail())!=null) {
-			if(memService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
+		if (memService.findByEmail(mem.getEmail())!=null) {
+			if(memService.findByEmail(mem.getEmail()).getId() != currentMem.getId()) {
 				model.addAttribute("emailExists", true);
 				return "myProfile";
 			}
 		}
 		
 		/*check username already exists*/
-		if (memService.findByUsername(user.getUsername())!=null) {
-			if(memService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
+		if (memService.findByMemname(mem.getUsername())!=null) {
+			if(memService.findByMemname(mem.getUsername()).getId() != currentMem.getId()) {
 				model.addAttribute("usernameExists", true);
 				return "myProfile";
 			}
@@ -580,9 +580,9 @@ public class HomeController {
 //		update password
 		if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
 			BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
-			String dbPassword = currentUser.getPassword();
-			if(passwordEncoder.matches(user.getPassword(), dbPassword)){
-				currentUser.setPassword(passwordEncoder.encode(newPassword));
+			String dbPassword = currentMem.getPassword();
+			if(passwordEncoder.matches(mem.getPassword(), dbPassword)){
+				currentMem.setPassword(passwordEncoder.encode(newPassword));
 			} else {
 				model.addAttribute("incorrectPassword", true);
 				
@@ -590,27 +590,27 @@ public class HomeController {
 			}
 		}
 		
-		currentUser.setFirstName(user.getFirstName());
-		currentUser.setLastName(user.getLastName());
-		currentUser.setUsername(user.getUsername());
-		currentUser.setEmail(user.getEmail());
+		currentMem.setFirstName(mem.getFirstName());
+		currentMem.setLastName(mem.getLastName());
+		currentMem.setUsername(mem.getUsername());
+		currentMem.setEmail(mem.getEmail());
 		
-		memService.save(currentUser);
+		memService.save(currentMem);
 		
 		model.addAttribute("updateSuccess", true);
-		model.addAttribute("user", currentUser);
+		model.addAttribute("user", currentMem);
 		model.addAttribute("classActiveEdit", true);
 		
 		model.addAttribute("listOfShippingAddresses", true);
 		model.addAttribute("listOfCreditCards", true);
 		
-		UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
+		UserDetails userDetails = userSecurityService.loadUserByUsername(currentMem.getUsername());
 
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
 				userDetails.getAuthorities());
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		model.addAttribute("orderList", user.getOrderList());
+		model.addAttribute("orderList", mem.getOrderList());
 		
 		return "myProfile";
 	}
@@ -620,7 +620,7 @@ public class HomeController {
 			@RequestParam("id") Long orderId,
 			Principal principal, Model model
 			){
-		User user = memService.findByUsername(principal.getName());
+		Mem user = memService.findByMemname(principal.getName());
 		Order order = orderService.findOne(orderId);
 		
 		if(order.getUser().getId()!=user.getId()) {
@@ -631,7 +631,7 @@ public class HomeController {
 			model.addAttribute("user", user);
 			model.addAttribute("order", order);
 			
-			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userPaymentList", user.getMemPaymentList());
 			model.addAttribute("userShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			

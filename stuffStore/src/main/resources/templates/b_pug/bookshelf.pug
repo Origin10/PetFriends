@@ -8,7 +8,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
         .col-xs-8
           h2.section-headline
             h2.section-headline
-              span(th:text="${user}? '使用者 '+${#strings.toUpperCase(user.username)}+' 歡迎您的蒞臨' : 'PetFriends 物資交換中心'")
+              span(th:text="${mem}? '使用者 '+${#strings.toUpperCase(mem.username)}+' 歡迎您的蒞臨' : 'PetFriends 物資交換中心'")
         .col-xs-4
           img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')

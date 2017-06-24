@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.Mem;
 import com.bookstore.repository.MemRepository;
 
 @Service
@@ -17,13 +17,13 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = memRepository.findByUsername(username);
+		Mem mem = memRepository.findByUsername(username);
 		
-		if(null == user) {
+		if(null == mem) {
 			throw new UsernameNotFoundException("Username not found");
 		}
 		
-		return user;
+		return mem;
 	}
 
 }

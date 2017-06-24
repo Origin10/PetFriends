@@ -3,6 +3,7 @@ package com.bookstore.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.bookstore.domain.Mem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookstore.domain.Book;
-import com.bookstore.domain.User;
 import com.bookstore.service.StuffService;
 import com.bookstore.service.MemService;
 
@@ -30,7 +30,7 @@ public class SearchController {
 			){
 		if(principal!=null) {
 			String username = principal.getName();
-			User user = memService.findByUsername(username);
+			Mem user = memService.findByMemname(username);
 			model.addAttribute("user", user);
 		}
 		
@@ -58,7 +58,7 @@ public class SearchController {
 			) {
 		if(principal!=null) {
 			String username = principal.getName();
-			User user = memService.findByUsername(username);
+			Mem user = memService.findByMemname(username);
 			model.addAttribute("user", user);
 		}
 		

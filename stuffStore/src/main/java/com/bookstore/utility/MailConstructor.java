@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.bookstore.domain.Mem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +16,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.bookstore.domain.Order;
-import com.bookstore.domain.User;
 
 @Component
 public class MailConstructor {
@@ -26,7 +26,7 @@ public class MailConstructor {
 	private TemplateEngine templateEngine;
 	
 	public SimpleMailMessage constructResetTokenEmail(
-			String contextPath, Locale locale, String token, User user, String password
+            String contextPath, Locale locale, String token, Mem user, String password
 			) {
 		
 		String url = contextPath + "/newUser?token="+token;
@@ -40,7 +40,7 @@ public class MailConstructor {
 		
 	}
 	
-	public MimeMessagePreparator constructOrderConfirmationEmail (User user, Order order, Locale locale) {
+	public MimeMessagePreparator constructOrderConfirmationEmail (Mem user, Order order, Locale locale) {
 		Context context = new Context();
 		context.setVariable("order", order);
 		context.setVariable("user", user);

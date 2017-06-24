@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.bookstore.domain.*;
+import com.bookstore.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bookstore.domain.MemShipping;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
-import com.bookstore.repository.PasswordResetTokenRepository;
-import com.bookstore.repository.RoleRepository;
-import com.bookstore.repository.MemPaymentRepository;
-import com.bookstore.repository.MemRepository;
-import com.bookstore.repository.MemShippingRepository;
 import com.bookstore.service.MemService;
 
 @Service
@@ -47,32 +43,32 @@ public class MemServiceImpl implements MemService {
 	}
 	
 	@Override
-	public void createPasswordResetTokenForUser(final User user, final String token) {
+	public void createPasswordResetTokenForMem(final Mem user, final String token) {
 		final PasswordResetToken myToken = new PasswordResetToken(token, user);
 		passwordResetTokenRepository.save(myToken);
 	}
 	
 	@Override
-	public User findByUsername(String username) {
+	public Mem findByMemname(String username) {
 		return memRepository.findByUsername(username);
 	}
 	
 	@Override
-	public User findById(Long id){
+	public Mem findById(Long id){
 		return memRepository.findOne(id);
 	}
 	
 	@Override
-	public User findByEmail (String email) {
+	public Mem findByEmail (String email) {
 		return memRepository.findByEmail(email);
 	}
 	
 	@Override
 	@Transactional
-	public User createUser(User user, Set<UserRole> userRoles){
-		User localUser = memRepository.findByUsername(user.getUsername());
+	public Mem createMem(Mem user, Set<UserRole> userRoles){
+		Mem localMem = memRepository.findByUsername(user.getUsername());
 		
-		if(localUser != null) {
+		if(localMem != null) {
 			LOG.info("user {} already exists. Nothing will be done.", user.getUsername());
 		} else {
 			for (UserRole ur : userRoles) {
@@ -82,66 +78,66 @@ public class MemServiceImpl implements MemService {
 			user.getUserRoles().addAll(userRoles);
 			
 			ShoppingCart shoppingCart = new ShoppingCart();
-			shoppingCart.setUser(user);
+			shoppingCart.setMem(user);
 			user.setShoppingCart(shoppingCart);
 			
 			user.setMemShippingList(new ArrayList<MemShipping>());
-			user.setUserPaymentList(new ArrayList<UserPayment>());
+			user.setMemPaymentList(new ArrayList<MemPayment>());
 			
-			localUser = memRepository.save(user);
+			localMem = memRepository.save(user);
 		}
 		
-		return localUser;
+		return localMem;
 	}
 	
 	@Override
-	public User save(User user) {
+	public Mem save(Mem user) {
 		return memRepository.save(user);
 	}
 	
 	@Override
-	public void updateUserBilling(MemBilling memBilling, UserPayment userPayment, User user) {
-		userPayment.setUser(user);
-		userPayment.setMemBilling(memBilling);
-		userPayment.setDefaultPayment(true);
-		memBilling.setUserPayment(userPayment);
-		user.getUserPaymentList().add(userPayment);
+	public void updateMemBilling(MemBilling memBilling, MemPayment memPayment, Mem user) {
+		memPayment.setMem(user);
+		memPayment.setMemBilling(memBilling);
+		memPayment.setDefaultPayment(true);
+		memBilling.setMemPayment(memPayment);
+		user.getMemPaymentList().add(memPayment);
 		save(user);
 	}
 	
 	@Override
-	public void updateUserShipping(MemShipping memShipping, User user){
-		memShipping.setUser(user);
-		memShipping.setUserShippingDefault(true);
+	public void updateMemShipping(MemShipping memShipping, Mem user){
+		memShipping.setMem(user);
+		memShipping.setMemShippingDefault(true);
 		user.getMemShippingList().add(memShipping);
 		save(user);
 	}
 	
 	@Override
-	public void setUserDefaultPayment(Long userPaymentId, User user) {
-		List<UserPayment> userPaymentList = (List<UserPayment>) memPaymentRepository.findAll();
+	public void setMemDefaultPayment(Long userPaymentId, Mem user) {
+		List<MemPayment> memPaymentList = (List<MemPayment>) memPaymentRepository.findAll();
 		
-		for (UserPayment userPayment : userPaymentList) {
-			if(userPayment.getId() == userPaymentId) {
-				userPayment.setDefaultPayment(true);
-				memPaymentRepository.save(userPayment);
+		for (MemPayment memPayment : memPaymentList) {
+			if(memPayment.getId() == userPaymentId) {
+				memPayment.setDefaultPayment(true);
+				memPaymentRepository.save(memPayment);
 			} else {
-				userPayment.setDefaultPayment(false);
-				memPaymentRepository.save(userPayment);
+				memPayment.setDefaultPayment(false);
+				memPaymentRepository.save(memPayment);
 			}
 		}
 	}
 	
 	@Override
-	public void setUserDefaultShipping(Long userShippingId, User user) {
+	public void setMemDefaultShipping(Long userShippingId, Mem user) {
 		List<MemShipping> memShippingList = (List<MemShipping>) memShippingRepository.findAll();
 		
 		for (MemShipping memShipping : memShippingList) {
 			if(memShipping.getId() == userShippingId) {
-				memShipping.setUserShippingDefault(true);
+				memShipping.setMemShippingDefault(true);
 				memShippingRepository.save(memShipping);
 			} else {
-				memShipping.setUserShippingDefault(false);
+				memShipping.setMemShippingDefault(false);
 				memShippingRepository.save(memShipping);
 			}
 		}

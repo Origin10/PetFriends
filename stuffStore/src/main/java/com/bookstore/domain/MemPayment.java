@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class UserPayment {
+public class MemPayment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class UserPayment {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User user;
+	private Mem mem;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "userPayment")
 	private MemBilling memBilling;
@@ -103,12 +103,12 @@ public class UserPayment {
 		this.defaultPayment = defaultPayment;
 	}
 
-	public User getUser() {
-		return user;
+	public Mem getMem() {
+		return mem;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMem(Mem mem) {
+		this.mem = mem;
 	}
 
 	public MemBilling getMemBilling() {

@@ -1,11 +1,7 @@
 package com.bookstore.service;
 
-import com.bookstore.domain.BillingAddress;
-import com.bookstore.domain.Order;
-import com.bookstore.domain.Payment;
-import com.bookstore.domain.ShippingAddress;
-import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
+import com.bookstore.domain.*;
+import com.bookstore.domain.Mem;
 
 public interface OrderService {
 	Order createOrder(ShoppingCart shoppingCart,
@@ -13,7 +9,7 @@ public interface OrderService {
 			BillingAddress billingAddress,
 			Payment payment,
 			String shippingMethod,
-			User user);
+			Mem mem);
 	
 	Order findOne(Long id);
 }

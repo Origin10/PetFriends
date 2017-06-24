@@ -3,19 +3,19 @@ package com.bookstore.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.domain.Payment;
-import com.bookstore.domain.UserPayment;
+import com.bookstore.domain.MemPayment;
 import com.bookstore.service.PaymentService;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
 	
-	public Payment setByUserPayment(UserPayment userPayment, Payment payment) {
-		payment.setType(userPayment.getType());
-		payment.setHolderName(userPayment.getHolderName());
-		payment.setCardNumber(userPayment.getCardNumber());
-		payment.setExpiryMonth(userPayment.getExpiryMonth());
-		payment.setExpiryYear(userPayment.getExpiryYear());
-		payment.setCvc(userPayment.getCvc());
+	public Payment setByUserPayment(MemPayment memPayment, Payment payment) {
+		payment.setType(memPayment.getType());
+		payment.setHolderName(memPayment.getHolderName());
+		payment.setCardNumber(memPayment.getCardNumber());
+		payment.setExpiryMonth(memPayment.getExpiryMonth());
+		payment.setExpiryYear(memPayment.getExpiryYear());
+		payment.setCvc(memPayment.getCvc());
 		
 		return payment;
 	}
