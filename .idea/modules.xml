@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/PetFriends.iml" filepath="$PROJECT_DIR$/.idea/PetFriends.iml" />
       <module fileurl="file://$PROJECT_DIR$/adminportal/adminportal.iml" filepath="$PROJECT_DIR$/adminportal/adminportal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adminportal/adminportal.iml" filepath="$PROJECT_DIR$/adminportal/adminportal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stuffStore/stuffStore.iml" filepath="$PROJECT_DIR$/stuffStore/stuffStore.iml" />
       <module fileurl="file://$PROJECT_DIR$/stuffStore/stuffStore.iml" filepath="$PROJECT_DIR$/stuffStore/stuffStore.iml" />
     </modules>
   </component>
