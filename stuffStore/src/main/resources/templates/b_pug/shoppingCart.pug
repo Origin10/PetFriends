@@ -8,7 +8,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
         .col-xs-8
           h2.section-headline
             h2.section-headline
-              span(th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'")
+              span(th:text="${user}? ${#strings.toUpperCase(user.username)} : '購物車明細'")
         .col-xs-4
           img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width:85%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')

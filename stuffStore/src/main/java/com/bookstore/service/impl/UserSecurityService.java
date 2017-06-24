@@ -20,7 +20,7 @@ public class UserSecurityService implements UserDetailsService{
 		User user = memRepository.findByUsername(username);
 		
 		if(null == user) {
-			throw new UsernameNotFoundException("Username not found");
+			throw new UsernameNotFoundException("使用者帳號未找到");
 		}
 		
 		return user;

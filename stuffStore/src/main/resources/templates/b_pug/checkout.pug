@@ -148,7 +148,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           .row
                             .col-xs-6
                               select.form-control(name='expiryMonth', required='required', th:value='${payment.expiryMonth}')
-                                option(disabled='disabled') -- Month --
+                                option(disabled='disabled') -- 月份 --
                                 option(value='01') Jan (01)
                                 option(value='02') Feb (02)
                                 option(value='03') Mar (03)
@@ -163,7 +163,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                                 option(value='12') Dec (12)
                             .col-xs-6
                               select.form-control(name='expiryYear', th:value='${payment.expiryYear}')
-                                option(disabled='disabled') -- Year --
+                                option(disabled='disabled') -- 年分 --
                                 option(value='2017') 2017
                                 option(value='2018') 2018
                                 option(value='19') 2019
@@ -261,7 +261,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                       strong(style='font-size: large;')
                         | 總和 (
                         span(th:text='${#lists.size(cartItemList)}')
-                        |  個項目):
+                        | 個項目):
                       span(style='color: #db3208; font-szie: large;')
                         | $
                         span(th:text='${shoppingCart.grandTotal}')
@@ -273,7 +273,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                       | 並且同意PetFriends所提供的 
                       a(href='#') 政策
                       | 訊息以及 
-                      a(href='#') 條約
+                      a(th:href='@{/auction}')  買賣雙方條約
                       |  使用
     // end of container
     div(th:replace='common/header :: footer')/

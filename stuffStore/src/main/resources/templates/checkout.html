@@ -164,7 +164,7 @@
                           <div class="row">
                             <div class="col-xs-6">
                               <select name="expiryMonth" required="required" th:value="${payment.expiryMonth}" class="form-control">
-                                <option disabled="disabled">-- Month --</option>
+                                <option disabled="disabled">-- 月份 --</option>
                                 <option value="01">Jan (01)</option>
                                 <option value="02">Feb (02)</option>
                                 <option value="03">Mar (03)</option>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="col-xs-6">
                               <select name="expiryYear" th:value="${payment.expiryYear}" class="form-control">
-                                <option disabled="disabled">-- Year --</option>
+                                <option disabled="disabled">-- 年分 --</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="19">2019</option>
@@ -297,9 +297,9 @@
                       </div>
                     </div>
                     <hr/>
-                    <h4 class="col-xs-12 text-right"><strong style="font-size: large;">總和 (<span th:text="${#lists.size(cartItemList)}"></span> 個項目):</strong><span style="color: #db3208; font-szie: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4><br/><br/>
+                    <h4 class="col-xs-12 text-right"><strong style="font-size: large;">總和 (<span th:text="${#lists.size(cartItemList)}"></span>個項目):</strong><span style="color: #db3208; font-szie: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4><br/><br/>
                     <button type="submit" class="btn btn-warning btn-block">確定你的訂購</button>
-                    <p style="font-size: smaller;">並且同意PetFriends所提供的 <a href="#">政策</a>訊息以及 <a href="#">條約</a> 使用</p>
+                    <p style="font-size: smaller;">並且同意PetFriends所提供的 <a href="#">政策</a>訊息以及 <a th:href="@{/auction}"> 買賣雙方條約</a> 使用</p>
                   </div>
                 </div>
               </div>

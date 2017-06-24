@@ -64,24 +64,10 @@
               <li><a href="contact.html">血庫</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <cif test="${not empty mem}">
-                <li id="profile-image"><a href="${pageContext.servletContext.contextPath}/MemInfo.jsp"><img src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${mem.mem_mail}&amp;type=memPhoto" width="20" height="20"/>                              ${mem.mem_name}</a></li>
-                <li id="alert" style="display:none" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle glyphicon glyphicon-bell"><span id="alerttotal" class="badge">00</span></a>
-                  <ul class="dropdown-menu">
-                    <cforeach var="alertlist" items="${alert}">
-                      <li>
-                        <div class="panel panel-default">
-                          <div class="panel-body"><img id="alertimg" src="${pageContext.servletContext.contextPath}/memPhoto.do?id=${alertlist.mem_mail}&amp;type=memPhoto" width="60" height="60"/>${alertlist.mem_name} 寄出交友邀請給你<br/>
-                            <button id="removefri" type="submit" style="float:right" class="btn btn-default">刪除邀請</button>
-                            <button id="joinfri" type="submit" style="float:right" class="btn btn-default">接受</button>
-                          </div>
-                        </div>
-                      </li>
-                      <li><a href="${pageContext.servletContext.contextPath}/logout.do?logout=登出">登出     </a></li>
-                    </cforeach>
-                  </ul>
-                </li>
-              </cif>
+              <li><a th:href="@{/shoppingCart/cart}" class="fa fa-3x fa-fw fa-cart-plus"></a></li>
+              <li><a sec:authorize="isAnonymous()" th:href="@{/login}" class="fa fa-3x fa-fw fa-handshake-o"></a></li>
+              <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">買賣管理</a></li>
+              <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">登出後台管理   </a></li>
             </ul>
           </div>
         </div>
@@ -124,11 +110,11 @@
                 </div></a></div>
             <div class="col-md-2"><a style="color:#fff" th:href="@{/myProfile}"> <i class="fa fa-5x fa-fw fa-cart-plus"></i>
                 <div class="col-md-12">
-                  <p class="lead">物資交易明細</p>
+                  <p class="lead">購物車明細</p>
                 </div></a></div>
             <div class="col-md-2"><a style="color:#fff" th:href="@{/book/bookList}"><i class="fa fa-5x fa-fw fa-shopping-basket"></i>
                 <div class="col-md-12">
-                  <p class="lead">捐出的物資</p>
+                  <p class="lead">我的上架物資</p>
                 </div></a></div>
             <div class="col-md-2">                   </div>
           </div>
@@ -157,9 +143,9 @@
           <div class="col-xs-3 paddingtop-bottom">
             <h6 class="heading7">相關連結</h6>
             <ul class="footer-ul">
-              <li><a href="#"> 使用者條約</a></li>
+              <li><a th:href="@{/auction}"> 買賣雙方條約</a></li>
               <li><a href="#"> 政策 &amp; 公開條款</a></li>
-              <li><a href="#"> 常見問與答</a></li>
+              <li><a th:href="@{/faq}"> 常見問與答</a></li>
             </ul>
           </div>
           <div class="col-xs-3 paddingtop-bottom">

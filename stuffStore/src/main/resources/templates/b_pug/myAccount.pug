@@ -7,9 +7,9 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
       .row(style='margin-bottom: -100px;')
         .col-xs-8
           h2.section-headline
-            span 使用者帳號
+            span 賣場登入
         .col-xs-4
-          img.img-responsive(src='/imgs/logo.png')
+          img.img-responsive(src='/imgs/pf2update2.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
       img.img-responsive(src='/imgs/wood.png', style='margin-top: -75px;')
       .row(style='margin-top: 60px;')
@@ -19,7 +19,7 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
             li(th:classappend="${classActiveNewAccount}? 'active'")
               a(href='#tab-1', data-toggle='tab')
                 span(style='color: red;')
-                  | 建造一個新帳號
+                  | 申請一個賣家帳號
             li(th:classappend="${classActiveLogin}? 'active'")
               a(href='#tab-2', data-toggle='tab')
                 span(style='color: red;')
@@ -53,6 +53,8 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                           | 所有的訊息都會寄到目前這個地址，該電子信箱不會被公開，只會用於接收您的新密碼或其他相關網站資訊。
                       button.btn.btn-primary(type='submit')
                         | 創建一個新帳號
+                      button.btn.btn-success(type='submit')
+                        | 開通原本PetFriends的社群帳號
             // log in
             #tab-2.tab-pane.fade(th:classappend="${classActiveLogin}? 'in active'")
               .panel-group

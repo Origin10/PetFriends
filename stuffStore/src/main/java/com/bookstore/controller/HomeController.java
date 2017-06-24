@@ -89,6 +89,11 @@ public class HomeController {
 		return "hours";
 	}
 	
+	@RequestMapping("/auction")
+	public String auction() {
+		return "auction";
+	}
+
 	@RequestMapping("/faq")
 	public String faq() {
 		return "faq";
@@ -174,7 +179,7 @@ public class HomeController {
 		User user = memService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		MemShipping memShipping = new MemShipping();
@@ -198,7 +203,7 @@ public class HomeController {
 		User user = memService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		model.addAttribute("listOfCreditCards", true);
@@ -215,7 +220,7 @@ public class HomeController {
 		User user = memService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		model.addAttribute("listOfCreditCards", true);
@@ -247,7 +252,7 @@ public class HomeController {
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		return "myProfile";
@@ -272,7 +277,7 @@ public class HomeController {
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		return "myProfile";
@@ -289,7 +294,7 @@ public class HomeController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
@@ -300,7 +305,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/addNewShippingAddress", method=RequestMethod.POST)
 	public String addNewShippingAddressPost(
-			@ModelAttribute("userShipping") MemShipping memShipping,
+			@ModelAttribute("memShipping") MemShipping memShipping,
 			Principal principal, Model model
 			){
 		User user = memService.findByUsername(principal.getName());
@@ -308,7 +313,7 @@ public class HomeController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("listOfShippingAddresses", true);
 		model.addAttribute("classActiveShipping", true);
 		model.addAttribute("listOfCreditCards", true);
@@ -342,7 +347,7 @@ public class HomeController {
 			model.addAttribute("listOfShippingAddresses", true);
 			
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
-			model.addAttribute("userShippingList", user.getMemShippingList());
+			model.addAttribute("memShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
 			return "myProfile";
@@ -372,7 +377,7 @@ public class HomeController {
 			model.addAttribute("listOfCreditCards", true);
 			
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
-			model.addAttribute("userShippingList", user.getMemShippingList());
+			model.addAttribute("memShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
 			return "myProfile";
@@ -392,7 +397,7 @@ public class HomeController {
 		model.addAttribute("listOfShippingAddresses", true);
 		
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		return "myProfile";
@@ -411,7 +416,7 @@ public class HomeController {
 		model.addAttribute("listOfShippingAddresses", true);
 		
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getMemShippingList());
+		model.addAttribute("memShippingList", user.getMemShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 		
 		return "myProfile";
@@ -435,7 +440,7 @@ public class HomeController {
 			model.addAttribute("listOfShippingAddresses", true);
 			
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
-			model.addAttribute("userShippingList", user.getMemShippingList());
+			model.addAttribute("memShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
 			return "myProfile";
@@ -460,7 +465,7 @@ public class HomeController {
 			model.addAttribute("classActiveShipping", true);
 			
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
-			model.addAttribute("userShippingList", user.getMemShippingList());
+			model.addAttribute("memShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
 			return "myProfile";
@@ -632,7 +637,7 @@ public class HomeController {
 			model.addAttribute("order", order);
 			
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
-			model.addAttribute("userShippingList", user.getMemShippingList());
+			model.addAttribute("memShippingList", user.getMemShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			
 			MemShipping memShipping = new MemShipping();

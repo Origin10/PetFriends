@@ -13,6 +13,15 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
           img.img-responsive(src='/imgs/logo.png')
       hr(style='position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;')
       img.img-responsive(src='/imgs/wood.png', style='margin-top: -75px;')
+        
+      .container
+        .row
+          .col-md-8.text-left
+            .btn-group(style="position:relative; top:75px")
+              a.btn.btn-primary.btn-lg(type="button", th:href='@{/book/add}') 新增物資
+              a.btn.btn-success.btn-lg(type="button", th:href='@{/book/bookList}') 檢視物資清單
+          .col-md-4.text-right
+            
       .row(style='margin-top: 60px;')
         .col-xs-9.col-xs-offset-3
           // Nav tabs
@@ -25,10 +34,10 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                 span(style='color: red;') 訂單
             li(th:classappend="${classActiveBilling}? 'active'")
               a(href='#tab-3', data-toggle='tab')
-                span(style='color: red;') 帳單
+                span(style='color: red;') 信用卡
             li(th:classappend="${classActiveShipping}? 'active'")
               a(href='#tab-4', data-toggle='tab')
-                span(style='color: red;') 運輸
+                span(style='color: red;') 寄送地址
           // Tab panels
           .tab-content
             // Edit user information
@@ -339,17 +348,17 @@ html(lang='en', xmlns:th='http://www.w3.org/1000/xhtml')
                     ol.breadcrumb
                       li.breadcrumb-item.active
                         a(th:href='@{/listOfShippingAddresses}', th:style="${listOfShippingAddresses}? 'color:red'")
-                          | 帳單地址列表
+                          | 運送地址列表
                       li.breadcrumb-item.active
                         a(th:href='@{/addNewShippingAddress}', th:style="${addNewShippingAddress}? 'color:red'")
-                          | 新增或更新帳單地址
+                          | 新增或更新運送地址
                     div(th:if='${listOfShippingAddresses}')
                       form(th:action='@{/setDefaultShippingAddress}', method='post')
                         table.table
                           thead
                             tr
-                              th 預設帳單地址
-                              th 帳單地址
+                              th 預設運送地址
+                              th 運送地址
                               th 操作
                           tbody
                             tr(th:each='memShipping : ${memShippingList}')
